@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumini</title>
     <link rel="icon" href="https://i.ibb.co/XZVSKkBT/Screenshot-2025-11-10-174930-Photoroom.png" type="image/x-icon">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/arduino-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -138,91 +140,117 @@
     <main>
 
         <!-- Page: Home -->
-        <div id="home" class="page">
-            <!-- Hero Section -->
-            <section id="hero" class="relative h-[80vh] min-h-[500px] flex items-center justify-center text-white bg-cover bg-center" 
-                     style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/5966251/pexels-photo-5966251.jpeg');">
-                <div class="relative z-10 text-center px-4 fade-in">
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Bringing Glory To Olden Days</h1>
-                    <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 drop-shadow-md">A Journey Where Old is Reinvented and Polished</p>
-                    <a href="#features" class="bg-indigo-600/80 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-indigo-600 transition duration-300 shadow-xl transform hover:scale-105">Explore</a>
-                </div>
-            </section>
-
-            <!-- About Section -->
-            <section id="about" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="fade-in">
-                            <img src="https://i.ibb.co/CD8g2g1/TELEGRAPH.png" 
-                                 loading="lazy"
-                                 alt="Students collaborating" class="rounded-lg shadow-2xl w-full h-auto">
-                        </div>
-                        <div class="fade-in">
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4">Welcome to Our Project</h2>
-                            <p class="text-gray-600 mb-4 leading-relaxed">
-                                For our Tech Trek project, we chose to reinvent the telegraph — one of the earliest communication devices that changed human history. The telegraph used electrical pulses and Morse code to send messages across long distances, laying the foundation for global connectivity.
-                            </p>
-                            <p class="text-gray-600 mb-6 leading-relaxed">
-                                We believe in a holistic approach to learning, combining rigorous academics with practical, hands-on experience. Join our vibrant community and embark on a journey of discovery.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section id="features" class="py-20">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12 fade-in">
-                        <h2 class="text-3xl md:text-4xl font-bold">Why we chose this project</h2>
-                        <p class="text-gray-600 mt-4 max-w-2xl mx-auto"></p>
-                    </div>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
-                            <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <i data-feather="smartphone" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">Efficiency</h3>
-                            <p class="text-gray-600">The telegraph could make communication easier without the use of cellphones.</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
-                            <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <i data-feather="heart" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">Accessibility</h3>
-                            <p class="text-gray-600">Silent alerts are perfect for accessibility, such as for hearing-impaired users, or for new forms of personal expression.</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
-                            <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-                                <i data-feather="alert-triangle" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">Emergency Use</h3>
-                            <p class="text-gray-600">It's a great tool for emergency communication in areas without internet or cellular service.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Gallery Section -->
-            <section id="gallery" class="py-20 bg-white">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12 fade-in">
-                        <h2 class="text-3xl md:text-4xl font-bold">Gallery</h2>
-                        <p class="text-gray-600 mt-4">How the Telegraph used to work.</p>
-                    </div>
-                    <div class="relative fade-in">
-                        <div id="media-display-container" class="w-full h-[500px] bg-black rounded-lg shadow-2xl mb-4 flex items-center justify-center"></div>
-                        <div id="thumbnail-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <img src="https://placehold.co/300x200/c7d2fe/3730a3?text=Telegraph+Video" alt="Telegraph" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-indigo-600" data-type="video" data-src="https://i.imgur.com/iL5vVmr.mp4">
-                            <img src="https://i.ibb.co/SDmkpwLf/Screenshot-2025-08-20-213850.png" alt="Gallery Image 2" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/SDmkpwLf/Screenshot-2025-08-20-213850.png">
-                            <img src="https://i.ibb.co/BHL5RkFb/schematics.png" alt="Gallery Image 3" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/BHL5RkFb/schematics.png">
-                            <img src="https://i.ibb.co/BH98f7MW/Chat-GPT-Image-Aug-19-2025-09-07-31-AM.png" alt="Gallery Image 4" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/BH98f7MW/Chat-GPT-Image-Aug-19-2025-09-07-31-AM.png">
-                        </div>
-                    </div>
-                </div>
-            </section>
+<div id="home" class="page">
+    <section id="hero" class="relative h-[80vh] min-h-[500px] flex items-center justify-center text-white bg-cover bg-center" 
+             style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/5966251/pexels-photo-5966251.jpeg');">
+        <div class="relative z-10 text-center px-4 fade-in">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Bringing Glory To Olden Days</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 drop-shadow-md">A Journey Where Old is Reinvented and Polished</p>
+            <a href="#features" class="bg-indigo-600/80 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-indigo-600 transition duration-300 shadow-xl transform hover:scale-105">Explore</a>
         </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <img src="https://i.imgur.com/81uoAsY.gif" 
+                         loading="lazy"
+                         alt="Telegraph concept animated GIF" 
+                         class="rounded-lg shadow-2xl w-full h-auto">
+                </div>
+                <div class="fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Welcome to Our Project</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        For our Tech Trek project, we chose to reinvent the telegraph — one of the earliest communication devices that changed human history. The telegraph used electrical pulses and Morse code to send messages across long distances, laying the foundation for global connectivity.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        We believe in a holistic approach to learning, combining rigorous academics with practical, hands-on experience. Join our vibrant community and embark on a journey of discovery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold">Why we chose this project</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto"></p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="smartphone" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Efficiency</h3>
+                    <p class="text-gray-600">The telegraph could make communication easier without the use of cellphones.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="heart" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Accessibility</h3>
+                    <p class="text-gray-600">Silent alerts are perfect for accessibility, such as for hearing-impaired users, or for new forms of personal expression.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center fade-in transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-indigo-100 text-indigo-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="alert-triangle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Emergency Use</h3>
+                    <p class="text-gray-600">It's a great tool for emergency communication in areas without internet or cellular service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+    
+                <div class="md:w-1/2 text-center md:text-left fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold">
+                        Past Meets Future
+                    </h2>
+                    <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-lg mx-auto md:mx-0">
+                        Our project is a direct bridge between history and modern innovation. We didn't just rebuild the telegraph; we gave it new life.
+                    </p>
+                    <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-lg mx-auto md:mx-0">
+                        This isn't just about nostalgia. It's about proving that a simple, reliable idea, when combined with modern technology, can become a powerful, low-cost, and resilient communication tool for today.
+                    </p>
+                    <div class="mt-10">
+
+                        
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 mt-12 md:mt-0 fade-in">
+                    <img src="https://i.ibb.co/4ZmnTRL7/Untitled-design-1-Photoroom.png" 
+                         alt="An old 19th-century telegraph machine blending into a modern 3D-printed LUMINI device" 
+                         class="w-full h-auto">
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold">Gallery</h2>
+                <p class="text-gray-600 mt-4">How the Telegraph used to work.</p>
+            </div>
+            <div class="relative fade-in">
+                <div id="media-display-container" class="w-full h-[500px] bg-black rounded-lg shadow-2xl mb-4 flex items-center justify-center"></div>
+                <div id="thumbnail-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img src="https://placehold.co/300x200/c7d2fe/3730a3?text=Telegraph+Video" alt="Telegraph" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-indigo-600" data-type="video" data-src="https://i.imgur.com/iL5vVmr.mp4">
+                    <img src="https://i.ibb.co/SDmkpwLf/Screenshot-2025-08-20-213850.png" alt="Gallery Image 2" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/SDmkpwLf/Screenshot-2025-08-20-213850.png">
+                    <img src="https://i.ibb.co/BHL5RkFb/schematics.png" alt="Gallery Image 3" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/BHL5RkFb/schematics.png">
+                    <img src="https://i.ibb.co/BH98f7MW/Chat-GPT-Image-Aug-19-2025-09-07-31-AM.png" alt="Gallery Image 4" class="gallery-thumbnail cursor-pointer rounded-md shadow-md hover:opacity-75 border-4 border-transparent" data-type="image" data-src="https://i.ibb.co/BH98f7MW/Chat-GPT-Image-Aug-19-2025-09-07-31-AM.png">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
         <!-- Page: Journey -->
         <div id="journey" class="page hidden">
@@ -281,6 +309,55 @@
                             <h3 class="text-2xl font-bold mb-2">Conclusion</h3>
                             <p class="text-gray-600">This project has been a valuable journey of learning, experimentation, and perseverance. While we started with little knowledge, we have grown confident in our ability to reinvent an old invention using modern technology. We remain determined to complete and refine our project, with the ultimate aim of not only succeeding in this challenge but also contributing a meaningful innovation.</p>
                         </div>
+                        <!-- =======================
+                 NEW REFLECTION SECTION
+            ======================== -->
+            <div class="mt-16 bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Team's Reflection</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Tenzing Jangsel Dorjee -->
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900">Tenzing Jangsel Dorjee</h4>
+                        <p class="text-indigo-600 font-medium mb-2">Website & Documentation</p>
+                        <p class="text-gray-700 space-y-3">
+                            "This journey really helped my personal growth. I was responsible for the website, which meant I not only learned HTML but also crucial skills like AI prompting and empathy-driven design. It was amazing to see how AI could guide me and help turn our creative ideas into reality. Our team put all our effort in, and I'm proud of how we came up with the 'Blind Mode' to make our project accessible. Every day was a new learning experience."
+                        </p>
+                    </div>
+
+                    <!-- Tandin Wangyel -->
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900">Tandin Wangyel</h4>
+                        <p class="text-indigo-600 font-medium mb-2">Circuit Designer</p>
+                        <p class="text-gray-700 space-y-3">
+                            "I was able to dive deeper into technology as the main circuit designer. I learned about circuit design, using machines, coding, and documentation, but the topic that interested me most was circuit design. It's amazing how hardware components combine to create a project. At the start, I didn't know how circuits worked, but I was privileged to have friends and mentors teach me. I also documented the circuit design, showing our multiple phases and how to build them."
+                        </p>
+                    </div>
+
+                    <!-- Ugyen Rigpa Yeshey -->
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900">Ugyen Rigpa Yeshey</h4>
+                        <p class="text-indigo-600 font-medium mb-2">Team Lead & 3D Design</p>
+                        <p class="text-gray-700 space-y-3">
+                            "My journey was centered on leading the team and executing the technical build—focusing on 3D designing and assembly. This experience rapidly advanced my technical and personal skills. I mastered essential modern skills by leveraging generative AI tools to prototype and optimize designs, which accelerated our progress. A highlight was our collaborative effort to develop the 'Blind Mode.' This innovation, rooted in empathy, ensures our product is genuinely accessible. I am extremely thankful for this opportunity."
+                        </p>
+                    </div>
+
+                    <!-- Jigme Tshering -->
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900">Jigme Tshering</h4>
+                        <p class="text-indigo-600 font-medium mb-2">Documentation & Research</p>
+                        <p class="text-gray-700 space-y-3">
+                            "TechTrek has been an amazing experience. I learned the basics of circuits, deepened my understanding of HTML, and even learned Morse code. But beyond the technical aspects, this project gave me the opportunity to get closer with my teammates. We would often get together to discuss plans and provide feedback, which drastically improved our project and showcased our camaraderie. I'm sure the learnings I take from this will contribute to building a just society in the future."
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- =======================
+                 END NEW SECTION
+            ======================== -->
                     </div>
                 </div>
             </section>
@@ -349,17 +426,24 @@
                     <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 lg:gap-12">
                         
                         <!-- Sidebar Navigation -->
-                        <aside id="doc-sidebar" class="md:w-1/4 lg:w-1/5 fade-in">
-                            <nav id="doc-nav" class="sticky top-28">
-                                <ul class="space-y-2">
-                                    <li><a href="#doc-circuit-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="cpu" class="w-5 h-5"></i><span>Circuit Design</span></a></li>
-                                    <li><a href="#doc-making-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="settings" class="w-5 h-5"></i><span>Making the Design</span></a></li>
-                                    <li><a href="#doc-morse-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="message-circle" class="w-5 h-5"></i><span>Learn Morse Code</span></a></li>
-                                    <li><a href="#doc-build-summary" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="list" class="w-5 h-5"></i><span>Build Summary</span></a></li>
-                                    <li><a href="#doc-website-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="layout" class="w-5 h-5"></i><span>Website Designing</span></a></li>
-                                </ul>
-                            </nav>
-                        </aside>
+<aside id="doc-sidebar" class="md:w-1/4 lg:w-1/5 fade-in">
+    <nav id="doc-nav" class="sticky top-28">
+        <ul class="space-y-2">
+            <li><a href="#doc-circuit-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="cpu" class="w-5 h-5"></i><span>Circuit Design</span></a></li>
+            <li><a href="#doc-making-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="settings" class="w-5 h-5"></i><span>Making the Design</span></a></li>
+            <li><a href="#doc-morse-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="message-circle" class="w-5 h-5"></i><span>Learn Morse Code</span></a></li>
+            <li><a href="#doc-build-summary" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="list" class="w-5 h-5"></i><span>Build Summary</span></a></li>
+            <li><a href="#doc-website-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="layout" class="w-5 h-5"></i><span>Website Designing</span></a></li>
+            <li>
+    <a href="#doc-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100">
+        <i data-feather="code" class="w-5 h-5"></i>
+        <span>Source Code</span>
+    </a>
+</li>
+            <li><a href="#doc-history" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="archive" class="w-5 h-5"></i><span>History</span></a></li>
+            </ul>
+    </nav>
+</aside>
 
                         <!-- Content Area -->
                         <div class="md:w-3/4 lg:w-4/5 min-w-0">
@@ -396,6 +480,14 @@
                     <i data-feather="map-pin" class="w-4 h-4 mr-2.5"></i>
                     Pinouts
                 </button>
+                <button 
+                    onclick="showCircuitTab('demonstration')" 
+                    id="btn-demonstration"
+                    class="circuit-tab-btn w-full text-left p-3 rounded-md font-medium text-sm flex items-center transition-all duration-150 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                    <i data-feather="video" class="w-4 h-4 mr-2.5"></i>
+                Demonstration
+                </button>
+                
 
             </nav>
         </div>
@@ -439,7 +531,7 @@
                     <h4 class="text-xl font-bold mb-4">The second design of our circuit board</h4>
                     <img src="https://i.ibb.co/rGBpVLXg/Screenshot-2025-11-10-170359.png" alt="Second circuit design" class="rounded-lg shadow-md w-full mb-4">
                     <p class="text-gray-700 mb-4 leading-relaxed">
-                        This is the second design in which we used 3 buttons for dot, dash, and space. We also added a buzzer to make the sound of dots and dashes. At the time, we didnD2%80%99t know how the breadboard works so it didnD2%80%99t work quite well.
+                        This is the second design in which we used 3 buttons for dot, dash, and space. We also added a buzzer to make the sound of dots and dashes. At the time, we didn't know how the breadboard works so it didnD2%80%99t work quite well.
                     </p>
                 </div>
                 
@@ -537,6 +629,71 @@
                     <p class="text-sm font-medium text-gray-600 mb-2 pt-4">Pinout Image:</p>
                     <img src="https://i.ibb.co/3y1Y6PfM/Screenshot-2025-11-11-074827.png" alt="Final design pinout table" class="rounded-lg shadow-md w-full">
                 </div>
+                    </div>
+                <div id="tab-demonstration" class="circuit-tab-content hidden space-y-8">
+    
+    <h4 class="text-xl font-bold">Project Demonstrations</h4>
+    <p class="text-gray-700 leading-relaxed">
+        See the Smart Telegraph in action! These videos showcase the key functionalities, from the single-button Morse code input to the successful Wi-Fi transmission between the two units.
+    </p>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 1: Emojies!</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            This video demonstrates the core logic of the single-button input. Watch how short presses (dots), long presses (dashes), and pauses (spaces) are captured, sounded by the buzzer, and translated into letters and emojies on the OLED display.
+        </p>
+        
+        <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
+             <video 
+                class="w-full h-auto"
+                src="https://i.imgur.com/zDu2Mao.mp4" 
+                title="Demonstration of single-button Morse code entry"
+                controls
+                preload="metadata">
+                Your browser does not support the video tag.
+             </video>
+        </div>
+    </div>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 2: Both Units Work</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            As you see here both units work and are sending messages to each other through Wi-Fi.
+        <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
+             <video 
+                class="w-full h-auto"
+                src="https://i.imgur.com/KWnCqK0.mp4" 
+                title="Demonstration of Wi-Fi message transmission between ESP32s"
+                controls
+                preload="metadata">
+                Your browser does not support the video tag.
+             </video>
+        </div>
+        <div class="border-t border-gray-200 pt-6 space-y-4">
+    <h5 class="text-lg font-semibold">Demo 3: Update: Blind Mode Integration</h5>
+    <p class="text-gray-700 leading-relaxed mb-4">
+        We've introduced a significant update: an accessibility-focused 'Blind Mode'. This feature is designed specifically for visually impaired users. When a message is received, this mode bypasses the OLED display and instead translates the incoming text *back* into Morse code, playing it aloud as audio beeps. This crucial update dramatically expands the device's utility, making it a viable communication tool for everyone, including those with disabilities.
+    </p>
+    
+    <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
+         <video 
+             class="w-full h-auto"
+             src="https://i.imgur.com/A8X6zYu.mp4" 
+             title="Demonstration of Blind Mode accessibility feature"
+             controls
+             preload="metadata">
+             Your browser does not support the video tag.
+         </video>
+    </div>
+</div>
+    </div>
+
+
+
+                
+
+                
+                
 
             </div> </div> </div> </div>
 
@@ -545,13 +702,12 @@
                                 SECTION: Making of the Design
                                 =================================
                             -->
-                            <div id="doc-making-design" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
-    
+                        <div id="doc-making-design" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
+
     <h3 class="text-2xl font-bold flex items-center"><i data-feather="settings" class="w-6 h-6 mr-3 text-indigo-600"></i>Making the Design</h3>
 
     <div class="space-y-6">
         <p class="text-gray-700">I will be sharing how me and my team have made our circuit for our Modern Telegraph using Wokwi. These are the components used in the circuit:</p>
-        
         <div class="grid md:grid-cols-2 gap-8 items-center">
             <div>
                 <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
@@ -562,9 +718,19 @@
                 </ul>
                 <p class="text-gray-700">It was the first time I would experience designing a circuit. We decided to use ESP32 as our microcontroller so our project can work through Wi-Fi and Bluetooth. Firstly, we had to understand each component's functions and pinouts. We used google search to find each component’s function and pinouts. To make our progress faster, we referred to connections between ESP32, buttons, and OLED display.</p>
             </div>
-            <div class="space-y-6">
-                <img src="https://i.ibb.co/3yvXPqwL/Screenshot-2025-08-20-at-9-18-33-PM.png" alt="Wokwi Circuit" class="rounded-lg shadow-md w-full">
-                <img src="https://i.ibb.co/7MmyNnF/IMG20250818213747.jpg" alt="Physical Breadboard Circuit" class="rounded-lg shadow-md w-full">
+            <div class="grid grid-cols-2 gap-6">
+                <a href="https://i.ibb.co/3yvXPqwL/Screenshot-2025-08-20-at-9-18-33-PM.png" data-lightbox="design-gallery" data-title="Wokwi Circuit">
+                    <img src="https://i.ibb.co/3yvXPqwL/Screenshot-2025-08-20-at-9-18-33-PM.png" alt="Wokwi Circuit" class="rounded-lg shadow-md w-full">
+                </a>
+                <a href="https://i.ibb.co/7MmyNnF/IMG20250818213747.jpg" data-lightbox="design-gallery" data-title="Physical Breadboard Circuit">
+                    <img src="https://i.ibb.co/7MmyNnF/IMG20250818213747.jpg" alt="Physical Breadboard Circuit" class="rounded-lg shadow-md w-full">
+                </a>
+                <a href="https://i.ibb.co/HTZ13QkY/IMG-20251111-170055-1.jpg" data-lightbox="design-gallery" data-title="Physical Circuit Prototype">
+                    <img src="https://i.ibb.co/HTZ13QkY/IMG-20251111-170055-1.jpg" alt="Physical Circuit Prototype" class="rounded-lg shadow-md w-full">
+                </a>
+                <a href="https://i.ibb.co/N2hqZKGn/IMG-20251111-170047.jpg" data-lightbox="design-gallery" data-title="Physical Circuit Close-up">
+                    <img src="https://i.ibb.co/N2hqZKGn/IMG-20251111-170047.jpg" alt="Physical Circuit Close-up" class="rounded-lg shadow-md w-full">
+                </a>
             </div>
         </div>
     </div>
@@ -590,6 +756,13 @@
                     Process
                 </button>
 
+                <button 
+                    onclick="showDesignTab('Updates')" 
+                    id="btn-updates"
+                    class="design-tab-btn w-full text-left p-3 rounded-md font-medium text-sm flex items-center transition-all duration-150 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                    <i data-feather="zap" class="w-4 h-4 mr-2.5"></i>
+                    Updates
+                </button>
             </nav>
         </div>
 
@@ -600,102 +773,164 @@
                 <p class="text-gray-700 leading-relaxed">
                     With the Wokwi simulation proving successful, our attention shifted to the physical design and enclosure. We began prototyping a case and arranging the components—the ESP32, OLED screen, and button—for optimal usability and a clean, compact final product.
                 </p>
-                <img src="https://i.ibb.co/Q3cJPgXD/Screenshot-2025-11-10-153602.png" alt="Physical layout of components on breadboard" class="rounded-lg shadow-md w-full mb-2">
+                <img src="https://i.ibb.co/Q3cJPgXD/Screenshot-2025-11-10-153602.png" 
+                     alt="Physical layout of components on breadboard" 
+                     class="rounded-lg shadow-md w-full mb-2 cursor-pointer" 
+                     onclick="showDesignTab('process')">
                 <p class="text-sm text-gray-600 italic text-center">Planning the physical component layout on the breadboard for the final enclosure.</p>
             </div>
 
             <div id="tab-process" class="design-tab-content hidden space-y-8 fade-in">
                 <h4 class="text-xl font-bold">Process</h4>
                 <div class="space-y-6">
-                    
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">1. First we create a sketch of the box.</p>
-                        <img src="https://i.ibb.co/1tLqs85J/Screenshot-2025-11-10-175412.png" alt="Process step 1" class="rounded-lg shadow-md w-full">
+                        <a href="https://i.ibb.co/1tLqs85J/Screenshot-2025-11-10-175412.png" data-lightbox="process-gallery" data-title="1. First we create a sketch of the box.">
+                            <img src="https://i.ibb.co/1tLqs85J/Screenshot-2025-11-10-175412.png" alt="Process step 1" class="rounded-lg shadow-md w-full">
+                        </a>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">2. Size</p>
-                        <img src="https://i.ibb.co/3mnvnkG0/Screen-Shot-2025-11-10-at-12-17-22-PM.png" alt="Process step 2" class="rounded-lg shadow-md w-full">
+                        <a href="https://i.ibb.co/3mnvnkG0/Screen-Shot-2025-11-10-at-12-17-22-PM.png" data-lightbox="process-gallery" data-title="2. Size">
+                            <img src="https://i.ibb.co/3mnvnkG0/Screen-Shot-2025-11-10-at-12-17-22-PM.png" alt="Process step 2" class="rounded-lg shadow-md w-full">
+                        </a>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">3. Then we extrude it using the extrude tool, and extrude it to 40 mm.</p>
                         <p class="text-sm text-gray-600 mb-2 italic">Extrude means to make a shape (a material such as metal or plastic) by forcing it through a die.</p>
                         <div class="grid grid-cols-2 gap-4">
-                            <img src="https://i.ibb.co/BVDtBnLD/Screen-Shot-2025-11-10-at-12-17-19-PM.png" alt="Process step 3a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/C5zVC6zg/Screen-Shot-2025-11-10-at-5-08-13-PM.png" alt="Process step 3b" class="rounded-lg shadow-md w-full">
+                            <a href="https://i.ibb.co/BVDtBnLD/Screen-Shot-2025-11-10-at-12-17-19-PM.png" data-lightbox="process-gallery" data-title="3. Extrude tool">
+                                <img src="https://i.ibb.co/BVDtBnLD/Screen-Shot-2025-11-10-at-12-17-19-PM.png" alt="Process step 3a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/C5zVC6zg/Screen-Shot-2025-11-10-at-5-08-13-PM.png" data-lightbox="process-gallery" data-title="3. Extruded to 40mm">
+                                <img src="https://i.ibb.co/C5zVC6zg/Screen-Shot-2025-11-10-at-5-08-13-PM.png" alt="Process step 3b" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">4. Next we need to create a hole in the box, so we create a sketch on the box and extrude it downwards.</p>
                         <div class="grid grid-cols-2 gap-4">
-                            <img src="https://i.ibb.co/1G6y8Nb3/Screen-Shot-2025-11-10-at-6-04-58-PM.png" alt="Process step 4a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/QvKyn04x/Screen-Shot-2025-11-10-at-6-07-02-PM.png" alt="Process step 4b" class="rounded-lg shadow-md w-full">
+                            <a href="https://i.ibb.co/1G6y8Nb3/Screen-Shot-2025-11-10-at-6-04-58-PM.png" data-lightbox="process-gallery" data-title="4. Create a sketch on the box">
+                                <img src="https://i.ibb.co/1G6y8Nb3/Screen-Shot-2025-11-10-at-6-04-58-PM.png" alt="Process step 4a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/QvKyn04x/Screen-Shot-2025-11-10-at-6-07-02-PM.png" data-lightbox="process-gallery" data-title="4. Extrude downwards">
+                                <img src="https://i.ibb.co/QvKyn04x/Screen-Shot-2025-11-10-at-6-07-02-PM.png" alt="Process step 4b" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">5. It should look like this after extrusion.</p>
-                        <img src="https://i.ibb.co/4wyTHCFX/Screen-Shot-2025-11-10-at-6-08-51-PM.png" alt="Process step 5" class="rounded-lg shadow-md w-full">
+                        <a href="https://i.ibb.co/4wyTHCFX/Screen-Shot-2025-11-10-at-6-08-51-PM.png" data-lightbox="process-gallery" data-title="5. After extrusion">
+                            <img src="https://i.ibb.co/4wyTHCFX/Screen-Shot-2025-11-10-at-6-08-51-PM.png" alt="Process step 5" class="rounded-lg shadow-md w-full">
+                        </a>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">6. Next we need to create a top to hold the oled and button so create another sketch with the same measurements as the first box and also Extrude it.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <img src="https://i.ibb.co/cK9fn8m2/Screen-Shot-2025-11-10-at-6-10-58-PM.png" alt="Process step 6a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/C3GdZBty/Screen-Shot-2025-11-10-at-6-13-58-PM.png" alt="Process step 6b" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/mCYgfpYT/Screen-Shot-2025-11-10-at-6-14-23-PM.png" alt="Process step 6c" class="rounded-lg shadow-md w-full">
+                            <a href="https://i.ibb.co/cK9fn8m2/Screen-Shot-2025-11-10-at-6-10-58-PM.png" data-lightbox="process-gallery" data-title="6. Create sketch for top">
+                                <img src="https://i.ibb.co/cK9fn8m2/Screen-Shot-2025-11-10-at-6-10-58-PM.png" alt="Process step 6a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/C3GdZBty/Screen-Shot-2025-11-10-at-6-13-58-PM.png" data-lightbox="process-gallery" data-title="6. Extrude the top">
+                                <img src="https://i.ibb.co/C3GdZBty/Screen-Shot-2025-11-10-at-6-13-58-PM.png" alt="Process step 6b" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/mCYgfpYT/Screen-Shot-2025-11-10-at-6-14-23-PM.png" data-lightbox="process-gallery" data-title="6. Top after extrusion">
+                                <img src="https://i.ibb.co/mCYgfpYT/Screen-Shot-2025-11-10-at-6-14-23-PM.png" alt="Process step 6c" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-2">7. We need to create a lid-like structure so we create a sketch on the lid we have just created.</p>
-                         <div class="grid grid-cols-2 gap-4">
-                            <img src="https://i.ibb.co/NdVNdFsX/Screen-Shot-2025-11-10-at-6-18-58-PM.png" alt="Process step 7a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/fPGwTFC/Screen-Shot-2025-11-10-at-6-24-47-PM.png" alt="Process step 7b" class="rounded-lg shadow-md w-full">
-                        </div>
-                    </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">8. We create a hole on the lid for the oled, do the same thing to make a hole extrude it inward.</p>
-                         <div class="grid grid-cols-2 gap-4">
-                            <img src="https://i.ibb.co/7tjPzXdY/Screen-Shot-2025-11-10-at-6-26-25-PM.png" alt="Process step 8a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/8ngQxT7M/Screen-Shot-2025-11-10-at-6-26-58-PM.png" alt="Process step 8b" class="rounded-lg shadow-md w-full">
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://i.ibb.co/7tjPzXdY/Screen-Shot-2025-11-10-at-6-26-25-PM.png" data-lightbox="process-gallery" data-title="8. Create sketch for OLED hole">
+                                <img src="https://i.ibb.co/7tjPzXdY/Screen-Shot-2025-11-10-at-6-26-25-PM.png" alt="Process step 8a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/8ngQxT7M/Screen-Shot-2025-11-10-at-6-26-58-PM.png" data-lightbox="process-gallery" data-title="8. Extrude OLED hole inward">
+                                <img src="httpss://i.ibb.co/8ngQxT7M/Screen-Shot-2025-11-10-at-6-26-58-PM.png" alt="Process step 8b" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">9. It should look like this, next we create a hole for the button.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <img src="https://i.ibb.co/0H2HHMk/Screen-Shot-2025-11-10-at-6-29-02-PM.png" alt="Process step 9a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/QFvdRTGT/Screen-Shot-2025-11-10-at-6-29-43-PM.png" alt="Process step 9b" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/4ZL2hvb4/Screen-Shot-2025-11-10-at-6-31-05-PM.png" alt="Process step 9c" class="rounded-lg shadow-md w-full">
+                            <a href="https.ibb.co/0H2HHMk/Screen-Shot-2025-11-10-at-6-29-02-PM.png" data-lightbox="process-gallery" data-title="9. Lid after OLED hole">
+                                <img src="https://i.ibb.co/0H2HHMk/Screen-Shot-2025-11-10-at-6-29-02-PM.png" alt="Process step 9a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https.ibb.co/QFvdRTGT/Screen-Shot-2025-11-10-at-6-29-43-PM.png" data-lightbox="process-gallery" data-title="9. Create hole for button">
+                                <img src="https://i.ibb.co/QFvdRTGT/Screen-Shot-2025-11-10-at-6-29-43-PM.png" alt="Process step 9b" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/4ZL2hvb4/Screen-Shot-2025-11-10-at-6-31-05-PM.png" data-lightbox="process-gallery" data-title="9. Button hole after extrusion">
+                                <img src="https://i.ibb.co/4ZL2hvb4/Screen-Shot-2025-11-10-at-6-31-05-PM.png" alt="Process step 9c" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">10. Next we create a hole for a buzzer. So we use the hole tool.</p>
                         <div class="grid grid-cols-2 gap-4">
-                            <img src="https://i.ibb.co/1fH56xHX/Screen-Shot-2025-11-10-at-6-34-48-PM.png" alt="Process step 10a" class="rounded-lg shadow-md w-full">
-                            <img src="https://i.ibb.co/3mM8w0Q4/Screen-Shot-2025-11-10-at-6-35-16-PM.png" alt="Process step 10b" class="rounded-lg shadow-md w-full">
+                            <a href="https://i.ibb.co/1fH56xHX/Screen-Shot-2025-11-10-at-6-34-48-PM.png" data-lightbox="process-gallery" data-title="10. Use hole tool for buzzer">
+                                <img src="https://i.ibb.co/1fH56xHX/Screen-Shot-2025-11-10-at-6-34-48-PM.png" alt="Process step 10a" class="rounded-lg shadow-md w-full">
+                            </a>
+                            <a href="https://i.ibb.co/3mM8w0Q4/Screen-Shot-2025-11-10-at-6-35-16-PM.png" data-lightbox="process-gallery" data-title="10. Buzzer hole complete">
+                                <img src="https://i.ibb.co/3mM8w0Q4/Screen-Shot-2025-11-10-at-6-35-16-PM.png" alt="Process step 10b" class="rounded-lg shadow-md w-full">
+                            </a>
                         </div>
                     </div>
-
                     <div>
                         <p class="font-semibold text-gray-800 mb-2">11. End product!!!</p>
-                        <img src="https://i.ibb.co/VWSkp4Zj/Screen-Shot-2025-11-10-at-6-36-51-PM.png" alt="Process step 11" class="rounded-lg shadow-md w-full">
+                        <a href="https://i.ibb.co/VWSkp4Zj/Screen-Shot-2025-11-10-at-6-36-51-PM.png" data-lightbox="process-gallery" data-title="11. End product!!!">
+                            <img src="https://i.ibb.co/VWSkp4Zj/Screen-Shot-2025-11-10-at-6-36-51-PM.png" alt="Process step 11" class="rounded-lg shadow-md w-full">
+                        </a>
                     </div>
-
+                </div> </div> <div id="tab-Updates" class="design-tab-content hidden space-y-8 fade-in">
+                <h4 class="text-xl font-bold">Design Updates & Prototyping</h4>
+                
+                <div class="space-y-4">
+                    <h5 class="text-lg font-semibold text-gray-800">1. First Prototype: 3D Print</h5>
+                    <p class="text-gray-700 leading-relaxed">
+                        After printing our first prototype, we found it didn’t work quite well, as you can see below.
+                    </p>
+                    <a href="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" data-lightbox="updates-gallery" data-title="First 3D print prototype - incorrect hole sizes.">
+                        <img src="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" alt="First 3D print prototype failure" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+                    </a>
+                    <p class="text-gray-700 leading-relaxed">
+                        The holes we designed for the cable and button were too small. This failure was a valuable learning experience, helping us assess the correct measurements for the next design.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed font-medium">
+                        Since the 3D printing took hours to complete, we decided to switch to laser cutting, which helped us save a lot of time and iterate faster.
+                    </p>
                 </div>
-            </div> </div> </div> </div>
+
+                <div class="border-t border-gray-200 pt-6 space-y-4">
+                    <h5 class="text-lg font-semibold text-gray-800">2. Pivot to Laser Cutting</h5>
+                    <p class="text-gray-700 leading-relaxed">
+                        We created a new `.svg` file (left) for the laser cutter. After cutting the design, we got the physical prototype (right).
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <a href="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" data-lightbox="updates-gallery" data-title="The .svg file for the laser cutter.">
+                                <img src="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" alt="SVG file for laser cutting" class="rounded-lg shadow-md w-full h-full object-contain border border-gray-100">
+                            </a>
+                            <p class="text-sm text-gray-600 italic text-center mt-2">The `.svg` design file.</p>
+                        </div>
+                        <div>
+                            <a href="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" data-lightbox="updates-gallery" data-title="Laser-cut prototype with fixed holes.">
+                                <img src="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" alt="Laser-cut prototype result" class="rounded-lg shadow-md w-full h-full object-cover">
+                            </a>
+                            <p class="text-sm text-gray-600 italic text-center mt-2">The physical laser-cut result.</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        This is the product from the laser-cutting machine. The holes are now fixed and the correct size. The top piece for the enclosure is still in progress.
+                    </p>
+                </div>
+                
+            </div> </div> </div> </div> 
                             
                             <!-- 
                                 =================================
                                 SECTION: Learn Morse Code
                                 =================================
                             -->
-                            <div id="doc-morse-code" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
+<div id="doc-morse-code" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
 
     <h3 class="text-2xl font-bold flex items-center"><i data-feather="message-circle" class="w-6 h-6 mr-3 text-indigo-600"></i>Learn Morse Code</h3>
 
@@ -726,6 +961,14 @@
                     class="morse-tab-btn w-full text-left p-3 rounded-md font-medium text-sm flex items-center transition-all duration-150 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
                     <i data-feather="grid" class="w-4 h-4 mr-2.5"></i>
                     Full Translation Table
+                </button>
+
+                <button 
+                    onclick="showMorseTab('updates')" 
+                    id="btn-morse-updates"
+                    class="morse-tab-btn w-full text-left p-3 rounded-md font-medium text-sm flex items-center transition-all duration-150 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                    <i data-feather="zap" class="w-4 h-4 mr-2.5"></i>
+                    Updates
                 </button>
 
             </nav>
@@ -857,9 +1100,77 @@
                 </div>
                 
             </div>
+
+            <div id="tab-morse-updates" class="morse-tab-content hidden space-y-8 fade-in">
+            
+                <h4 class="text-xl font-bold">New Emojis (v17)</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6 text-center">
+                    <div>
+                        <p class="font-bold text-lg">Laugh</p>
+                        <p class="text-gray-500 text-sm">(EMOJI_LAUGH)</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">...-..</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">Angry</p>
+                        <p class="text-gray-500 text-sm">(EMOJI_ANGRY)</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">-..-</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">Surprised</p>
+                        <p class="text-gray-500 text-sm">(EMOJI_SURPRISED)</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">---..-</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">Skull</p>
+                        <p class="text-gray-500 text-sm">(EMOJI_SKULL)</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">...-.-</p>
+                    </div>
+                </div>
+
+                <h4 class="text-xl font-bold border-t border-gray-200 pt-8">New Prosigns &amp; Phrases</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6 text-center">
+                    <div>
+                        <p class="font-bold text-lg">OK</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">-.-.-</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">YES</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">----</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">NO</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">...-.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">HELP</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">.--.--</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">WAIT</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">..--.-</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">DONE</p>
+                        <p class="text-gray-600 text-2xl tracking-wideset">-...--</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">COME</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">---...</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">GO</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">--...-</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">READY</p>
+                        <p class="text-gray-600 text-2xl tracking-widest">.-..--</p>
+                    </div>
+                </div>
+
             </div>
-        </div>
+            </div>
     </div>
+</div>
                             
                             <!-- 
                                 =================================
@@ -867,84 +1178,143 @@
                                 =================================
                                 ** FIX APPLIED: Added 'hidden' class **
                             -->
-                            <div id="doc-build-summary" class="doc-section space-y-8 hidden">
-                                <!-- Quick View -->
-                                <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="zap" class="w-6 h-6 mr-3 text-indigo-600"></i>What You'll Build (Quick View)</h3>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li>Two identical handheld units.</li>
-                                        <li>Morse Key (1 button) to tap dots/dashes.</li>
-                                        <li>Buzzer + LED for beep/blink feedback.</li>
-                                        <li>OLED screen that shows decoded text.</li>
-                                        <li>Units talk wirelessly (ESP-NOW on ESP32)—no router needed.</li>
-                                        <li>You can demo “old vs new”: tap Morse → receiver shows live text.</li>
-                                    </ul>
-                                </div>
+                            <div id="doc-build-summary" class="doc-section space-y-8">
+    <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
+        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="zap" class="w-6 h-6 mr-3 text-indigo-600"></i>What You'll Build (Quick View)</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>Two identical handheld units.</li>
+            <li>Morse Key (1 button) to tap dots/dashes.</li>
+            <li>Buzzer for audible feedback.</li>
+            <li>OLED screen that shows decoded text.</li>
+            <li>Units talk wirelessly (ESP-WIFI on ESP32)—no router needed.</li>
+            <li>You can demo “old vs new”: tap Morse → receiver shows live text.</li>
+        </ul>
+    </div>
 
-                                <!-- Bill of Materials -->
-                                <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="list" class="w-6 h-6 mr-3 text-indigo-600"></i>Bill of Materials (per unit)</h3>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li>ESP32 DevKit (DOIT or WROOM-32) ×1</li>
-                                        <li>0.96" I²C OLED (128×64, SSD1306) ×1</li>
-                                        <li>Momentary pushbutton (normally open) ×1</li>
-                                        <li>220 Ω resistor ×1 (for LED) Optional</li>
-                                        <li>Red LED ×1 Optional</li>
-                                        <li>Active buzzer (3.3–5 V) ×1</li>
-                                        <li>10 kΩ resistor ×1 (pull‑down for button) Optional</li>
-                                        <li>Breadboard + jumper wires</li>
-                                        <li>Power: USB power bank / 5 V phone charger</li>
-                                        <li>Optional: small slide switch (power), 3D‑printed case</li>
-                                    </ul>
-                                </div>
+    <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
+        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="list" class="w-6 h-6 mr-3 text-indigo-600"></i>Bill of Materials (per unit)</h3>
+        <p class="text-gray-600 mb-10">You'll need two sets of these components to build both handheld units.</p>
 
-                                <!-- Wiring -->
-                                <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="git-pull-request" class="w-6 h-6 mr-3 text-indigo-600"></i>Wiring (per unit)</h3>
-                                    <p class="text-gray-500 mb-4">(You can change pins in code if needed.)</p>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li><strong>Button:</strong> GPIO 14 (to pin) + 10 kΩ to GND; other side of button to 3V3</li>
-                                        <li><strong>LED:</strong> GPIO 26 through 220 Ω to LED anode; LED cathode to GND</li>
-                                        <li><strong>Buzzer:</strong> GPIO 27 to + buzzer; buzzer – to GND</li>
-                                        <li><strong>OLED I²C:</strong> SDA = GPIO 21, SCL = GPIO 22, VCC → 3V3, GND → GND</li>
-                                    </ul>
-                                </div>
+        <div class="space-y-12"> <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://www.espboards.dev/esp32/esp32doit-devkit-v1/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://joy-it.net/files/files/Produkte/SBC-NodeMCU-ESP32-C/SBC-NodeMCU-ESP32-C_01.png" alt="ESP32 Development Board" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">ESP32 DevKit (×1)</h4>
+                    <p class="text-gray-700">This is the microcontroller, the "brain" of our project. A <strong>DOIT or WROOM-32</strong> model is perfect. Its built-in Wi-Fi is what we use for the router-free ESP-NOW communication.</p>
+                </div>
+            </div>
 
-                                <!-- Morse Timing & Enclosure -->
-                                <div class="grid md:grid-cols-2 gap-8">
-                                    <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="clock" class="w-6 h-6 mr-3 text-indigo-600"></i>Morse Timing</h3>
-                                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                            <li>Dit (•) length = 120 ms (≈10–12 WPM)</li>
-                                            <li>Dash (—) ≈ 3× dit</li>
-                                            <li>Gap between symbols = 1× dit</li>
-                                            <li>Gap between letters = 3× dit</li>
-                                            <li>Gap between words = 7× dit</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="archive" class="w-6 h-6 mr-3 text-indigo-600"></i>Enclosure</h3>
-                                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                            <li>Top panel cutouts: OLED (28×14 mm), LED (3 mm)</li>
-                                            <li>Internal pillars (M2.5 standoffs)</li>
-                                            <li>Dimensions: 110×65×30 mm</li>
-                                            <li>Front label: “Smart Telegraph — Unit A/B”</li>
-                                        </ul>
-                                    </div>
-                                </div>
+            <div class="flex flex-col md:flex-row-reverse items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://www.adafruit.com/product/326?srsltid=AfmBOorxicqHxyPkGnvKEZfpJxBLcXQi2oVMSl5M7CbO4fplWQI2sCvh" target="_blank" rel="noopener noreferrer">
+                        <img src="https://www.az-delivery.de/cdn/shop/products/096-zoll-oled-ssd1306-display-i2c-128-x-64-pixel-kompatibel-mit-arduino-und-raspberry-pi-562312.jpg?v=1679397959&width=1500" alt="OLED Screen" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">0.96" I²C OLED (×1)</h4>
+                    <p class="text-gray-700">This <strong>128x64 SSD1306</strong> display will show the decoded text. Make sure you get the <strong>I²C (or IIC)</strong> version, which only needs 4 pins (VCC, GND, SDA, SCL).</p>
+                </div>
+            </div>
 
-                                <!-- Build Steps -->
-                                <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
-                                    <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="tool" class="w-6 h-6 mr-3 text-indigo-600"></i>Build Steps</h3>
-                                    <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                                        <li>Breadboard one unit and test the OLED, button, LED, and buzzer.</li>
-                                        <li>Flash code with ROLE = SENDER (Unit A) and again with ROLE = RECEIVER (Unit B).</li>
-                                        <li>Power both—tap on A → text appears on B; B’s buzzer/LED beep per character.</li>
-                                        <li>Make a second pass to tidy wiring, move to perfboard, or mount in a case.</li>
-                                    </ol>
-                                </div>
-                            </div>
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://www.circuits-diy.com/push-button-led-circuit-basic-electronics/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://static-01.daraz.com.np/p/b5bbe8f281cca92ff4013aac837d47d6.jpg" alt="Momentary Pushbutton" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Momentary Pushbutton (×1)</h4>
+                    <p class="text-gray-700">This will be our Morse code key. Any "normally open" (NO) momentary pushbutton will work. A 12mm button is a comfortable size.</p>
+                </div>
+            </div>
 
+            <div class="flex flex-col md:flex-row-reverse items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://www.circuitbasics.com/what-is-a-buzzer/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://emariete.com/wp-content/uploads/2020/12/zumbador.png" alt="Active Buzzer" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Active Buzzer (×1)</h4>
+                    <p class="text-gray-700">This provides the "beep" feedback. Make sure to get an <strong>active buzzer</strong> (it usually has a sticker on top) that works with 3.3V or 5V. It will have a '+' pin and a '–' pin.</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/all" target="_blank" rel="noopener noreferrer">
+                        <img src="https://sfxpcb.com/wp-content/uploads/2023/09/Breadboard.jpg" alt="Solderless Breadboard" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Breadboard (×1)</h4>
+                    <p class="text-gray-700">A standard 400-point or 830-point solderless breadboard is perfect for prototyping the circuit without any soldering.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://en.wikipedia.org/wiki/Jump_wire" target="_blank" rel="noopener noreferrer">
+                        <img src="https://electronicssecret.wordpress.com/wp-content/uploads/2022/07/image-1.png" alt="Jumper Wires" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Jumper Wires</h4>
+                    <p class="text-gray-700">A set of male-to-male (M-M) and male-to-female (M-F) jumper wires will be needed to connect everything. The M-F wires are useful for the OLED and buzzer pins.</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-2/5 w-full">
+                    <a href="https://ledlenser.com/en/advisor/what-is-a-power-bank/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://images.philips.com/is/image/philipsconsumer/506144bc684c46e3a62fb0ce00a6d411?$pnglarge$&wid=960" alt="USB Power Bank" class="rounded-lg shadow-md w-full object-contain h-48 bg-gray-100">
+                    </a>
+                </div>
+                <div class="md:w-3/5 w-full">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">Power Source (×1)</h4>
+                    <p class="text-gray-700">A USB power bank or a standard 5V phone charger with a Micro-USB cable (to match the ESP32) will be needed to power each unit.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
+            <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="clock" class="w-6 h-6 mr-3 text-indigo-600"></i>Morse Timing</h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Dit (•) length = 120 ms (≈10–12 WPM)</li>
+                <li>Dash (—) ≈ 3× dit</li>
+                <li>Gap between symbols = 1× dit</li>
+                <li>Gap between letters = 3× dit</li>
+                <li>Gap between words = 7× dit</li>
+            </ul>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
+            <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="archive" class="w-6 h-6 mr-3 text-indigo-600"></i>Enclosure</h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Top panel cutouts: OLED (28×14 mm)</li>
+                <li>Internal pillars (M2.5 standoffs)</li>
+                <li>Dimensions: 110×65×30 mm</li>
+                <li>Front label: “Smart Telegraph — Unit A/B”</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg fade-in">
+        <h3 class="text-2xl font-bold mb-4 flex items-center"><i data-feather="tool" class="w-6 h-6 mr-3 text-indigo-600"></i>Build Steps</h3>
+        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+            <li>Breadboard one unit and test the OLED, button, and buzzer.</li>
+            <li>Flash code with ROLE = SENDER (Unit A) and again with ROLE = RECEIVER (Unit B).</li>
+            <li>Power both—tap on A → text appears on B; B’s buzzer should beep per character.</li>
+            <li>Make a second pass to tidy wiring, move to perfboard, or mount in a case.</li>
+        </ol>
+    </div>
+</div>
                             <!-- 
                                 =================================
                                 SECTION: Website Designing
@@ -1023,9 +1393,1248 @@
             By simply adding our development domain to the 'Authorized domains' list in the Firebase Authentication settings, the Google Sign-in popup appeared, and the login system worked perfectly. This was a key step in enabling user interaction on our site.
         </D2%80%9D>
         <img src="https://i.ibb.co/ccmMjpxX/Screenshot-2025-11-10-163748.png" alt="Google login popup working" class="rounded-lg shadow-md w-full mb-2">
+
         <p class="text-sm text-gray-600 italic text-center">The Google Sign-in flow now works as expected.</p>
+    <div class="border-t border-gray-200 pt-6"></div>
+        <h4 class="text-xl font-semibold mb-2">Social Links now work!</h4>
+        <p class="text-gray-700 mb-4 leading-relaxed">
+            Although we had already added the option to make inquiries in the contact page of our website, we decided it would also be good for people to be able to directly contact us and get to know about our project and the team members in real-time. Therefore, we have added our social links in the footer section of our website. 
+When we started designing our website, in the home page, the option to access our social links was already available. However, since we did not have official social media accounts, clicking on the option would open a tab saying that the feature was still under construction.
+
+
+        </D2%80%9D>
+        <img src="https://i.ibb.co/9kzFPr0S/Screenshot-2025-11-11-153311.png" alt="Google login popup working" class="rounded-lg shadow-md w-full mb-2">
+        <p class="text-gray-700 mb-4 leading-relaxed">
+            Today, we have created our social media accounts, allowing us to communicate with interested individuals more freely without those individuals having to wait for a response.
+For our socials, we have created a LinkedIn account, and an Instagram account
+        <p class="text-sm text-gray-600 italic text-center">The Social Links as of now will work</p>
     </div>
     
+</div>
+
+<!-- ======================================================= -->
+<!--             START: SOURCE CODE SECTION                -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!--             START: SOURCE CODE SECTION                -->
+<!-- ======================================================= -->
+<div id="doc-code" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
+
+    <h3 class="text-2xl font-bold flex items-center">
+        <i data-feather="code" class="w-6 h-6 mr-3 text-indigo-600"></i>
+        Source Code & Replicate
+    </h3>
+
+    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <p class="text-gray-700">
+            You can find all our work, including all code versions, 3D models, and documentation, on our official GitHub repository. We welcome you to explore, fork, and build upon our project!
+        </p>
+        <a href="https://github.com/LuminiRoyalAcademy/Lumini" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-3 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <i data-feather="github" class="w-4 h-4"></i>
+            Visit GitHub Repository
+        </a>
+    </div>
+    <div class="space-y-4">
+        <h4 class="text-xl font-bold text-gray-800">Bill of Materials (BOM)</h4>
+        <p class="text-gray-700">To build this project, you only need 4 core components:</p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li><strong>1x</strong> ESP32 Microcontroller</li>
+            <li><strong>1x</strong> SSD1306 0.96" I2C OLED Display (128x64)</li>
+            <li><strong>1x</strong> Piezo Buzzer (Passive or Active)</li>
+            <li><strong>1x</strong> Push Button (Tactile Switch)</li>
+        </ul>
+    </div>
+
+    <div class="border-t border-gray-200 pt-8 space-y-4">
+        <div class="flex justify-between items-center">
+            <h4 class="text-xl font-bold text-gray-800">Arduino Code (.ino)</h4>
+            <button onclick="copyActiveArduinoCode()" id="copy-code-btn" class="bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg flex items-center gap-2 transition-all duration-150 hover:bg-gray-300">
+                <i data-feather="copy" class="w-4 h-4"></i>
+                <span>Copy Code</span>
+            </button>
+        </div>
+
+        <div class="flex border-b border-gray-200">
+            <button id="tab-btn-v17" class="tab-btn px-4 py-2 font-medium text-indigo-600 border-b-2 border-indigo-600">
+                v17 (Visual Emojis)
+            </button>
+            <button id="tab-btn-v18" class="tab-btn px-4 py-2 font-medium text-gray-500 hover:text-gray-700">
+                v18 (Blind Mode)
+            </button>
+        </div>
+
+        <div id="tab-panel-v17" class="tab-panel">
+            <pre class="rounded-lg" style="max-height: 600px; overflow-x: auto;">
+<code id="arduino-code-v17" class="language-cpp">
+/*
+ * Sketch: Morse_Transceiver_MQTT_v17
+ * (Version 17 - Added Laugh, Angry, Surprised, Skull)
+ */
+
+#include &lt;Wire.h&gt;
+#include &lt;Adafruit_GFX.h&gt;
+#include &lt;Adafruit_SSD1306.h&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+
+// ---
+// --- 1. ! REQUIRED: EDIT THIS SECTION ! ---
+// ---
+const char* WIFI_SSID = "DGI";
+const char* WIFI_PASSWORD = "dgi@2024!";
+// ---
+// --- 2. ! REQUIRED: MAKE THIS TOPIC UNIQUE ! ---
+// ---
+const char* MQTT_TOPIC = "morse/tj-project-final/999"; // &lt;-- Use a new, unique topic
+// ---
+
+// --- MQTT Definitions ---
+const char* MQTT_BROKER = "broker.hivemq.com";
+const int   MQTT_PORT = 1883;
+String clientID = "MorseESP32-";
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
+// ... (The rest of your original v17 code from the prompt) ...
+// ... (I'm truncating it here for brevity, but you would) ...
+// ... (paste your *entire* original v17 code block here) ...
+
+void updateDisplay() {
+  display.clearDisplay();
+  display.setCursor(0, 0);
+
+  display.setTextSize(2);
+  display.print("&gt;");
+  display.println(currentMorse);
+
+  display.setTextSize(1);
+  display.println("");
+  display.setCursor(0, 24);
+  display.println("Message:");
+  
+  String displayMessage = translatedMessage;
+  displayMessage.replace("EMOJI_WINK", "[WINK]");
+  displayMessage.replace("EMOJI_HEART", "[&lt;3]");
+
+  // --- NEW: Add text previews for the new emojis ---
+  displayMessage.replace("EMOJI_LAUGH", "[HAHA]");
+  displayMessage.replace("EMOJI_ANGRY", "[ANGRY]");
+  displayMessage.replace("EMOJI_SURPRISED", "[SURPRISED]");
+  displayMessage.replace("EMOJI_SKULL", "[SKULL]");
+  
+  displayMessage.replace(String(char(0)), "");
+  
+  display.setTextSize(2);
+  display.setTextWrap(true);
+  display.println(displayMessage);
+
+  display.display();
+}
+</code>
+            </pre>
+        </div>
+
+        <div id="tab-panel-v18" class="tab-panel hidden">
+            <pre class="rounded-lg" style="max-height: 600px; overflow-x: auto;">
+<code id="arduino-code-v18" class="language-cpp">
+/*
+ * Sketch: Morse_Transceiver_MQTT_v18
+ * (Version 18 - Added Blind Mode)
+ * * This version adds an accessibility mode for visually
+ * impaired users. On startup, holding the button
+ * selects "Blind Mode," which plays all incoming
+ * messages as audible Morse code.
+ */
+
+#include &lt;Wire.h&gt;
+#include &lt;Adafruit_GFX.h&gt;
+#include &lt;Adafruit_SSD1306.h&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+
+
+const char* WIFI_SSID = "DGI";
+const char* WIFI_PASSWORD = "dgi@2024!";
+const char* MQTT_TOPIC = "morse/tj-project-final/999";
+
+const char* MQTT_BROKER = "broker.hivemq.com";
+const int   MQTT_PORT = 1883;
+String clientID = "MorseESP32-";
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
+
+const int MORSE_BUTTON_PIN = 32;
+const int BUZZER_PIN = 26;
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET      -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &amp;Wire, OLED_RESET);
+
+std::map&lt;std::string, String&gt; morseMap;
+String currentMorse = "";
+String translatedMessage = "";
+
+
+unsigned long buttonPressTime = 0;
+unsigned long lastReleaseTime = 0;
+unsigned long lastDebounceTime = 0;
+const long debounceTime = 50;
+const long dashThreshold = 250;
+const long letterTimeout = 1000;
+const long wordTimeout = 2000;
+const long resetTimeout = 5000;
+
+
+int buttonState = HIGH;
+int lastButtonState = HIGH;
+bool letterCommitted = false;
+bool wordCommitted = false;
+
+
+const int buzzerFrequency = 800;
+const int notifyFrequency = 1200;
+String receivedMessage = "";
+volatile bool newMessage = false;
+bool messageIsDisplaying = false;
+// Used for TEXT messages only
+unsigned long messageDisplayStartTime = 0;
+const long messageDisplayTime = 5000;
+// --- NEW: Blind Mode Vars ---
+bool isBlindMode = false;
+std::map&lt;char, std::string&gt; reverseMorseMap;
+// Durations for Morse playback (based on your dashThreshold)
+const int dotDuration = 250;
+// Same as dashThreshold for consistency
+const int dashDuration = dotDuration * 3;
+const int interElementPause = dotDuration;
+// Pause between dots/dashes
+const int interLetterPause = dotDuration * 3; // Pause between letters
+const int interWordPause = dotDuration * 7;
+// Pause between words
+// --- End Blind Mode Vars ---
+
+
+void initializeMorseMap();
+void translateAndClear();
+void updateDisplay();
+bool sendMessage();
+void setup_wifi();
+void mqtt_callback(char* topic, byte* payload, unsigned int length);
+void reconnect_mqtt();
+void playWinkAnimation();
+void playHeartAnimation();
+void playLaughAnimation();
+void playAngryAnimation();
+void playSurprisedAnimation();
+void playSkullAnimation();
+
+// --- NEW: Blind Mode Functions ---
+void initializeReverseMorseMap();
+void playMorseCode(std::string morseCode);
+void playMorseString(String message);
+// --- End Blind Mode Functions ---
+
+
+void setup_wifi() {
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(WIFI_SSID);
+
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setCursor(0,0);
+  display.println("Connecting to WiFi");
+  display.println(WIFI_SSID);
+  display.display();
+  
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+  int retries = 0;
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    display.print(".");
+    display.display();
+    if (retries++ &gt; 20) {
+      Serial.println("\nFailed to connect to WiFi!");
+      display.clearDisplay();
+      display.setCursor(0,0);
+      display.println("WIFI FAILED!");
+      display.println("Check credentials.");
+      display.display();
+      while(true);
+    }
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void mqtt_callback(char* topic, byte* payload, unsigned int length) {
+  char buffer[length + 1];
+  memcpy(buffer, payload, length);
+  buffer[length] = '\0';
+  String fullMessage = String(buffer);
+
+  Serial.print("Full msg received: "); Serial.println(fullMessage);
+
+  int colonIndex = fullMessage.indexOf(':');
+  if (colonIndex == -1) {
+    Serial.println("Ignoring malformed message (no colon).");
+    return;
+  }
+
+  String senderID = fullMessage.substring(0, colonIndex);
+  String messageContent = fullMessage.substring(colonIndex + 1);
+  if (senderID == clientID) {
+    Serial.println("This is my own message (echo). Ignoring.");
+    return;
+  }
+
+  receivedMessage = messageContent;
+  newMessage = true;
+  
+  Serial.print("Message from OTHER: "); Serial.println(receivedMessage);
+}
+
+void reconnect_mqtt() {
+  while (!mqttClient.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    display.clearDisplay();
+    display.setCursor(0,0);
+    display.setTextSize(1);
+    display.println("Connecting to MQTT");
+    display.println(MQTT_BROKER);
+    display.display();
+    
+    if (mqttClient.connect(clientID.c_str())) {
+      Serial.println("CONNECTED!");
+      display.println("CONNECTED!");
+      display.display();
+      delay(500);
+      
+      Serial.print("Subscribing to topic: ");
+      Serial.println(MQTT_TOPIC);
+      if(mqttClient.subscribe(MQTT_TOPIC)) {
+        Serial.println("Subscription successful!");
+      } else {
+        Serial.println("Subscription FAILED!");
+      }
+      
+      updateDisplay();
+    } else {
+      Serial.print("FAILED, rc=");
+      Serial.print(mqttClient.state());
+      Serial.println(" try again in 5 seconds");
+      
+      display.println("FAILED!");
+      display.display();
+      delay(5000);
+    }
+  }
+}
+
+
+void setup() {
+  Serial.begin(115200);
+
+  clientID += String(random(0xffff), HEX);
+  Serial.print("My client ID is: ");
+  Serial.println(clientID);
+
+  pinMode(MORSE_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;);
+  }
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  // --- NEW: MODE SELECTION ---
+  display.setCursor(0,0);
+  display.println("SELECT MODE:");
+  display.println("");
+  display.println("Click . (DOT)");
+  display.println("for NORMAL");
+  display.println("");
+  display.println("Hold - (DASH)");
+  display.println("for BLIND");
+  display.display();
+
+  bool modeSelected = false;
+  while (!modeSelected) {
+    int reading = digitalRead(MORSE_BUTTON_PIN);
+    if (reading == LOW) { // Button is pressed
+      unsigned long pressTime = millis();
+      tone(BUZZER_PIN, buzzerFrequency); // Audio feedback
+      
+      // Wait for the button to be released
+      while (digitalRead(MORSE_BUTTON_PIN) == LOW) {
+        delay(10);
+// small delay
+      }
+      noTone(BUZZER_PIN);
+      unsigned long pressDuration = millis() - pressTime;
+      
+      // Check if it was a dash (long press)
+      if (pressDuration &gt;= dashThreshold) {
+        isBlindMode = true;
+        modeSelected = true;
+        Serial.println("BLIND Mode Selected.");
+      } 
+      // Check if it was a dot (short press)
+      else if (pressDuration &gt; debounceTime) {
+        isBlindMode = false;
+        modeSelected = true;
+        Serial.println("NORMAL Mode Selected.");
+      }
+    }
+  }
+
+  // Show confirmation on display
+  display.clearDisplay();
+  display.setCursor(0,0);
+  display.println("Mode Selected:");
+  display.setTextSize(2);
+  if (isBlindMode) {
+    display.println("BLIND");
+  } else {
+    display.println("NORMAL");
+  }
+  display.display();
+  delay(1500); // Show for 1.5 seconds
+  
+  // --- END MODE SELECTION ---
+
+
+  // --- Original setup continues... ---
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0,0);
+  display.println("Morse Transceiver");
+  display.println("v18 (Blind Mode)");
+  display.display();
+  delay(1000);
+
+  setup_wifi();
+  
+  mqttClient.setServer(MQTT_BROKER, MQTT_PORT);
+  mqttClient.setCallback(mqtt_callback);
+
+  initializeMorseMap();
+  initializeReverseMorseMap();
+// &lt;-- ADDED
+  updateDisplay();
+  lastReleaseTime = millis();
+}
+
+void loop() {
+  if (!mqttClient.connected()) {
+    reconnect_mqtt();
+  }
+  mqttClient.loop();
+  
+  // This check is for timing out TEXT messages in NORMAL mode.
+  if (messageIsDisplaying &amp;&amp; !isBlindMode &amp;&amp; (millis() - messageDisplayStartTime &gt; messageDisplayTime)) {
+    messageIsDisplaying = false;
+    updateDisplay();
+    lastReleaseTime = millis();
+  }
+
+  if (newMessage) {
+    newMessage = false;
+    
+    Serial.println("Playing notification sound!");
+    tone(BUZZER_PIN, notifyFrequency, 100);
+    delay(150);
+    tone(BUZZER_PIN, notifyFrequency, 100);
+
+    currentMorse = "";
+    translatedMessage = "";
+    // --- NEW: MODE-BASED LOGIC ---
+    if (!isBlindMode) {
+      
+      // --- This is the ORIGINAL logic for NORMAL (visual) mode ---
+      
+      if (receivedMessage == "EMOJI_WINK") {
+        Serial.println("Received EMOJI_WINK, playing animation...");
+        playWinkAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else if (receivedMessage == "EMOJI_HEART") {
+        Serial.println("Received EMOJI_HEART, playing animation...");
+        playHeartAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else if (receivedMessage == "EMOJI_LAUGH") {
+        Serial.println("Received EMOJI_LAUGH, playing animation...");
+        playLaughAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else if (receivedMessage == "EMOJI_ANGRY") {
+        Serial.println("Received EMOJI_ANGRY, playing animation...");
+        playAngryAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else if (receivedMessage == "EMOJI_SURPRISED") {
+        Serial.println("Received EMOJI_SURPRISED, playing animation...");
+        playSurprisedAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else if (receivedMessage == "EMOJI_SKULL") {
+        Serial.println("Received EMOJI_SKULL, playing animation...");
+        playSkullAnimation();
+        updateDisplay();
+        lastReleaseTime = millis();
+        
+      } else {
+        Serial.println("Received text, displaying for 5s...");
+        display.clearDisplay();
+        display.setCursor(0, 0);
+        display.setTextSize(1);
+        display.println("MSG RECEIVED:");
+        display.setTextSize(2);
+        display.setTextWrap(true);
+        display.println(receivedMessage);
+        display.display();
+        
+        messageIsDisplaying = true;
+        messageDisplayStartTime = millis();
+      }
+      
+    } else {
+      
+      // --- This is the NEW logic for BLIND (audio) mode ---
+      
+      Serial.print("Blind Mode: Received message: ");
+      Serial.println(receivedMessage);
+
+      // We must set this flag to TRUE to prevent the user from
+      // typing new morse code *while* the audio is playing.
+      messageIsDisplaying = true;
+      
+      String messageToPlay;
+      
+      // Translate Emojis into simple words for audio playback
+      if (receivedMessage == "EMOJI_WINK") {
+        messageToPlay = "WINK";
+      } else if (receivedMessage == "EMOJI_HEART") {
+        messageToPlay = "HEART";
+      } else if (receivedMessage == "EMOJI_LAUGH") {
+        messageToPlay = "LAUGH";
+      } else if (receivedMessage == "EMOJI_ANGRY") {
+        messageToPlay = "ANGRY";
+      } else if (receivedMessage == "EMOJI_SURPRISED") {
+        messageToPlay = "SURPRISED";
+      } else if (receivedMessage == "EMOJI_SKULL") {
+        messageToPlay = "SKULL";
+      } else {
+        messageToPlay = receivedMessage;
+// Play the text as-is
+      }
+      
+      Serial.print("Playing back as Morse: ");
+      Serial.println(messageToPlay);
+
+      // Show a "busy" message on the display
+      display.clearDisplay();
+      display.setCursor(0,0);
+      display.setTextSize(1);
+      display.println("BLIND MODE");
+      display.println("Receiving...");
+      display.display();
+
+      // Play the morse string audio
+      playMorseString(messageToPlay);
+      
+      Serial.println("Playback finished.");
+      // Playback is done, so we can clear the flag.
+      // This allows the user to start typing again.
+      messageIsDisplaying = false; 
+      updateDisplay(); // Resets display to the input screen
+      lastReleaseTime = millis();
+    }
+    // --- END NEW LOGIC ---
+  }
+
+  // This is the morse INPUT logic.
+  // The 'if (!messageIsDisplaying)' wrapper is now CRITICAL.
+  // It prevents this code from running while an animation is playing
+  // OR while our new audio playback is happening.
+  if (!messageIsDisplaying) {
+    int reading = digitalRead(MORSE_BUTTON_PIN);
+    if (reading != lastButtonState) {
+      lastDebounceTime = millis();
+    }
+    lastButtonState = reading;
+    if ((millis() - lastDebounceTime) &gt; debounceTime) {
+      if (reading != buttonState) {
+        buttonState = reading;
+        if (buttonState == LOW) {
+          Serial.println("Red Morse Button (32) PRESSED");
+          buttonPressTime = millis();
+          letterCommitted = false;
+          wordCommitted = false;
+          tone(BUZZER_PIN, buzzerFrequency);
+        } else {
+          noTone(BUZZER_PIN);
+          unsigned long pressDuration = millis() - buttonPressTime;
+          if (pressDuration &gt;= dashThreshold) {
+            currentMorse += "-";
+          } else {
+            currentMorse += ".";
+          }
+          updateDisplay();
+          lastReleaseTime = millis();
+        }
+      }
+    }
+
+    if (buttonState == HIGH) {
+      unsigned long timeSinceRelease = millis() - lastReleaseTime;
+      if (timeSinceRelease &gt; resetTimeout &amp;&amp; translatedMessage.length() &gt; 0) {
+        Serial.println("Reset Timeout (5s)");
+        translatedMessage = "";
+        currentMorse = "";
+        updateDisplay();
+        letterCommitted = true;
+        wordCommitted = true;
+      }
+      else if (timeSinceRelease &gt; wordTimeout &amp;&amp; !wordCommitted) {
+        if (currentMorse.length() &gt; 0) {
+          translateAndClear();
+        }
+        if (translatedMessage.length() &gt; 0) {
+          Serial.println("Word Timeout (2s)... ADDING SPACE AND SENDING");
+          if (translatedMessage.endsWith(" ") || translatedMessage.endsWith(String(char(0)))) {
+            // ...
+          } else {
+             translatedMessage += " ";
+          }
+          
+          bool sentOK = sendMessage();
+          if (sentOK) {
+            display.setCursor(0, 56);
+            display.print("...SENT!");
+          } else {
+            display.setCursor(0, 56);
+            display.print("...FAIL!");
+          }
+          display.display();
+          delay(500);
+        }
+        updateDisplay();
+        wordCommitted = true;
+        letterCommitted = true;
+      }
+      else if (timeSinceRelease &gt; letterTimeout &amp;&amp; !letterCommitted) {
+        if (currentMorse.length() &gt; 0) {
+          Serial.println("Letter Timeout (1s)");
+          translateAndClear();
+          updateDisplay();
+        }
+        letterCommitted = true;
+      }
+    }
+  }
+} // --- END OF loop() ---
+
+
+
+void playWinkAnimation() {
+
+  int y = 20;
+// Centered Y
+  
+  // Play the animation 4 times
+  for (int i = 0; i &lt; 4; i++) {
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(33, y); // Centered X for "(o o)"
+    display.print("(o o)");
+    display.display();
+    delay(300);
+    
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(33, y);
+    display.print("(- -)");
+    display.display();
+    delay(200);
+  }
+  
+  delay(500);
+}
+
+void playHeartAnimation() {
+
+  for (int i = 0; i &lt; 4; i++) {
+
+    display.clearDisplay();
+    display.fillCircle(58, 28, 5, SSD1306_WHITE); // Left lobe
+    display.fillCircle(70, 28, 5, SSD1306_WHITE);
+// Right lobe
+    display.fillTriangle(53, 30, 75, 30, 64, 42, SSD1306_WHITE); // Point
+    display.display();
+    delay(250);
+// --- Frame 2: Big Heart ---
+    display.clearDisplay();
+    display.fillCircle(55, 25, 8, SSD1306_WHITE);
+// Left lobe
+    display.fillCircle(73, 25, 8, SSD1306_WHITE);
+// Right lobe
+    display.fillTriangle(47, 30, 81, 30, 64, 48, SSD1306_WHITE); // Point
+    display.display();
+    delay(250);
+  }
+}
+
+// --- NEW ANIMATION FUNCTIONS ---
+
+void playLaughAnimation() {
+  // A simple text-based laughing animation
+  int y = 20;
+// Centered Y
+  
+  // Play the animation 5 times
+  for (int i = 0; i &lt; 5; i++) {
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(33, y); // Centered X
+    display.print("(&gt; &lt;)");
+    display.display();
+    delay(200);
+    
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(33, y);
+// Centered X
+    display.print("(v v)");
+    display.display();
+    delay(200);
+  }
+  
+  delay(500);
+// Hold last frame
+}
+
+void playAngryAnimation() {
+  // A simple text-based vibrating angry face
+  int y = 20;
+// Centered Y
+  
+  // Play the animation 6 times
+  for (int i = 0; i &lt; 6; i++) {
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(30, y); // Centered X
+    display.print("(&gt;_&lt;)");
+    display.display();
+    delay(150);
+    
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(30, y+2);
+// Vibrate down
+    display.print("(&gt;O&lt;)");
+    display.display();
+    delay(150);
+  }
+  
+  delay(500);
+// Hold last frame
+}
+
+void playSurprisedAnimation() {
+  // A simple text-based surprised face
+  int y = 20;
+// Centered Y
+  
+  // Play the animation 3 times
+  for (int i = 0; i &lt; 3; i++) {
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(30, y); // Centered X
+    display.print("(o_o)");
+    display.display();
+    delay(400);
+    
+    display.clearDisplay();
+    display.setTextSize(3);
+    display.setCursor(30, y);
+// Centered X
+    display.print("(O_O)");
+    display.display();
+    delay(300);
+  }
+  
+  delay(500);
+// Hold last frame
+}
+
+void playSkullAnimation() {
+  // A shape-based chattering skull
+  
+  // Play the animation 5 times
+  for (int i = 0; i &lt; 5; i++) {
+    // --- Frame 1: Mouth Closed ---
+    display.clearDisplay();
+    display.fillRoundRect(50, 15, 28, 22, 6, SSD1306_WHITE); // Cranium
+    display.fillRect(52, 37, 24, 8, SSD1306_WHITE);
+// Jaw
+    display.fillCircle(57, 26, 5, SSD1306_BLACK);           // Left eye
+    display.fillCircle(71, 26, 5, SSD1306_BLACK);
+// Right eye
+    display.fillTriangle(62, 32, 66, 32, 64, 37, SSD1306_BLACK); // Nose
+    display.display();
+    delay(200);
+// --- Frame 2: Mouth Open ---
+    display.clearDisplay();
+    display.fillRoundRect(50, 15, 28, 22, 6, SSD1306_WHITE);
+// Cranium
+    display.fillRect(52, 42, 24, 8, SSD1306_WHITE);
+// Jaw (moved down)
+    display.fillCircle(57, 26, 5, SSD1306_BLACK);
+// Left eye
+    display.fillCircle(71, 26, 5, SSD1306_BLACK);
+// Right eye
+    display.fillTriangle(62, 32, 66, 32, 64, 37, SSD1306_BLACK); // Nose
+    display.display();
+    delay(200);
+  }
+}
+
+// ---
+// --- NEW BLIND MODE AUDIO FUNCTIONS ---
+// ---
+
+/**
+ * Populates the reverse map for text-to-morse translation.
+ */
+void initializeReverseMorseMap() {
+    reverseMorseMap['A'] = ".-";   reverseMorseMap['B'] = "-...";
+    reverseMorseMap['C'] = "-.-."; reverseMorseMap['D'] = "-..";
+    reverseMorseMap['E'] = ".";    reverseMorseMap['F'] = "..-.";
+    reverseMorseMap['G'] = "--.";  reverseMorseMap['H'] = "....";
+    reverseMorseMap['I'] = "..";   reverseMorseMap['J'] = ".---";
+    reverseMorseMap['K'] = "-.-";  reverseMorseMap['L'] = ".-..";
+    reverseMorseMap['M'] = "--";   reverseMorseMap['N'] = "-.";
+    reverseMorseMap['O'] = "---";  reverseMorseMap['P'] = ".--.";
+    reverseMorseMap['Q'] = "--.-"; reverseMorseMap['R'] = ".-.";
+    reverseMorseMap['S'] = "...";  reverseMorseMap['T'] = "-";
+    reverseMorseMap['U'] = "..-";  reverseMorseMap['V'] = "...-";
+    reverseMorseMap['W'] = ".--";  reverseMorseMap['X'] = "-..-";
+    reverseMorseMap['Y'] = "-.--"; reverseMorseMap['Z'] = "--..";
+    reverseMorseMap['0'] = "-----"; reverseMorseMap['1'] = ".----";
+    reverseMorseMap['2'] = "..---"; reverseMorseMap['3'] = "...--";
+    reverseMorseMap['4'] = "....-"; reverseMorseMap['5'] = ".....";
+    reverseMorseMap['6'] = "-...."; reverseMorseMap['7'] = "--...";
+    reverseMorseMap['8'] = "---.."; reverseMorseMap['9'] = "----.";
+}
+
+/**
+ * Plays a single morse code sequence (e.g., ".-") on the buzzer.
+ */
+void playMorseCode(std::string morseCode) {
+  Serial.print("Playing: ");
+  Serial.println(morseCode.c_str());
+  
+  for (char c : morseCode) {
+    // Play the tone for the dot or dash duration
+    if (c == '.') {
+      tone(BUZZER_PIN, buzzerFrequency);
+      delay(dotDuration);
+    } else if (c == '-') {
+      tone(BUZZER_PIN, buzzerFrequency);
+      delay(dashDuration);
+    }
+    noTone(BUZZER_PIN); // Stop the tone
+    
+    // Wait for the pause between elements
+    delay(interElementPause);
+  }
+}
+
+/**
+ * Translates a text string into morse audio.
+ */
+void playMorseString(String message) {
+  message.toUpperCase();
+// Our map only has uppercase keys
+  
+  for (int i = 0; i &lt; message.length(); i++) {
+    char c = message.charAt(i);
+    if (c == ' ') {
+      // It's a space, wait for the word pause
+      // (We subtract the interLetterPause because it will be added next)
+      delay(interWordPause - interLetterPause);
+    } else if (reverseMorseMap.count(c)) {
+      // It's a letter, find it and play it
+      playMorseCode(reverseMorseMap[c]);
+// Wait for the pause between letters
+      // (We subtract interElementPause because playMorseCode already added one)
+      delay(interLetterPause - interElementPause);
+    }
+    // Any character not in the map (like '?', '!', '[', ']') is ignored.
+  }
+}
+
+// --- END NEW BLIND MODE FUNCTIONS ---
+
+
+// ---
+// --- Morse &amp; Display Functions (Unchanged)
+// ---
+
+bool sendMessage() {
+  if (translatedMessage.length() == 0) {
+    Serial.println("Message is empty, not sending.");
+    return false;
+  }
+
+  String messageToSend = clientID + ":" + translatedMessage;
+
+  Serial.print("Publishing message: ");
+  Serial.println(messageToSend);
+  if (mqttClient.publish(MQTT_TOPIC, messageToSend.c_str())) {
+    Serial.println("Publish SUCCESS");
+    return true;
+  } else {
+    Serial.println("Publish FAILED!");
+    return false;
+  }
+}
+
+void initializeMorseMap() {
+    morseMap[".-"] = "A"; morseMap["-..."] = "B"; morseMap["-.-."] = "C";
+    morseMap["-.."] = "D";
+    morseMap["."] = "E"; morseMap["..-."] = "F";
+    morseMap["--."] = "G"; morseMap["...."] = "H"; morseMap[".."] = "I";
+    morseMap[".---"] = "J";
+    morseMap["-.-"] = "K"; morseMap[".-.."] = "L";
+    morseMap["--"] = "M"; morseMap["-."] = "N"; morseMap["---"] = "O";
+    morseMap[".--."] = "P";
+    morseMap["--.-"] = "Q"; morseMap[".-."] = "R";
+    morseMap["..."] = "S"; morseMap["-"] = "T"; morseMap["..-"] = "U";
+    morseMap["...-"] = "V";
+    morseMap[".--"] = "W"; morseMap["-..-"] = "X";
+    morseMap["-.--"] = "Y"; morseMap["--.."] = "Z";
+    morseMap["-----"] = "0"; morseMap[".----"] = "1";
+    morseMap["..---"] = "2";
+    morseMap["...--"] = "3"; morseMap["....-"] = "4m"; morseMap["....."] = "5";
+    morseMap["-...."] = "6"; morseMap["--..."] = "7";
+    morseMap["---.."] = "8";
+    morseMap["----."] = "9";
+    
+    morseMap["-.-.-"] = "OK"; morseMap["----"] = "YES";
+    morseMap["...-."] = "NO"; morseMap[".--.--"] = "HELP";
+    morseMap["..--.-"] = "WAIT";
+    morseMap["-...--"] = "DONE"; morseMap["---..."] = "COME"; morseMap["--...-"] = "GO";
+    morseMap[".-..--"] = "READY";
+    
+    // ---
+    // --- EMOJI KEYWORDS (NOW WITH MORE EMOJIS) ---
+    // ---
+    Serial.println("Loading custom emoji codes...");
+    morseMap[".-.-."] = "EMOJI_WINK";  // (A, R)
+    morseMap[".-..-."] = "EMOJI_HEART";
+// (A, L, F)
+    
+    // --- NEW EMOJI CODES ---
+    morseMap["...-.."] = "EMOJI_LAUGH";
+// (S, L)
+    morseMap["-..-"] = "EMOJI_ANGRY";     // (X)
+    morseMap["---..."] = "EMOJI_SURPRISED";
+// (O, S)
+    morseMap["...-.-"] = "EMOJI_SKULL";     // (S, K)
+    
+}
+
+void translateAndClear() {
+  if (currentMorse.length() &gt; 0) {
+    std::string currentMorseStd = currentMorse.c_str();
+    if (morseMap.count(currentMorseStd)) {
+      translatedMessage += morseMap[currentMorseStd];
+      if (morseMap[currentMorseStd].startsWith("EMOJI_")) {
+        translatedMessage += String(char(0));
+      }
+      
+    } else {
+      translatedMessage += "?";
+    }
+    currentMorse = "";
+  }
+}
+
+void updateDisplay() {
+  display.clearDisplay();
+  display.setCursor(0, 0);
+
+  display.setTextSize(2);
+  display.print("&gt;");
+  display.println(currentMorse);
+
+  display.setTextSize(1);
+  display.println("");
+  display.setCursor(0, 24);
+  display.println("Message:");
+  
+  String displayMessage = translatedMessage;
+  displayMessage.replace("EMOJI_WINK", "[WINK]");
+  displayMessage.replace("EMOJI_HEART", "[&lt;3]");
+  // --- NEW: Add text previews for the new emojis ---
+  displayMessage.replace("EMOJI_LAUGH", "[HAHA]");
+  displayMessage.replace("EMOJI_ANGRY", "[ANGRY]");
+  displayMessage.replace("EMOJI_SURPRISED", "[SURPRISED]");
+  displayMessage.replace("EMOJI_SKULL", "[SKULL]");
+  displayMessage.replace(String(char(0)), "");
+  
+  display.setTextSize(2);
+  display.setTextWrap(true);
+  display.println(displayMessage);
+
+  display.display();
+}
+</code>
+</div>
+<!-- ======================================================= -->
+<!--               END: SOURCE CODE SECTION                -->
+<!-- ======================================================= -->
+
+<div id="doc-history" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
+
+    <h3 class="text-2xl font-bold flex items-center">
+        <i data-feather="archive" class="w-6 h-6 mr-3 text-indigo-600"></i>
+        History: The Lost Invention
+    </h3>
+
+    <div class="space-y-4">
+        <h4 class="text-xl font-bold text-gray-800">1. Lost Invention: The Electrical Telegraph</h4>
+        <p class="text-gray-700 leading-relaxed">
+            The challenge is simple: Imagine a world where global communication relied on magnets, simple circuits, and a code of taps. In the 19th century, the Electrical Telegraph was the pinnacle of human ingenuity, reducing distance to mere seconds.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+            However, this revolutionary technology was lost—not because it failed, but because it was too fragile and too expensive to scale.
+        </p>
+    </div>
+
+    <div class="space-y-6">
+        <h4 class="text-xl font-bold text-gray-800">The Historical Failure Point (The Gap)</h4>
+        <p class="text-gray-700 leading-relaxed">
+            The original system was brilliant in concept but suffered from three major, historical limitations. Click each to learn more:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 rounded-lg bg-gray-100 p-1">
+            <button 
+                onclick="showHistoryTab('hist-1')" 
+                id="btn-hist-1"
+                class="history-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 bg-white text-indigo-700 shadow-sm">
+                <i data-feather="hard-drive" class="w-4 h-4"></i>
+                Massive Infrastructure
+            </button>
+            <button 
+                onclick="showHistoryTab('hist-2')" 
+                id="btn-hist-2"
+                class="history-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 text-gray-600 hover:bg-white hover:shadow-sm">
+                <i data-feather="battery-charging" class="w-4 h-4"></i>
+                Power Inefficiency
+            </button>
+            <button 
+                onclick="showHistoryTab('hist-3')" 
+                id="btn-hist-3"
+                class="history-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 text-gray-600 hover:bg-white hover:shadow-sm">
+                <i data-feather="archive" class="w-4 h-4"></i>
+                Lack of Portability
+            </button>
+        </div>
+
+        <div class="p-4 rounded-b-lg">
+            <div id="hist-1" class="history-tab-content space-y-2 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Massive Infrastructure:</strong> Early systems required miles of dedicated, heavy copper wire and huge, bulky mechanical relays to boost the signal. This made the system immobile and extremely vulnerable to weather damage.
+                </p>
+            </div>
+            <div id="hist-2" class="history-tab-content hidden space-y-2 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Power Inefficiency:</strong> The system relied on constant, high-power electrical current to move physical mechanisms (the needle or the sounder). This was a significant power drain and created enormous maintenance costs.
+                </p>
+            </div>
+            <div id="hist-3" class="history-tab-content hidden space-y-2 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>Lack of Portability:</strong> Communication was confined to dedicated, expensive stations. There was no concept of a portable or rapidly deployable telegraph unit.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-lg">
+        <p class="font-medium text-indigo-800">Conclusion</p>
+        <p class="text-indigo-700 leading-relaxed mt-1">
+            The brilliance of the original design was its simple encoding (Morse Code), but the available materials and power systems of the 1800s were too primitive to make it truly resilient and portable.
+        </p>
+    </div>
+
+    <div class="border-t border-gray-200 pt-8 space-y-6">
+        
+        <h4 class="text-xl font-bold text-gray-800">2. The Modern Solution: LUMINI’s Technical Fix</h4>
+        
+        <div class="space-y-2">
+            <h5 class="text-lg font-semibold text-gray-800">LUMINI: Modernizing the Signal for Resilience</h5>
+            <p class="text-gray-700 leading-relaxed">
+                LUMINI revives the Telegraph's core strength—its elegant simplicity—by replacing heavy 19th-century mechanics with 21st-century micro-electronics. Our solution is scientifically sound because it translates the reliable, binary signal of Morse Code into a modern, energy-efficient digital format.
+            </p>
+        </div>
+
+        <div class="space-y-2">
+            <h5 class="text-lg font-semibold text-gray-800">Technical Application: Closing the Gap</h5>
+            <p class="text-gray-700 leading-relaxed">
+                We use modern technology (all available at a FabLab) to directly address the historical weaknesses:
+            </p>
+
+            <div class="mt-4 border border-gray-200 rounded-lg overflow-hidden">
+                
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="px-4 py-3 font-semibold text-gray-800 bg-gray-100 border-b md:border-b-0">
+                        Historical Problem (The Gap)
+                    </div>
+                    <div class="px-4 py-3 font-semibold text-gray-800 bg-gray-100 border-b md:border-l md:border-b-0">
+                        Modern Solution (LUMINI)
+                    </div>
+                    <div class="px-4 py-3 font-semibold text-gray-800 bg-gray-100 border-b md:border-l md:border-b-0">
+                        Technological Application
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-b-0">
+                        Bulky Mechanical Relays
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-l md:border-b-0">
+                        Microcontroller Core (e.g., esp32)
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 md:border-l">
+                        The esp32 reads the physical key-press, digitally encodes the signal, and eliminates the need for complex, heavy mechanical switches.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-t">
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-b-0">
+                        Vulnerable Copper Wiring
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-l md:border-b-0">
+                        Wireless &amp; Low-Power Transmission (Wi-Fi)
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 md:border-l">
+                        We use low-power, Wi-Fi modules to transmit the data packet wirelessly, replacing the costly and fragile dedicated copper lines.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 border-t">
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-b-0">
+                        Expensive, Immobile Housing
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 border-b md:border-l md:border-b-0">
+                        Precision Prototyping (3D Printing)
+                    </div>
+                    <div class="px-4 py-3 text-gray-700 md:border-l">
+                        We use Fusion 360 and 3D printing to create a compact, durable, custom-designed, and lightweight enclosure. This allows for rapid, low-cost replication of the portable unit.
+                        <br>
+                        <a href="#doc-making-design" class="doc-nav-link inline-flex items-center font-medium text-indigo-600 hover:text-indigo-800 transition-all mt-2">
+                            Learn more
+                            <i data-feather="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="border-t border-gray-200 pt-8 space-y-6">
+
+        <h4 class="text-xl font-bold text-gray-800">3. How LUMINI Helps (Potential Applications)</h4>
+        <p class="text-gray-700 leading-relaxed">
+            LUMINI provides a robust alternative when high-tech infrastructure fails.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 rounded-lg bg-gray-100 p-1">
+            <button 
+                onclick="showHelpTab('help-1')" 
+                id="btn-help-1"
+                class="help-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 bg-white text-indigo-700 shadow-sm">
+                <i data-feather="shield" class="w-4 h-4"></i>
+                Disaster Resilience
+            </button>
+            <button 
+                onclick="showHelpTab('help-2')" 
+                id="btn-help-2"
+                class="help-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 text-gray-600 hover:bg-white hover:shadow-sm">
+                <i data-feather="globe" class="w-4 h-4"></i>
+                Low-Resource Connectivity
+            </button>
+            <button 
+                onclick="showHelpTab('help-3')" 
+                id="btn-help-3"
+                class="help-tab-btn p-3 w-full font-medium text-sm rounded-md transition-all flex items-center justify-center gap-2 text-gray-600 hover:bg-white hover:shadow-sm">
+                <i data-feather="book-open" class="w-4 h-4"></i>
+                Educational Tool
+            </button>
+        </div>
+
+        <div class="p-4 rounded-b-lg">
+            
+            <div id="help-1" class="help-tab-content space-y-3 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Use:</strong> 
+                    LUMINI is a self-contained, off-grid communication tool for disaster zones.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Benefit:</strong> 
+                    When cellular and power grids fail (e.g., after an earthquake), LUMINI's low-power system and wireless link can provide a vital, continuous text message connection where no other infrastructure works.
+                </p>
+            </div>
+            
+            <div id="help-2" class="help-tab-content hidden space-y-3 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Use:</strong> 
+                    Providing communication in remote areas.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Benefit:</strong> 
+                    In communities where laying fiber optics or installing cell towers is too expensive, LUMINI offers a stable, affordable, and easily maintainable communication link. The entire unit can be built using cheap, globally available components and FabLab resources.
+                </p>
+            </div>
+            
+            <div id="help-3" class="help-tab-content hidden space-y-3 fade-in">
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Use:</strong> 
+                    Project-based learning.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong class="text-gray-800">Benefit:</strong> 
+                    It serves as a perfect educational model. Students directly learn about electromagnetism, digital logic (binary encoding), and basic circuit design by building a functional, historically relevant communication device.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
 </div>
                             <!-- 
                             / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / 
@@ -1223,6 +2832,193 @@
  * Handles showing and hiding the tabs in the "Learn Morse Code" section.
  * (Call this function 'showMorseTab')
  */
+/*
+ * Manages the interactive tabs in the "History" section.
+ 
+ */
+/*
+ * Manages the interactive tabs in the "History > Failure Point" section.
+
+ */
+function copyActiveArduinoCode() {
+        let activeCodeId = 'arduino-code-v17'; // Default to v17
+        
+        // Check which tab panel is visible
+        if (!document.getElementById('tab-panel-v18').classList.contains('hidden')) {
+            activeCodeId = 'arduino-code-v18';
+        }
+
+        const codeBlock = document.getElementById(activeCodeId);
+        const codeText = codeBlock.innerText;
+        
+        navigator.clipboard.writeText(codeText).then(() => {
+            // Update button text to "Copied!"
+            const copyBtn = document.getElementById('copy-code-btn');
+            const originalIcon = copyBtn.innerHTML; // Save original content
+            copyBtn.innerHTML = '<i data-feather="check" class="w-4 h-4"></i> <span>Copied!</span>';
+            feather.replace(); // Re-render the new icon
+            
+            // Revert button text after 2 seconds
+            setTimeout(() => {
+                copyBtn.innerHTML = originalIcon;
+                feather.replace(); // Re-render the original icon
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // --- NEW: Tab Switching Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        // Get button and panel elements
+        const btnV17 = document.getElementById('tab-btn-v17');
+        const btnV18 = document.getElementById('tab-btn-v18');
+        const panelV17 = document.getElementById('tab-panel-v17');
+        const panelV18 = document.getElementById('tab-panel-v18');
+
+        // Function to switch tabs
+        function switchTab(activeBtn, inactiveBtn, activePanel, inactivePanel) {
+            // Show active panel, hide inactive
+            activePanel.classList.remove('hidden');
+            inactivePanel.classList.add('hidden');
+
+            // Style active button
+            activeBtn.classList.add('text-indigo-600', 'border-indigo-600');
+            activeBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+            
+            // Style inactive button
+            inactiveBtn.classList.add('text-gray-500', 'hover:text-gray-700');
+            inactiveBtn.classList.remove('text-indigo-600', 'border-indigo-600');
+        }
+
+        // Add click listeners
+        btnV17.addEventListener('click', () => {
+            switchTab(btnV17, btnV18, panelV17, panelV18);
+        });
+
+        btnV18.addEventListener('click', () => {
+            switchTab(btnV18, btnV17, panelV18, panelV17);
+        });
+    });
+function copyArduinoCode() {
+    const codeBlock = document.getElementById('arduino-code');
+    const codeText = codeBlock.innerText; // .innerText decodes the &lt; &gt; back to < >
+
+    navigator.clipboard.writeText(codeText).then(() => {
+        // --- Success Feedback ---
+        const button = document.getElementById('copy-code-btn');
+        button.innerHTML = '<i data-feather="check" class="w-4 h-4"></i><span>Copied!</span>';
+        
+        // Re-enable feather icons
+        feather.replace(); 
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+            button.innerHTML = '<i data-feather="copy" class="w-4 h-4"></i><span>Copy Code</span>';
+            feather.replace();
+        }, 2000);
+
+    }).catch(err => {
+        // --- Error Feedback ---
+        console.error('Failed to copy code: ', err);
+        const button = document.getElementById('copy-code-btn');
+        button.innerHTML = '<span>Error!</span>';
+        
+        setTimeout(() => {
+            button.innerHTML = '<i data-feather="copy" class="w-4 h-4"></i><span>Copy Code</span>';
+            feather.replace();
+        }, 2000);
+    });
+}
+hljs.highlightAll();
+function showHistoryTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.history-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.history-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-60A0', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
+
+/*
+ * Manages the interactive tabs in the "History > How LUMINI Helps" section.
+ */
+function showHelpTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.help-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.help-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-7q00', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
+function showHistoryTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.history-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.history-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
 function showMorseTab(tabId) {
     // 1. Hide all morse tab content
     // Note: We use querySelectorAll with a class to get all content panes
@@ -1336,6 +3132,8 @@ function showMorseTab(tabId) {
                 console.error('Error switching design tab:', error);
             }
         }
+    // Function for 'Circuit Design' tabs
+
         
         // This line makes the function available to the "onclick" in your HTML
         window.showDesignTab = showDesignTab;
@@ -1888,6 +3686,7 @@ if (forgotPasswordLink) {
                         } else if (password !== null) { // Only show error if they entered something
                             alert('Incorrect password. Changes were not saved.');
                         }
+                        
                     });
                 });
             }
@@ -1896,5 +3695,6 @@ if (forgotPasswordLink) {
             showPage('home');
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
 </body>
 </html>
