@@ -1,0 +1,873 @@
+    <script>
+        // Function to handle tabs within the "Making the Design" section
+        // Function to handle tabs within the "Circuit Design" section
+        /**
+ * Handles showing and hiding the tabs in the "Learn Morse Code" section.
+ */
+/**
+ * Handles showing and hiding the tabs in the "Learn Morse Code" section.
+ * (Call this function 'showMorseTab')
+ */
+/*
+ * Manages the interactive tabs in the "History" section.
+ 
+ */
+/*
+ * Manages the interactive tabs in the "History > Failure Point" section.
+
+ */
+function copyActiveArduinoCode() {
+        let activeCodeId = 'arduino-code-v17'; // Default to v17
+        
+        // Check which tab panel is visible
+        if (!document.getElementById('tab-panel-v18').classList.contains('hidden')) {
+            activeCodeId = 'arduino-code-v18';
+        }
+
+        const codeBlock = document.getElementById(activeCodeId);
+        const codeText = codeBlock.innerText;
+        
+        navigator.clipboard.writeText(codeText).then(() => {
+            // Update button text to "Copied!"
+            const copyBtn = document.getElementById('copy-code-btn');
+            const originalIcon = copyBtn.innerHTML; // Save original content
+            copyBtn.innerHTML = '<i data-feather="check" class="w-4 h-4"></i> <span>Copied!</span>';
+            feather.replace(); // Re-render the new icon
+            
+            // Revert button text after 2 seconds
+            setTimeout(() => {
+                copyBtn.innerHTML = originalIcon;
+                feather.replace(); // Re-render the original icon
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // --- NEW: Tab Switching Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        // Get button and panel elements
+        const btnV17 = document.getElementById('tab-btn-v17');
+        const btnV18 = document.getElementById('tab-btn-v18');
+        const panelV17 = document.getElementById('tab-panel-v17');
+        const panelV18 = document.getElementById('tab-panel-v18');
+
+        // Function to switch tabs
+        function switchTab(activeBtn, inactiveBtn, activePanel, inactivePanel) {
+            // Show active panel, hide inactive
+            activePanel.classList.remove('hidden');
+            inactivePanel.classList.add('hidden');
+
+            // Style active button
+            activeBtn.classList.add('text-indigo-600', 'border-indigo-600');
+            activeBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+            
+            // Style inactive button
+            inactiveBtn.classList.add('text-gray-500', 'hover:text-gray-700');
+            inactiveBtn.classList.remove('text-indigo-600', 'border-indigo-600');
+        }
+
+        // Add click listeners
+        btnV17.addEventListener('click', () => {
+            switchTab(btnV17, btnV18, panelV17, panelV18);
+        });
+
+        btnV18.addEventListener('click', () => {
+            switchTab(btnV18, btnV17, panelV18, panelV17);
+        });
+    });
+function copyArduinoCode() {
+    const codeBlock = document.getElementById('arduino-code');
+    const codeText = codeBlock.innerText; // .innerText decodes the &lt; &gt; back to < >
+
+    navigator.clipboard.writeText(codeText).then(() => {
+        // --- Success Feedback ---
+        const button = document.getElementById('copy-code-btn');
+        button.innerHTML = '<i data-feather="check" class="w-4 h-4"></i><span>Copied!</span>';
+        
+        // Re-enable feather icons
+        feather.replace(); 
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+            button.innerHTML = '<i data-feather="copy" class="w-4 h-4"></i><span>Copy Code</span>';
+            feather.replace();
+        }, 2000);
+
+    }).catch(err => {
+        // --- Error Feedback ---
+        console.error('Failed to copy code: ', err);
+        const button = document.getElementById('copy-code-btn');
+        button.innerHTML = '<span>Error!</span>';
+        
+        setTimeout(() => {
+            button.innerHTML = '<i data-feather="copy" class="w-4 h-4"></i><span>Copy Code</span>';
+            feather.replace();
+        }, 2000);
+    });
+}
+hljs.highlightAll();
+function showHistoryTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.history-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.history-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-60A0', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
+
+/*
+ * Manages the interactive tabs in the "History > How LUMINI Helps" section.
+ */
+function showHelpTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.help-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.help-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-7q00', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
+function showHistoryTab(tabId) {
+    // Hide all tab content
+    const contentTabs = document.querySelectorAll('.history-tab-content');
+    contentTabs.forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // Remove 'active' style from all buttons
+    const buttons = document.querySelectorAll('.history-tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+        btn.classList.add('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    });
+
+    // Show the target tab content
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.remove('hidden');
+    }
+
+    // Set the target button to 'active'
+    const targetButton = document.getElementById('btn-' + tabId);
+    if (targetButton) {
+        targetButton.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+        targetButton.classList.remove('text-gray-600', 'hover:bg-white', 'hover:shadow-sm');
+    }
+}
+function showMorseTab(tabId) {
+    // 1. Hide all morse tab content
+    // Note: We use querySelectorAll with a class to get all content panes
+    const allMorseContent = document.querySelectorAll('.morse-tab-content');
+    allMorseContent.forEach(content => {
+        if (!content.classList.contains('hidden')) {
+            content.classList.add('hidden');
+        }
+    });
+
+    // 2. Deactivate all morse tab buttons
+    // We use querySelectorAll with a class to get all buttons
+    const allMorseButtons = document.querySelectorAll('.morse-tab-btn');
+    allMorseButtons.forEach(btn => {
+        // Remove active styles
+        btn.classList.remove('bg-indigo-100', 'text-indigo-700');
+        // Add inactive styles
+        btn.classList.add('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+    });
+
+    // 3. Show the selected tab content
+    // We use getElementById to find the specific content pane to show
+    const selectedContent = document.getElementById('tab-morse-' + tabId);
+    if (selectedContent) {
+        selectedContent.classList.remove('hidden');
+    }
+
+    // 4. Activate the selected tab button
+    // We use getElementById to find the specific button to activate
+    const selectedButton = document.getElementById('btn-morse-' + tabId);
+    if (selectedButton) {
+        // Remove inactive styles
+        selectedButton.classList.remove('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+        // Add active styles
+        selectedButton.classList.add('bg-indigo-100', 'text-indigo-700');
+    }
+}   
+        function showCircuitTab(tabId) {
+            try {
+                // Hide all content tabs
+                document.querySelectorAll('#doc-circuit-design .circuit-tab-content').forEach(tab => {
+                    tab.classList.add('hidden');
+                });
+
+                // Deactivate all tab buttons
+                document.querySelectorAll('#doc-circuit-design .circuit-tab-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-100', 'text-indigo-700');
+                    btn.classList.add('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+                });
+
+                // Show the selected content tab
+                const selectedTab = document.getElementById(`tab-${tabId}`);
+                if (selectedTab) {
+                    selectedTab.classList.remove('hidden');
+                }
+
+                // Activate the selected tab button
+                const selectedButton = document.getElementById(`btn-${tabId}`);
+                if (selectedButton) {
+                    selectedButton.classList.add('bg-indigo-100', 'text-indigo-700');
+                    selectedButton.classList.remove('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+                }
+                
+                // Re-run feather icons
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            } catch (error) {
+                console.error('Error switching circuit tab:', error);
+            }
+        }
+        // Make this function globally accessible for the onclick attributes
+        window.showCircuitTab = showCircuitTab;
+
+
+        // This function should already be here from last time:
+        // Function to handle tabs within the "Making the Design" section
+
+        // ... (rest of the function)
+        function showDesignTab(tabId) {
+            try {
+                // Hide all content tabs
+                document.querySelectorAll('#doc-making-design .design-tab-content').forEach(tab => {
+                    tab.classList.add('hidden');
+                });
+
+                // Deactivate all tab buttons
+                document.querySelectorAll('#doc-making-design .design-tab-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-100', 'text-indigo-700');
+                    btn.classList.add('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+                });
+
+                // Show the selected content tab
+                const selectedTab = document.getElementById(`tab-${tabId}`);
+                if (selectedTab) {
+                    selectedTab.classList.remove('hidden');
+                }
+
+                // Activate the selected tab button
+                const selectedButton = document.getElementById(`btn-${tabId}`);
+                if (selectedButton) {
+                    selectedButton.classList.add('bg-indigo-100', 'text-indigo-700');
+                    selectedButton.classList.remove('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+                }
+                
+                // Re-run feather icons if feather is loaded (this is a safer check)
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            } catch (error) {
+                console.error('Error switching design tab:', error);
+            }
+        }
+    // Function for 'Circuit Design' tabs
+
+        
+        // This line makes the function available to the "onclick" in your HTML
+        window.showDesignTab = showDesignTab;
+
+        // PASTE THE CODE BLOCK ABOVE THIS LINE:
+        function handleForgotPassword() {
+    const emailField = document.getElementById('signin-email');
+    const email = emailField.value;
+    if (!email) {
+        alert('Please enter your email address in the email field first, then click "Forgot Password".');
+        return;
+    }
+    firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Password reset email sent! Check your inbox.');
+        })
+        .catch((error) => {
+            console.error("Password reset error:", error);
+            alert('Error: ' + error.message);
+        });
+}
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Firebase Configuration ---
+            const firebaseConfig = {
+              apiKey: "AIzaSyDtV1VuCnNCDeuHwGX4ZUCG0WMJM82-hBY",
+              authDomain: "luminix-bcc28.firebaseapp.com",
+              projectId: "luminix-bcc28",
+              storageBucket: "luminix-bcc28.firebasestorage.app",
+              messagingSenderId: "217255412785",
+              appId: "1:217255412785:web:dccb64a43aa83c6b234110",
+              measurementId: "G-TKJELBK1F5"
+            };
+            
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const auth = firebase.auth();
+
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Header Dropdown Logic ---
+            const dropdownButton = document.getElementById('pages-dropdown-button');
+            const dropdownMenu = document.getElementById('pages-dropdown');
+            if(dropdownButton) {
+                dropdownButton.addEventListener('click', () => {
+                    dropdownMenu.classList.toggle('hidden');
+                });
+            }
+            window.addEventListener('click', function(e) {
+                if (dropdownButton && !dropdownButton.contains(e.target) && dropdownMenu && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+
+            // --- Fade-in on Scroll ---
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            // --- Gallery Logic ---
+            const mediaDisplayContainer = document.getElementById('media-display-container');
+            const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+            function updateMedia(thumbnail) {
+                if (!thumbnail) return;
+                const dataType = thumbnail.dataset.type;
+                const dataSrc = thumbnail.dataset.src;
+                mediaDisplayContainer.innerHTML = '';
+                if (dataType === 'video') {
+                    const video = document.createElement('video');
+                    video.src = dataSrc;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.muted = true;
+                    video.loop = true;
+                    video.className = 'w-full h-full object-cover rounded-lg';
+                    mediaDisplayContainer.appendChild(video);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = dataSrc;
+                    img.alt = thumbnail.alt;
+                    img.className = 'w-full h-full object-cover rounded-lg';
+                    mediaDisplayContainer.appendChild(img);
+                }
+                thumbnails.forEach(t => t.classList.remove('border-indigo-600'));
+                thumbnail.classList.add('border-indigo-600');
+            }
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    updateMedia(this);
+                });
+            });
+            if (thumbnails.length > 0) {
+                updateMedia(thumbnails[0]);
+            }
+
+            // --- Page Navigation Logic ---
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.nav-link');
+            async function showPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.toggle('hidden', page.id !== pageId);
+                });
+                window.scrollTo(0, 0);
+
+                if (pageId === 'roadmap') {
+                    await renderRoadmap();
+                }
+                if (pageId === 'contact') {
+                    await displayQuestions();
+                }
+                // NEW: When documentation page is shown, default to the first tab
+                if (pageId === 'documentation') {
+                    showDocSection('doc-circuit-design');
+                }
+
+                // Re-trigger fade-in animations for the new page
+                document.querySelectorAll(`#${pageId} .fade-in`).forEach(fader => {
+                    fader.classList.remove('visible');
+                    appearOnScroll.observe(fader)
+                });
+                
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            }
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    showPage(pageId);
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    if (dropdownMenu && !dropdownMenu.classList.contains('hidden')) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // --- Documentation Tab Logic ---
+            const docNavLinks = document.querySelectorAll('.doc-nav-link');
+            const docSections = document.querySelectorAll('.doc-section');
+
+            function showDocSection(sectionId) {
+                // Hide all sections
+                docSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show the target section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    // Re-trigger fade-in for this section's content
+                    targetSection.querySelectorAll('.fade-in').forEach(fader => {
+                        fader.classList.remove('visible');
+                        appearOnScroll.observe(fader);
+                    });
+                }
+
+                // Update active link styling
+                docNavLinks.forEach(link => {
+                    link.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-bold');
+                    link.classList.add('text-gray-600', 'hover:bg-gray-100');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('bg-indigo-100', 'text-indigo-700', 'font-bold');
+                        link.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                    }
+                });
+                
+                if (typeof feather !== 'undefined') {
+                    feather.replace(); // Refresh icons
+                }
+            }
+
+            docNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('href').substring(1);
+                    showDocSection(sectionId);
+                });
+            });
+            
+            // --- AUTHENTICATION LOGIC ---
+            const authLinks = document.getElementById('auth-links');
+            const userInfo = document.getElementById('user-info');
+            const userEmailSpan = document.getElementById('user-email');
+            const mobileAuthLinks = document.getElementById('mobile-auth-links');
+            const mobileUserInfo = document.getElementById('mobile-user-info');
+            const mobileUserEmailSpan = document.getElementById('mobile-user-email');
+            const contactLoggedOut = document.getElementById('contact-logged-out');
+            const contactLoggedIn = document.getElementById('contact-logged-in');
+
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // User is signed in
+                    authLinks.style.display = 'none';
+                    userInfo.style.display = 'flex';
+                    userEmailSpan.textContent = user.email;
+
+                    mobileAuthLinks.style.display = 'none';
+                    mobileUserInfo.style.display = 'block';
+                    mobileUserEmailSpan.textContent = user.email;
+
+                    if(contactLoggedOut && contactLoggedIn){
+                        contactLoggedOut.style.display = 'none';
+                        contactLoggedIn.style.display = 'block';
+                    }
+
+                } else {
+                    // User is signed out
+                    authLinks.style.display = 'flex';
+                    userInfo.style.display = 'none';
+                    userEmailSpan.textContent = '';
+                    
+                    mobileAuthLinks.style.display = 'block';
+                    mobileUserInfo.style.display = 'none';
+                    mobileUserEmailSpan.textContent = '';
+
+                    if(contactLoggedOut && contactLoggedIn){
+                        contactLoggedOut.style.display = 'block';
+                        contactLoggedIn.style.display = 'none';
+                    }
+                }
+            });
+
+            // Sign Up
+            const signupForm = document.getElementById('signup-form');
+            const signupError = document.getElementById('signup-error');
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = signupForm['signup-email'].value;
+                const password = signupForm['signup-password'].value;
+                
+                if(password.length < 8) {
+                    signupError.textContent = "Password must be at least 8 characters.";
+                    return;
+                }
+                
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then(userCredential => {
+                        signupForm.reset();
+                        signupError.textContent = '';
+                        showPage('home');
+                    })
+                    .catch(error => {
+                        signupError.textContent = error.message;
+                    });
+            });
+
+            // Sign In
+            const signinForm = document.getElementById('signin-form');
+            const signinError = document.getElementById('signin-error');
+            signinForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = signinForm['signin-email'].value;
+                const password = signinForm['signin-password'].value;
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(userCredential => {
+                        signinForm.reset();
+                        signinError.textContent = '';
+                        showPage('home');
+                    })
+                    .catch(error => {
+                        signinError.textContent = error.message;
+                    });
+            });
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        handleForgotPassword();
+    });
+}
+            // ... your existing signinForm event listener ...
+        signinForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = signinForm['signin-email'].value;
+            const password = signinForm['signin-password'].value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    signinForm.reset();
+                    signinError.textContent = '';
+                    showPage('home');
+                })
+                .catch(error => {
+                    signinError.textContent = error.message;
+                });
+        });
+
+        // ADD THIS NEW CODE
+        // --- Google Sign-In ---
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        
+        const googleSignInButton = document.getElementById('google-signin-button');
+        
+        if (googleSignInButton) {
+            googleSignInButton.addEventListener('click', () => {
+                const signinError = document.getElementById('signin-error');
+                signinError.textContent = ''; // Clear previous errors
+
+                auth.signInWithPopup(googleProvider)
+                    .then((result) => {
+                        // Sign-in successful.
+                        console.log('Signed in with Google:', result.user);
+                        showPage('home'); // Go to home page
+                    })
+                    .catch((error) => {
+                        // Handle Errors here.
+                        console.error('Google Sign-In Error:', error.message);
+                        if(signinError) {
+                            signinError.textContent = error.message;
+                        }
+                    });
+            });
+        }
+        // END OF NEW CODE
+
+        // Sign Out
+        document.getElementById('signout-button').addEventListener('click', () => auth.signOut());
+        // ... rest of your script ...
+
+            // Sign Out
+            document.getElementById('signout-button').addEventListener('click', () => auth.signOut());
+            document.getElementById('mobile-signout-button').addEventListener('click', () => auth.signOut());
+
+
+            // --- Contact Form Logic with Firebase ---
+            const contactForm = document.getElementById('contact-form');
+            const questionsContainer = document.getElementById('questions-container');
+
+            async function displayQuestions() {
+                if(!questionsContainer) return;
+                questionsContainer.innerHTML = '<p class="text-gray-500">Loading questions...</p>';
+                const snapshot = await db.collection('questions').orderBy('timestamp', 'desc').get();
+                questionsContainer.innerHTML = '';
+                if (snapshot.empty) {
+                    questionsContainer.innerHTML = '<p class="text-gray-500">No questions submitted yet.</p>';
+                    return;
+                }
+                snapshot.forEach(doc => {
+                    const question = doc.data();
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'bg-gray-100 p-4 rounded-lg';
+                    
+                    const userEmailElement = document.createElement('p');
+                    userEmailElement.className = 'text-xs font-bold text-indigo-600 mb-1';
+                    userEmailElement.textContent = question.userEmail || 'Anonymous';
+                    
+                    const questionTextElement = document.createElement('p');
+                    questionTextElement.textContent = question.text;
+                    
+                    questionElement.appendChild(userEmailElement);
+                    questionElement.appendChild(questionTextElement);
+                    questionsContainer.appendChild(questionElement);
+                });
+            }
+
+            if(contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const questionText = document.getElementById('question').value;
+                    const user = auth.currentUser;
+
+                    if (questionText.trim() === '' || !user) return;
+
+                    try {
+                        await db.collection('questions').add({
+                            text: questionText,
+                            userEmail: user.email,
+                            userId: user.uid,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        
+                        document.getElementById('question').value = '';
+                        alert('Thank you! Your question has been submitted.');
+                        displayQuestions();
+                    } catch (error) {
+                        console.error("Error adding document: ", error);
+                        alert('Sorry, there was an error submitting your question. Please try again.');
+                    }
+                });
+            }
+
+            // --- Social Media Modal Logic ---
+            const modalOverlay = document.getElementById('social-modal-overlay');
+            const modalBox = document.getElementById('social-modal-box');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const socialLinks = document.querySelectorAll('.social-link');
+
+            function openModal() {
+                modalOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalBox.classList.remove('opacity-0', 'scale-95');
+                }, 10);
+            }
+
+            function closeModal() {
+                modalOverlay.classList.add('opacity-0');
+                modalBox.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    modalOverlay.classList.add('hidden');
+                }, 300);
+            }
+
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal();
+                });
+            });
+            if(closeModalButton) {
+                closeModalButton.addEventListener('click', closeModal);
+            }
+            if(modalOverlay) {
+                modalOverlay.addEventListener('click', function(e) {
+                    if (e.target === modalOverlay) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            // --- Roadmap Logic ---
+            const roadmapContainer = document.getElementById('roadmap-container');
+            const roadmapTasks = [
+                { id: 'circuit_testing', title: 'Circuit Testing', dates: '23 Sep - 10th Oct' },
+                { id: 'website_design', title: 'Website Designing/Building', dates: '10th Oct - 17th Oct' },
+                { id: 'assembling', title: 'Assembling', dates: '17th Oct - 25th Oct' },
+                { id: 'debugging', title: 'Debugging', dates: '25th Oct - 10th Nov' },
+                { id: 'finalize_documentation', title: 'Finalize Documentation', dates: '10th Nov - 20th Nov' },
+            ];
+
+            async function renderRoadmap() {
+                if (!roadmapContainer) return;
+                roadmapContainer.innerHTML = ''; // Clear existing content
+                
+                const progressSnap = await db.collection('roadmap_progress').get();
+                const progressData = {};
+                progressSnap.forEach(doc => {
+                    progressData[doc.id] = doc.data().progress;
+                });
+
+                roadmapTasks.forEach(task => {
+                    const progress = progressData[task.id] || 0;
+                    const taskElement = document.createElement('div');
+                    taskElement.className = 'bg-white p-6 rounded-lg shadow-lg fade-in';
+                    taskElement.innerHTML = `
+                        <div id="task-${task.id}">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-gray-800">${task.title}</h3>
+                                <p class="text-sm text-gray-500">${task.dates}</p>
+                            </div>
+                            <!-- Progress Display -->
+                            <div class="progress-display">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-indigo-600 h-2.5 rounded-full" style="width: ${progress}%"></div>
+                                </div>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-sm font-medium text-indigo-700">${progress}% Complete</span>
+                                    <button class="edit-progress-btn text-sm text-indigo-600 hover:underline" data-task-id="${task.id}">Edit</button>
+                                </div>
+                            </div>
+                            <!-- Progress Editor (hidden by default) -->
+                            <div class="progress-editor hidden mt-4">
+                                <label class="block text-sm font-medium text-gray-700">Set Progress: <span class="font-bold">${progress}%</span></label>
+                                <input type="range" min="0" max="100" value="${progress}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="text-right mt-2">
+                                    <button class="cancel-edit-btn text-sm text-gray-600 hover:underline mr-4" data-task-id="${task.id}">Cancel</button>
+                                    <button class="save-progress-btn bg-indigo-600 text-white px-4 py-1 rounded-md text-sm hover:bg-indigo-700" data-task-id="${task.id}">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    roadmapContainer.appendChild(taskElement);
+                });
+                
+                addRoadmapEventListeners();
+            }
+            
+            function addRoadmapEventListeners() {
+                document.querySelectorAll('.edit-progress-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const taskId = this.dataset.taskId;
+                        const taskContainer = document.getElementById(`task-${taskId}`);
+                        taskContainer.querySelector('.progress-display').classList.add('hidden');
+                        taskContainer.querySelector('.progress-editor').classList.remove('hidden');
+                    });
+                });
+
+                document.querySelectorAll('.cancel-edit-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const taskId = this.dataset.taskId;
+                        const taskContainer = document.getElementById(`task-${taskId}`);
+                        taskContainer.querySelector('.progress-display').classList.remove('hidden');
+                        taskContainer.querySelector('.progress-editor').classList.add('hidden');
+                    });
+                });
+
+                document.querySelectorAll('.progress-editor input[type="range"]').forEach(slider => {
+                    slider.addEventListener('input', function() {
+                        const label = this.previousElementSibling.querySelector('span');
+                        label.textContent = `${this.value}%`;
+                    });
+                });
+                
+                document.querySelectorAll('.save-progress-btn').forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const taskId = this.dataset.taskId;
+                        // Use a simple prompt for password.
+                        // NOTE: In a real-world app, use Firebase Auth rules for security.
+                        const password = prompt("Please enter the password to save changes:");
+                        
+                        // Check if password is correct
+                        if (password === 'lumini') {
+                            const taskContainer = document.getElementById(`task-${taskId}`);
+                            const newProgress = taskContainer.querySelector('input[type="range"]').value;
+                            
+                            try {
+                                // Save to Firestore
+                                await db.collection('roadmap_progress').doc(taskId).set({ progress: parseInt(newProgress, 10) });
+                                
+                                // Show success message (custom modal would be better)
+                                alert('Progress saved successfully!');
+                                renderRoadmap(); // Re-render to show updated state
+                                
+                            } catch (error) {
+                                console.error("Error saving progress: ", error);
+                                alert('Error saving progress. Please try again.');
+                            }
+
+                        } else if (password !== null) { // Only show error if they entered something
+                            alert('Incorrect password. Changes were not saved.');
+                        }
+                        
+                    });
+                });
+            }
+
+            // Initial page load
+            showPage('home');
+        });
+    </script>

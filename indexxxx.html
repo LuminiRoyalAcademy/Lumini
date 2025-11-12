@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 Morse Code Monitor</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #messages {
+            border: 1px solid #ccc;
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+        .msg { margin-bottom: 8px; }
+        .sender { font-weight: bold; }
+        .emoji { font-size: 1.5em; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <h2>Live Morse Code Messages</h2>
+    <p>Status: <span id="status">Connecting...</span></p>
+    <div id="messages"></div>
+
+    <script>
+        // --- 2. Connection Details ---
+        // NOTE: We use 'wss' (Web Secure Socket) and port 8884,
+        // not port 1883, which is for the ESP32.
+        const BROKER_URL = 'wss://broker.hivemq.com:8884/mqtt';
+        const TOPIC = 'morse/tj-project-final/999'; // [cite: 4]
+        
+        const clientId = 'WebAppClient-' + Math.random().toString(16).substr(2, 8);
+        const options = {
+            clientId: clientId,
+            clean: true,
+            connectTimeout: 4000,
+        };
+
+        const statusElement = document.getElementById('status');
+        const messagesElement = document.getElementById('messages');
+
+        // --- 3. Connect to the Broker ---
+        console.log('Connecting to MQTT broker...');
+        const client = mqtt.connect(BROKER_URL, options);
+
+        client.on('connect', () => {
+            console.log('Connected!');
+            statusElement.innerText = 'Connected';
+            
+            // --- 4. Subscribe to the Topic ---
+            client.subscribe(TOPIC, (err) => {
+                if (!err) {
+                    console.log(`Subscribed to ${TOPIC}`);
+                } else {
+                    console.error('Subscription failed:', err);
+                }
+            });
+        });
+
+        // --- 5. Handle Incoming Messages ---
+        client.on('message', (topic, payload) => {
+            const fullMessage = payload.toString();
+            console.log(`Received message: ${fullMessage} on topic ${topic}`);
+
+            // Parse the message just like your ESP32 does [cite: 24]
+            const colonIndex = fullMessage.indexOf(':');
+            if (colonIndex === -1) {
+                return; // Malformed message [cite: 24]
+            }
+
+            const senderID = fullMessage.substring(0, colonIndex); [cite: 25]
+            let messageContent = fullMessage.substring(colonIndex + 1); [cite: 25]
+
+            // --- 6. Handle Emojis ---
+            // We can replace the special codes [cite: 87] with real emojis!
+            if (messageContent === 'EMOJI_WINK') { [cite: 87]
+                messageContent = '<span class="emoji" title="Wink">😉</span>';
+            } else if (messageContent === 'EMOJI_HEART') { [cite: 87]
+                messageContent = '<span class="emoji" title="Heart">❤️</span>';
+            }
+
+            // --- 7. Display the Message ---
+            const msgElement = document.createElement('div');
+            msgElement.classList.add('msg');
+            msgElement.innerHTML = `<span class="sender">[${senderID}]:</span> ${messageContent}`;
+            
+            messagesElement.appendChild(msgElement);
+            // Auto-scroll to the bottom
+            messagesElement.scrollTop = messagesElement.scrollHeight;
+        });
+
+        client.on('error', (err) => {
+            console.error('Connection error:', err);
+            statusElement.innerText = `Error: ${err.message}`;
+            client.end();
+        });
+
+        client.on('reconnect', () => {
+            statusElement.innerText = 'Reconnecting...';
+        });
+
+    </script>
+</body>
+</html>
