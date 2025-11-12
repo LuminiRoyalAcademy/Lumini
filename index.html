@@ -434,7 +434,7 @@
             <li><a href="#doc-morse-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="message-circle" class="w-5 h-5"></i><span>Learn Morse Code</span></a></li>
             <li><a href="#doc-build-summary" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="list" class="w-5 h-5"></i><span>Build Summary</span></a></li>
             <li><a href="#doc-website-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="layout" class="w-5 h-5"></i><span>Website Designing</span></a></li>
-            <li>
+            <li><a href="#doc-references" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="book-open" class="w-5 h-5"></i><span>References</span></a></li>
     <a href="#doc-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100">
         <i data-feather="code" class="w-5 h-5"></i>
         <span>Source Code</span>
@@ -2649,14 +2649,64 @@ void updateDisplay() {
                     It serves as a perfect educational model. Students directly learn about electromagnetism, digital logic (binary encoding), and basic circuit design by building a functional, historically relevant communication device.
                 </p>
             </div>
-        </div> </div> </div> </section> </div> ```
-
-
-
+            
         </div>
     </div>
 
 </div>
+<div id="doc-references" class="doc-section bg-white p-8 rounded-lg shadow-lg fade-in space-y-8">
+    
+    <h3 class="text-2xl font-bold flex items-center">
+        <i data-feather="book-open" class="w-6 h-6 mr-3 text-indigo-600"></i>
+        References
+    </h3>
+
+    <p class="text-gray-700 leading-relaxed">
+        This project was built by integrating several key technologies, libraries, and resources. Below are the primary references used during development.
+    </p>
+
+    <div class="space-y-6">
+
+        <div>
+            <h4 class="text-lg font-semibold text-gray-800">Project Development & Debugging</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li>
+                    <strong>Google Gemini:</strong> AI-assisted troubleshooting for debugging complex HTML structural issues (like the nested `div` problem) and refining JavaScript logic.
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="text-lg font-semibold text-gray-800">Hardware & Core Libraries</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>ESP32 Official Documentation:</strong> For microcontroller datasheets, pinouts, and core API.</li>
+                <li><strong>Adafruit SSD1306 & GFX Libraries:</strong> For interfacing with the 0.96" OLED display.</li>
+                <li><strong>Arduino Core for ESP32:</strong> For the base framework and simplified hardware functions.</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h4 class="text-lg font-semibold text-gray-800">Protocols & Services</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>PubSubClient by Nick O'Leary:</strong> The lightweight Arduino library for MQTT communication.</li>
+                <li><strong>HiveMQ Public Broker:</strong> Used as the real-time, low-latency MQTT messaging service for testing.</li>
+                <li><strong>International Morse Code Standard:</strong> For the character-to-dot/dash encoding logic.</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="text-lg font-semibold text-gray-800">Website Design & Frameworks</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>Tailwind CSS Documentation:</strong> For the utility-first CSS framework and all site styling.</li>
+                <li><strong>Feather Icons:</strong> For the clean, open-source icon set used throughout the UI.</li>
+                <li><strong>Firebase Documentation:</strong> For implementing user authentication and the Firestore database for the Roadmap.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+</div> </div> </div> </section> </div>
         <!-- 
 
         / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / 
@@ -2790,6 +2840,7 @@ void updateDisplay() {
                     </div>
                 </div>
             </section>
+            
         </div>
     </main>
 
