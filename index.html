@@ -763,6 +763,13 @@
                     <i data-feather="zap" class="w-4 h-4 mr-2.5"></i>
                     Updates
                 </button>
+                <button 
+                    onclick="showDesignTab('final-design')" 
+                    id="btn-final-design"
+                    class="design-tab-btn w-full text-left p-3 rounded-md font-medium text-sm flex items-center transition-all duration-150 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                    <i data-feather="check-circle" class="w-4 h-4 mr-2.5"></i>
+                    Final Design
+                </button>                
             </nav>
         </div>
         
@@ -883,91 +890,129 @@
                     </div>
                 </div>
             </div>
-            <div id="tab-Updates" class="design-tab-content hidden space-y-8 fade-in">
-                <h4 class="text-xl font-bold">Design Updates & Prototyping</h4>
+<div id="tab-Updates" class="design-tab-content hidden space-y-8 fade-in">
+    <h4 class="text-xl font-bold">Design Updates & Prototyping</h4>
 
-                <div class="space-y-4">
-                    <h5 class="text-lg font-semibold text-gray-800">1. First Prototype: 3D Print</h5>
-                    <p class="text-gray-700 leading-relaxed">
-                        After printing our first prototype, we found it didn’t work quite well, as you can see below.
-                    </p>
-                    <a href="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" data-lightbox="updates-gallery" data-title="First 3D print prototype - incorrect hole sizes.">
-                        <img src="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" alt="First 3D print prototype failure" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
-                    </a>
-                    <p class="text-gray-700 leading-relaxed">
-                        The holes we designed for the cable and button were too small. This failure was a valuable learning experience, helping us assess the correct measurements for the next design.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed font-medium">
-                        Since the 3D printing took hours to complete, we decided to switch to laser cutting, which helped us save a lot of time and iterate faster.
-                    </p>
-                </div>
+    <div class="space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800">1. First Prototype: 3D Print</h5>
+        <p class="text-gray-700 leading-relaxed">
+            After printing our first prototype, we found it didn’t work quite well, as you can see below.
+        </p>
+        <a href="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" data-lightbox="updates-gallery" data-title="First 3D print prototype - incorrect hole sizes.">
+            <img src="https://i.ibb.co/wNqx2DBD/Screenshot-2025-11-12-124520.png" alt="First 3D print prototype failure" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+        </a>
+        <p class="text-gray-700 leading-relaxed">
+            The holes we designed for the cable and button were too small. This failure was a valuable learning experience, helping us assess the correct measurements for the next design.
+        </p>
+        <p class="text-gray-700 leading-relaxed font-medium">
+            Since the 3D printing took hours to complete, we decided to switch to laser cutting, which helped us save a lot of time and iterate faster.
+        </p>
+    </div>
 
-                <div class="border-t border-gray-200 pt-6 space-y-4">
-                    <h5 class="text-lg font-semibold text-gray-800">2. Pivot to Laser Cutting</h5>
-                    <p class="text-gray-700 leading-relaxed">
-                        We created a new `.svg` file (left) for the laser cutter. After cutting the design, we got the physical prototype (right).
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <a href="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" data-lightbox="updates-gallery" data-title="The .svg file for the laser cutter.">
-                                <img src="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" alt="SVG file for laser cutting" class="rounded-lg shadow-md w-full h-full object-contain border border-gray-100">
-                            </a>
-                            <p class="text-sm text-gray-600 italic text-center mt-2">The `.svg` design file.</p>
-                        </div>
-                        <div>
-                            <a href="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" data-lightbox="updates-gallery" data-title="Laser-cut prototype with fixed holes.">
-                                <img src="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" alt="Laser-cut prototype result" class="rounded-lg shadow-md w-full h-full object-cover">
-                            </a>
-                            <p class="text-sm text-gray-600 italic text-center mt-2">The physical laser-cut result.</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed">
-                        This is the product from the laser-cutting machine. The holes are now fixed and the correct size. The top piece for the enclosure is still in progress.
-                    </p>
-                </div>
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800">2. Pivot to Laser Cutting</h5>
+        <p class="text-gray-700 leading-relaxed">
+            We created a new `.svg` file (left) for the laser cutter. After cutting the design, we got the physical prototype (right).
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div>
+                <a href="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" data-lightbox="updates-gallery" data-title="The .svg file for the laser cutter.">
+                    <img src="https://i.ibb.co/mVmtsrjw/Screenshot-2025-11-12-124742.png" alt="SVG file for laser cutting" class="rounded-lg shadow-md w-full h-full object-contain border border-gray-100">
+                </a>
+                <p class="text-sm text-gray-600 italic text-center mt-2">The `.svg` design file.</p>
+            </div>
+            <div>
+                <a href="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" data-lightbox="updates-gallery" data-title="Laser-cut prototype with fixed holes.">
+                    <img src="https://i.ibb.co/35wDydjm/IMG-20251112-124857.jpg" alt="Laser-cut prototype result" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+                <p class="text-sm text-gray-600 italic text-center mt-2">The physical laser-cut result.</p>
+            </div>
+        </div>
+        <p class="text-gray-700 leading-relaxed">
+            This is the product from the laser-cutting machine. The holes are now fixed and the correct size. The top piece for the enclosure is still in progress.
+        </p>
+    </div>
 
-                <div class="border-t border-gray-200 pt-6 space-y-4">
-                    <h5 class="text-lg font-semibold text-gray-800">3. Current 3D Print Progress</h5>
-                    <p class="text-gray-700 leading-relaxed">
-                        We are currently printing the 3D model, which has fixed measurements. We are yet to find out the final results after the printing finishes.
-                    </p>
-                    <a href="https://i.imgur.com/PiqUYv6.jpeg" data-lightbox="updates-gallery" data-title="3D print in progress with fixed measurements.">
-                        <img src="https://i.imgur.com/PiqUYv6.jpeg" alt="3D print in progress" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
-                    </a>
-                    <p class="text-sm text-gray-600 italic text-center mt-2">3D printing in progress.</p>
-                </div>
-                
-                <div class="border-t border-gray-200 pt-6 space-y-4">
-                    <h5 class="text-lg font-semibold text-gray-800">4. Laser Printed Model</h5>
-                    <p class="text-gray-700 leading-relaxed">
-                        Our current laser printed model from all views.
-                    </p>
-                
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                        
-                        <div>
-                            <a href="https://i.postimg.cc/1z3ZT4t5/IMG-20251112-230709.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - normal view.">
-                                <img src="https://i.postimg.cc/1z3ZT4t5/IMG-20251112-230709.jpg" alt="Laser printed model normal view" class="rounded-lg shadow-md w-full h-full object-cover">
-                            </a>
-                            <p class="text-sm text-gray-600 italic text-center mt-2">Normal view</p>
-                        </div>
-                        
-                        <div>
-                            <a href="https://i.ibb.co/M5KhCDwd/IMG-20251112-230720.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - top view.">
-                                <img src="https://i.ibb.co/M5KhCDwd/IMG-20251112-230720.jpg" alt="Laser printed model top view" class="rounded-lg shadow-md w-full h-full object-cover">
-                            </a>
-                            <p class="text-sm text-gray-600 italic text-center mt-2">Top view</p>
-                        </div>
-                        
-                        <div>
-                            <a href="https://i.postimg.cc/Y9CTXPdt/IMG-20251112-230725.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - inside view.">
-                                <img src="https://i.postimg.cc/Y9CTXPdt/IMG-20251112-230725.jpg" alt="Laser printed model inside view" class="rounded-lg shadow-md w-full h-full object-cover">
-                            </a>
-                            <p class="text-sm text-gray-600 italic text-center mt-2">Inside view</p>
-                        </div>
-                        
-                    </div>
-                </div>
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800">3. Laser Printed Model</h5>
+        <p class="text-gray-700 leading-relaxed">
+            Our current laser printed model from all views.
+        </p>
+    
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            
+            <div>
+                <a href="https://i.postimg.cc/1z3ZT4t5/IMG-20251112-230709.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - normal view.">
+                    <img src="https://i.postimg.cc/1z3ZT4t5/IMG-20251112-230709.jpg" alt="Laser printed model normal view" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+                <p class="text-sm text-gray-600 italic text-center mt-2">Normal view</p>
+            </div>
+            
+            <div>
+                <a href="https://i.ibb.co/M5KhCDwd/IMG-20251112-230720.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - top view.">
+                    <img src="https://i.ibb.co/M5KhCDwd/IMG-20251112-230720.jpg" alt="Laser printed model top view" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+                <p class="text-sm text-gray-600 italic text-center mt-2">Top view</p>
+            </div>
+            
+            <div>
+                <a href="https://i.postimg.cc/Y9CTXPdt/IMG-20251112-230725.jpg" data-lightbox="updates-gallery" data-title="Laser printed model - inside view.">
+                    <img src="https://i.postimg.cc/Y9CTXPdt/IMG-20251112-230725.jpg" alt="Laser printed model inside view" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+                <p class="text-sm text-gray-600 italic text-center mt-2">Inside view</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800">4. Second 3D Print (In Progress)</h5>
+        <p class="text-gray-700 leading-relaxed">
+            We are currently printing the 3D model, which has fixed measurements. We are yet to find out the final results after the printing finishes.
+        </p>
+        <a href="https://i.imgur.com/PiqUYv6.jpeg" data-lightbox="updates-gallery" data-title="3D print in progress with fixed measurements.">
+            <img src="https://i.imgur.com/PiqUYv6.jpeg" alt="3D print in progress" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+        </a>
+        <p class="text-sm text-gray-600 italic text-center mt-2">3D printing in progress.</p>
+    </div>
+    
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold text-gray-800">5. Final 3D Print</h5>
+        <p class="text-gray-700 leading-relaxed">
+            We are finished with the 3D printing which has fixed measurements!
+        </p>
+        <a href="https://i.postimg.cc/mgPdr6jx/IMG-20251113-015212.jpg" data-lightbox="updates-gallery" data-title="Finished 3D print.">
+            <img src="https://i.postimg.cc/mgPdr6jx/IMG-20251113-015212.jpg" alt="Finished 3D printing" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+        </a>
+        <p class="text-sm text-gray-600 italic text-center mt-2">3D printing.</p>
+    </div>
+</div>
+
+<div id="tab-final-design" class="design-tab-content hidden space-y-8 fade-in">
+    
+    <h4 class="text-xl font-bold">Final Design</h4>
+
+    <div class="space-y-4">
+        <p class="text-gray-700 leading-relaxed">
+            After some work around a taping inside the box, we have our final design and the good part it actually works!
+        </p>
+        
+        <a href="https://i.postimg.cc/3RDj5dXT/IMG-20251113-020610.jpg" data-lightbox="final-design-gallery" data-title="The final, working prototype.">
+            <img src="https://i.postimg.cc/3RDj5dXT/IMG-20251113-020610.jpg" alt="Final working design" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+        </a>
+
+        <video class="rounded-lg shadow-md w-full max-w-lg mx-auto mt-6" controls>
+            <source src="https://i.imgur.com/ZK5EvVs.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <p class="text-sm text-gray-600 italic text-center mt-2">final design</p>
+    </div>
+    
+
+    
+
+
 
 
 
