@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -645,12 +646,12 @@
         
         <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
              <video 
-                class="w-full h-auto"
-                src="https://i.imgur.com/zDu2Mao.mp4" 
-                title="Demonstration of single-button Morse code entry"
-                controls
-                preload="metadata">
-                Your browser does not support the video tag.
+                 class="w-full h-auto"
+                 src="https://i.imgur.com/zDu2Mao.mp4" 
+                 title="Demonstration of single-button Morse code entry"
+                 controls
+                 preload="metadata">
+                 Your browser does not support the video tag.
              </video>
         </div>
     </div>
@@ -659,34 +660,82 @@
         <h5 class="text-lg font-semibold">Demo 2: Both Units Work</h5>
         <p class="text-gray-700 leading-relaxed mb-4">
             As you see here both units work and are sending messages to each other through Wi-Fi.
+        </p>
         <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
              <video 
-                class="w-full h-auto"
-                src="https://i.imgur.com/KWnCqK0.mp4" 
-                title="Demonstration of Wi-Fi message transmission between ESP32s"
-                controls
-                preload="metadata">
-                Your browser does not support the video tag.
+                 class="w-full h-auto"
+                 src="https://i.imgur.com/KWnCqK0.mp4" 
+                 title="Demonstration of Wi-Fi message transmission between ESP32s"
+                 controls
+                 preload="metadata">
+                 Your browser does not support the video tag.
              </video>
         </div>
-        <div class="border-t border-gray-200 pt-6 space-y-4">
-    <h5 class="text-lg font-semibold">Demo 3: Update: Blind Mode Integration</h5>
-    <p class="text-gray-700 leading-relaxed mb-4">
-        We've introduced a significant update: an accessibility-focused 'Blind Mode'. This feature is designed specifically for visually impaired users. When a message is received, this mode bypasses the OLED display and instead translates the incoming text *back* into Morse code, playing it aloud as audio beeps. This crucial update dramatically expands the device's utility, making it a viable communication tool for everyone, including those with disabilities.
-    </p>
+    </div>
     
-    <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
-         <video 
-             class="w-full h-auto"
-             src="https://i.imgur.com/A8X6zYu.mp4" 
-             title="Demonstration of Blind Mode accessibility feature"
-             controls
-             preload="metadata">
-             Your browser does not support the video tag.
-         </video>
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 3: Update: Blind Mode Integration</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            We've introduced a significant update: an accessibility-focused 'Blind Mode'. This feature is designed specifically for visually impaired users. When a message is received, this mode bypasses the OLED display and instead translates the incoming text *back* into Morse code, playing it aloud as audio beeps. This crucial update dramatically expands the device's utility, making it a viable communication tool for everyone, including those with disabilities.
+        </p>
+        
+        <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
+             <video 
+                 class="w-full h-auto"
+                 src="https://i.imgur.com/A8X6zYu.mp4" 
+                 title="Demonstration of Blind Mode accessibility feature"
+                 controls
+                 preload="metadata">
+                 Your browser does not support the video tag.
+             </video>
+        </div>
     </div>
-</div>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 4: Wi-Fi Selection & Clear</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            We added wifi selection (feedback from techtrek judges) and also clear wifi section in the first 5 seconds of loading the esp.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            <div>
+                <a href="https://i.postimg.cc/mD55RWmC/IMG-20251114-212507.jpg" data-lightbox="demo-gallery" data-title="Wi-Fi Selection">
+                    <img src="https://i.postimg.cc/mD55RWmC/IMG-20251114-212507.jpg" alt="Wi-Fi Selection" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+            </div>
+            <div>
+                <div class="w-full overflow-hidden rounded-lg shadow-md bg-black">
+                     <video 
+                         class="w-full h-auto" 
+                         src="https://i.imgur.com/X8mQWwg.mp4" 
+                         title="Wi-Fi Selection Demo" 
+                         controls 
+                         preload="metadata">
+                         Your browser does not support the video tag.
+                     </video>
+                </div>
+            </div>
+            <div>
+                <a href="https://i.postimg.cc/FRY710Vp/IMG-20251114-212515.jpg" data-lightbox="demo-gallery" data-title="Clearing Wi-Fi">
+                    <img src="https://i.postimg.cc/FRY710Vp/IMG-20251114-212515.jpg" alt="Clearing Wi-Fi" class="rounded-lg shadow-md w-full h-full object-cover">
+                </a>
+            </div>
+        </div>
+        <p class="text-sm text-gray-600 italic text-center mt-2">Wifi Selection</p>
     </div>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 5: Bug Fix - MQTT Connection Logic</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            We faced a problem: It kept on trying to connect to mqtt without even connecting to the wifi. We fixed it though. The problem was that the function which was designated to connecting to mqtt got in the same loop as the wifi selection.
+        </p>
+        
+        <a href="https://i.postimg.cc/kX3BX66R/IMG-20251114-212518.jpg" data-lightbox="demo-gallery" data-title="MQTT Bug Fix">
+            <img src="https://i.postimg.cc/kX3BX66R/IMG-20251114-212518.jpg" alt="MQTT Bug Fix" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
+        </a>
+    </div>
+
+
 
 
 
@@ -1017,8 +1066,8 @@
 
 
 
-                
-            </div> </div> </div> </div>
+                
+            </div> </div> </div> </div>
                             
                             <!-- 
                                 =================================
