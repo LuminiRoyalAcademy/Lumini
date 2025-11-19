@@ -9,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/arduino-light.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -98,6 +99,8 @@
                         <a href="#documentation" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Documentation</a>
                         <a href="#roadmap" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Roadmap</a>
                         <a href="#contact" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Contact</a>
+                        <a href="#telegraph" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Live Telegraph</a>
+
                     </div>
                 </div>
                 <!-- Auth Links -->
@@ -124,6 +127,7 @@
             <a href="#documentation" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Documentation</a>
             <a href="#roadmap" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Roadmap</a>
             <a href="#contact" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Contact</a>
+            <a href="#telegraph" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Live Telegraph</a>
             <div class="border-t border-gray-200 mt-4 pt-4">
                 <div id="mobile-auth-links">
                     <a href="#signin" class="nav-link block text-center py-2 text-gray-600 hover:text-indigo-600">Sign In</a>
@@ -633,7 +637,7 @@
                     </div>
                 <div id="tab-demonstration" class="circuit-tab-content hidden space-y-8">
     
-    <h4 class="text-xl font-bold">Project Demonstrations</h4>
+<h4 class="text-xl font-bold">Project Demonstrations</h4>
     <p class="text-gray-700 leading-relaxed">
         See the Smart Telegraph in action! These videos showcase the key functionalities, from the single-button Morse code input to the successful Wi-Fi transmission between the two units.
     </p>
@@ -733,6 +737,22 @@
         <a href="https://i.postimg.cc/kX3BX66R/IMG-20251114-212518.jpg" data-lightbox="demo-gallery" data-title="MQTT Bug Fix">
             <img src="https://i.postimg.cc/kX3BX66R/IMG-20251114-212518.jpg" alt="MQTT Bug Fix" class="rounded-lg shadow-md w-full max-w-lg mx-auto">
         </a>
+    </div>
+
+    <div class="border-t border-gray-200 pt-6 space-y-4">
+        <h5 class="text-lg font-semibold">Demo 6: Web Integration (Live Telegraph)</h5>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            We have successfully bridged the physical and digital worlds! This update introduces the "Live Telegraph" web interface. Using MQTT over Secure WebSockets (SSL), this website can now send messages directly to the ESP32. It features a custom glassmorphism UI, real-time connection status, and a live communication log that syncs instantly with the hardware.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="https://i.postimg.cc/Zq3gJdpx/Screenshot-2025-11-19-203551.png" data-lightbox="demo-gallery" data-title="Live Telegraph Web Interface">
+                <img src="https://i.postimg.cc/Zq3gJdpx/Screenshot-2025-11-19-203551.png" alt="Web Interface" class="rounded-lg shadow-md w-full h-auto hover:opacity-90 transition duration-300">
+            </a>
+            <a href="https://i.postimg.cc/xdH79zMP/Screenshot-2025-11-19-205654.png" data-lightbox="demo-gallery" data-title="Real-time Message Log & Notification">
+                <img src="https://i.postimg.cc/xdH79zMP/Screenshot-2025-11-19-205654.png" alt="Chat Log UI" class="rounded-lg shadow-md w-full h-auto hover:opacity-90 transition duration-300">
+            </a>
+        </div>
     </div>
 
 
@@ -2906,6 +2926,51 @@ void updateDisplay() {
                 </div>
             </section>
         </div>
+        <div id="telegraph" class="page hidden">
+            <section class="py-20 bg-slate-50">
+                <div class="container mx-auto px-6 max-w-3xl text-center fade-in">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Live Telegraph</h2>
+                    <p class="text-gray-600 mb-8">Send a real-time message directly to the ESP32 device.</p>
+                    
+                    <div class="mb-8">
+                        <span id="mqtt-status" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                            <span class="w-2 h-2 mr-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                            Connecting to Network...
+                        </span>
+                    </div>
+
+                    <div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-xl text-left">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="telegraph-msg" placeholder="Type (e.g. SOS)" 
+                                class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none uppercase"
+                                onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                        
+                        <p class="text-xs text-gray-500 mb-2 font-semibold">QUICK COMMANDS:</p>
+                        <div class="grid grid-cols-3 gap-2 mb-6">
+                            <button onclick="sendPreset('EMOJI_WINK')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">😉 Wink</button>
+                            <button onclick="sendPreset('EMOJI_HEART')" class="p-2 text-sm bg-pink-50 text-pink-700 rounded hover:bg-pink-100 border border-pink-200 transition">❤️ Heart</button>
+                            <button onclick="sendPreset('EMOJI_LAUGH')" class="p-2 text-sm bg-yellow-50 text-yellow-700 rounded hover:bg-yellow-100 border border-yellow-200 transition">😂 Laugh</button>
+                        </div>
+
+                        <button onclick="sendTelegraph()" 
+                            class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold hover:bg-indigo-700 transform hover:scale-[1.02] transition-all shadow-lg flex justify-center items-center gap-2">
+                            <span>TRANSMIT SIGNAL</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                        <div class="mt-8 text-left">
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Incoming Transmissions</h3>
+                        <div id="comm-log" class="h-48 bg-gray-900 rounded-xl p-4 overflow-y-auto font-mono text-sm shadow-inner border border-gray-700 space-y-2">
+                            <div class="text-gray-500 italic text-xs text-center mt-10 opacity-50">
+                                Waiting for signals...
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- Page: Sign Up -->
         <div id="signup" class="page hidden">
@@ -3014,6 +3079,15 @@ void updateDisplay() {
             <p>&copy; 2025 Lumini Project. All rights reserved.</p>
             <p class="text-sm mt-1">A project by Jigme, Tandin, Ugyen, and Tenzing.</p>
         </div>
+        <div id="toast-notification" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 px-6 py-4 rounded-2xl shadow-2xl transition-all duration-500 opacity-0 translate-y-10 pointer-events-none z-50 flex items-center gap-4 min-w-[300px] border">
+            <div id="toast-icon-bg" class="p-2 rounded-full bg-white/20 backdrop-blur-sm">
+                <span id="toast-icon" class="text-xl">📡</span>
+            </div>
+            <div class="flex-1">
+                <h4 id="toast-title" class="font-bold text-white text-sm tracking-wide uppercase">Transmission Sent</h4>
+                <p id="toast-message" class="text-indigo-100 text-sm font-medium">Signal delivered to ESP32</p>
+            </div>
+        </div>
     </footer>
     
     <!-- Modal for Social Links -->
@@ -3043,6 +3117,197 @@ void updateDisplay() {
  * Manages the interactive tabs in the "History > Failure Point" section.
 
  */
+
+
+        // --- CUSTOM NOTIFICATION SYSTEM ---
+// Global variable to track the timer
+
+        // --- COMPLETE TELEGRAPH SYSTEM (Popup + Chat Log) ---
+        
+        let toastTimer;
+        const commLog = document.getElementById('comm-log');
+
+        const mqttConfig = {
+            host: "broker.hivemq.com",
+            port: 8884, // Secure WebSocket
+            path: "/mqtt",
+            topic: "morse/tj-project-final/999", 
+            clientId: "Web_User_" + Math.floor(Math.random() * 10000)
+        };
+
+        let client = new Paho.MQTT.Client(mqttConfig.host, mqttConfig.port, mqttConfig.path, mqttConfig.clientId);
+
+        // --- EVENT HANDLERS ---
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived; 
+
+        // --- CONNECT ---
+        function connectMQTT() {
+            console.log("Connecting...");
+            updateStatus("connecting");
+            client.connect({
+                useSSL: true,
+                onSuccess: onConnect,
+                onFailure: onFailure
+            });
+        }
+
+        function onConnect() {
+            console.log("Connected!");
+            updateStatus("online");
+            client.subscribe(mqttConfig.topic); // Listen for messages
+        }
+
+        function onFailure(e) {
+            console.log("Failed:", e);
+            updateStatus("offline");
+        }
+
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0) {
+                console.log("Connection Lost: " + responseObject.errorMessage);
+                updateStatus("offline");
+            }
+        }
+
+        // --- RECEIVE MESSAGE ---
+        function onMessageArrived(message) {
+            const payload = message.payloadString;
+            
+            // Parse Sender:Message
+            let sender = "Unknown";
+            let content = payload;
+
+            if(payload.includes(":")) {
+                const parts = payload.split(":");
+                sender = parts[0];
+                content = parts.slice(1).join(":"); 
+            }
+
+            // Add to Chat Log
+            addToLog(sender, content);
+        }
+
+        // --- SEND MESSAGE ---
+        function sendTelegraph() {
+            const input = document.getElementById("telegraph-msg");
+            const text = input.value.trim();
+            
+            if(text === "") {
+                showToast("Input Error", "Please type a message first", "error");
+                return;
+            }
+            
+            publish(text);
+            input.value = ""; 
+        }
+
+        function sendPreset(command) {
+            publish(command);
+        }
+
+        function publish(payload) {
+            if (client.isConnected()) {
+                const formattedMessage = mqttConfig.clientId + ":" + payload;
+                let message = new Paho.MQTT.Message(formattedMessage);
+                message.destinationName = mqttConfig.topic;
+                client.send(message);
+                
+                // --- POPUP IS BACK HERE! ---
+                let displayMsg = payload;
+                if(payload === 'EMOJI_WINK') displayMsg = "Winking Face 😉";
+                if(payload === 'EMOJI_HEART') displayMsg = "Heart ❤️";
+                
+                showToast("Signal Sent", displayMsg, "success");
+
+            } else {
+                showToast("Transmission Failed", "Device is offline", "error");
+                connectMQTT();
+            }
+        }
+
+        // --- UI HELPERS ---
+        function addToLog(sender, message) {
+            if(commLog.innerText.includes("Waiting for signals...")) {
+                commLog.innerHTML = "";
+            }
+
+            const entry = document.createElement('div');
+            entry.className = "p-2 rounded bg-white/5 border-l-2 border-indigo-500 animate-pulse-once";
+            
+            const isMe = sender === mqttConfig.clientId;
+            const senderColor = isMe ? "text-indigo-400" : "text-green-400";
+            const senderName = isMe ? "YOU" : sender;
+
+            entry.innerHTML = `
+                <div class="flex justify-between text-xs ${senderColor} font-bold mb-1">
+                    <span>${senderName}</span>
+                    <span class="text-gray-600 font-normal">${new Date().toLocaleTimeString()}</span>
+                </div>
+                <div class="text-gray-300 break-words">${message}</div>
+            `;
+
+            commLog.appendChild(entry);
+            commLog.scrollTop = commLog.scrollHeight;
+        }
+
+        function updateStatus(state) {
+            const status = document.getElementById("mqtt-status");
+            if(!status) return;
+
+            if(state === "online") {
+                status.innerHTML = '<span class="w-2 h-2 mr-2 bg-green-500 rounded-full"></span>System Online';
+                status.className = "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800 transition-all";
+            } else if (state === "offline") {
+                status.innerHTML = '<span class="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>Offline';
+                status.className = "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-100 text-red-800";
+            } else {
+                status.innerHTML = '<span class="w-2 h-2 mr-2 bg-yellow-500 rounded-full animate-pulse"></span>Connecting...';
+                status.className = "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800";
+            }
+        }
+
+        // --- FIXED TOAST FUNCTION ---
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast-notification');
+            const titleEl = document.getElementById('toast-title');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+            const iconBg = document.getElementById('toast-icon-bg');
+
+            if (toastTimer) clearTimeout(toastTimer);
+
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+
+            let baseClasses = "fixed bottom-10 left-1/2 transform -translate-x-1/2 px-6 py-4 rounded-2xl shadow-2xl transition-all duration-500 z-50 flex items-center gap-4 min-w-[320px] border ";
+            
+            if (type === 'success') {
+                toast.className = baseClasses + "bg-indigo-900/95 backdrop-blur-md border-indigo-500/30 shadow-indigo-500/20";
+                iconEl.innerText = "📡";
+                iconBg.className = "p-2 rounded-full bg-indigo-400/20 text-indigo-200";
+            } else {
+                toast.className = baseClasses + "bg-red-900/95 backdrop-blur-md border-red-500/30 shadow-red-500/20";
+                iconEl.innerText = "⚠️";
+                iconBg.className = "p-2 rounded-full bg-red-400/20 text-red-200";
+            }
+
+            setTimeout(() => {
+                toast.classList.remove("opacity-0", "translate-y-10", "pointer-events-none");
+                toast.classList.add("opacity-100", "translate-y-0");
+            }, 10);
+
+            toastTimer = setTimeout(() => {
+                toast.classList.remove("opacity-100", "translate-y-0");
+                toast.classList.add("opacity-0", "translate-y-10", "pointer-events-none");
+            }, 3000);
+        }
+
+        // Start
+        window.addEventListener('load', connectMQTT);
+
+
+
 function copyActiveArduinoCode() {
         let activeCodeId = 'arduino-code-v17'; // Default to v17
         
