@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -843,6 +844,369 @@
         /* Hide "This section is empty" placeholder once a block is added */
         .idoc-section:has([data-editable="block"]) .idoc-empty-placeholder { display: none; }
 
+        /* ============================================
+           BENTO GRID (asymmetric hero + small tiles)
+           ============================================ */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 130px;
+            gap: 12px;
+        }
+        @media (max-width: 640px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+        }
+        .bento-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+        }
+        .bento-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+        }
+        .bento-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .bento-item-lg   { grid-column: span 2; grid-row: span 2; }
+        .bento-item-wide { grid-column: span 2; grid-row: span 1; }
+        .bento-item-tall { grid-column: span 1; grid-row: span 2; }
+        @media (max-width: 640px) {
+            /* Simplify on phones so nothing overflows the 2-col fallback.
+               !important is required because in-place resizing writes the
+               spans as INLINE styles, which would otherwise win. */
+            .bento-grid > .bento-item {
+                grid-column: span 2 !important;
+            }
+        }
+
+        /* ============================================
+           CUSTOM LAYOUT GRID (free-form, 12 columns)
+           Every tile is resized by dragging its edges
+           in edit mode; spans snap to the grid.
+           ============================================ */
+        .lay-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 70px;
+            gap: 12px;
+        }
+        .lay-tile {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #fdf6ec;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            grid-column: span 4;
+            grid-row: span 3;
+            transition: box-shadow 0.3s;
+        }
+        .lay-tile:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.15); }
+        .lay-tile img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .lay-tile > p, .lay-tile > h1, .lay-tile > h2,
+        .lay-tile > h3, .lay-tile > h4 {
+            padding: 14px 16px;
+            margin: 0;
+        }
+        .lay-add-tile {
+            grid-column: span 12;
+            display: none;
+            align-items: center; justify-content: center;
+            gap: 6px;
+            min-height: 44px;
+            border: 2px dashed rgba(180,83,9,0.45);
+            border-radius: 12px;
+            color: #b45309;
+            font-size: 0.8rem; font-weight: 700;
+            background: rgba(254,243,226,0.5);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .lay-add-tile:hover { background: #fef3e2; border-color: #b45309; }
+        body.edit-mode .lay-add-tile { display: flex; }
+        @media (max-width: 640px) {
+            .lay-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 60px; }
+            .lay-grid > .lay-tile { grid-column: span 4 !important; }
+            .lay-add-tile { grid-column: span 4; }
+        }
+
+        /* ============================================
+           MASONRY GALLERY — magazine style
+           Softer layered shadow, generous gutters,
+           subtle image zoom + bronze overlay on hover.
+           ============================================ */
+        .masonry-gallery {
+            columns: 1;
+            column-gap: 18px;
+        }
+        @media (min-width: 640px)  { .masonry-gallery { columns: 2; } }
+        @media (min-width: 1024px) { .masonry-gallery { columns: 3; } }
+        .masonry-item {
+            position: relative;
+            break-inside: avoid;
+            margin: 0 0 18px 0;
+            display: block;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #f9fafb;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.04),
+                0 8px 24px rgba(15, 12, 9, 0.08);
+            transition:
+                transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .masonry-item:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 4px 8px rgba(0,0,0,0.06),
+                0 18px 40px rgba(180, 83, 9, 0.18);
+        }
+        .masonry-item img {
+            width: 100%; height: auto;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1),
+                        filter 0.4s ease;
+        }
+        .masonry-item:hover img {
+            transform: scale(1.045);
+            filter: saturate(1.12) brightness(1.02);
+        }
+        /* Warm gradient overlay hint on hover */
+        .masonry-item::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg,
+                transparent 55%,
+                rgba(120, 53, 15, 0.18) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            border-radius: 18px;
+        }
+        .masonry-item:hover::after { opacity: 1; }
+
+        /* Staggered load-in feel (only when the gallery is visible) */
+        .masonry-item {
+            animation: masonryIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        .masonry-item:nth-child(2) { animation-delay: 0.05s; }
+        .masonry-item:nth-child(3) { animation-delay: 0.10s; }
+        .masonry-item:nth-child(4) { animation-delay: 0.15s; }
+        .masonry-item:nth-child(5) { animation-delay: 0.20s; }
+        .masonry-item:nth-child(6) { animation-delay: 0.25s; }
+        @keyframes masonryIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ============================================
+           IMAGE MODAL — drag-crop + drag-resize + bento
+           ============================================ */
+        .ime-section-label {
+            display: block; font-size: 0.72rem; font-weight: 700;
+            color: #78350f; text-transform: uppercase; letter-spacing: 0.09em;
+            margin: 18px 0 6px;
+        }
+        /* Preview stage — holds a resizable image frame with corner handles */
+        .ime-crop-stage {
+            position: relative;
+            width: 100%;
+            min-height: 240px;
+            padding: 24px 20px;
+            border-radius: 12px;
+            background: repeating-conic-gradient(#f3f4f6 0% 25%, #fafafa 0% 50%) 50% / 20px 20px;
+            border: 1px solid #e5e7eb;
+            user-select: none;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+        .ime-crop-frame {
+            position: relative;
+            width: var(--frame-width, 100%);
+            max-width: 100%;
+            background: #111;
+            border-radius: 6px;
+            box-shadow: 0 0 0 2px rgba(180,83,9,0.55), 0 8px 24px rgba(0,0,0,0.25);
+            transition: width 0.05s;
+        }
+        .ime-crop-frame img {
+            width: 100%;
+            height: auto;
+            max-height: 320px;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+            cursor: crosshair;
+            pointer-events: auto;
+            transition: object-position 0.1s ease-out;
+        }
+        .ime-focus-dot {
+            position: absolute;
+            width: 30px; height: 30px;
+            border-radius: 9999px;
+            background: rgba(180, 83, 9, 0.9);
+            border: 3px solid white;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.35);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 6;
+            transition: width 0.15s, height 0.15s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ime-focus-dot::after {
+            content: ""; width: 8px; height: 8px; border-radius: 9999px;
+            background: white;
+        }
+        .ime-crop-frame.dragging-focus .ime-focus-dot {
+            width: 38px; height: 38px;
+        }
+        /* (Resizing now happens directly on the page — see #live-resize-frame) */
+        /* Live width badge — resizing moved on-page, so this is hidden */
+        .ime-width-badge {
+            display: none;
+            position: absolute;
+            top: -12px; left: 8px;
+            background: #b45309;
+            color: white;
+            font-size: 0.7rem; font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            pointer-events: none;
+            z-index: 9;
+        }
+        .ime-crop-hint {
+            font-size: 0.75rem; color: #6b7280; text-align: center;
+            margin-bottom: 14px;
+        }
+        .ime-btn-row {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 14px;
+        }
+        .ime-btn-row button {
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            color: #4b5563;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .ime-btn-row button:hover { background: #e5e7eb; }
+        .ime-btn-row button.active {
+            background: #b45309;
+            color: white;
+            box-shadow: 0 2px 6px rgba(180,83,9,0.3);
+        }
+        .ime-bento-only { display: none; }
+        .img-edit-panel[data-context="bento"] .ime-bento-only { display: block; }
+
+        /* ============================================
+           IN-PLACE RESIZE FRAME (Windows-window style)
+           A fixed-position overlay tracked to whatever
+           element is selected. 8 grab handles + badge
+           + a small floating action bar.
+           ============================================ */
+        #live-resize-frame {
+            position: fixed;
+            z-index: 250;
+            pointer-events: none;
+            outline: 2px solid #b45309;
+            outline-offset: 0;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.85), 0 8px 30px rgba(0,0,0,0.18);
+            border-radius: 4px;
+            display: none;
+        }
+        #live-resize-frame.active { display: block; }
+        #live-resize-frame.dragging { outline-style: dashed; }
+        .lr-h {
+            position: absolute;
+            width: 13px; height: 13px;
+            background: #ffffff;
+            border: 2px solid #b45309;
+            border-radius: 3px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            pointer-events: auto;
+            transition: transform 0.12s, background 0.12s;
+            touch-action: none;
+        }
+        .lr-h:hover { transform: scale(1.3); background: #fef3e2; }
+        .lr-nw { top: -7px;  left: -7px;                        cursor: nwse-resize; }
+        .lr-n  { top: -7px;  left: 50%; margin-left: -6.5px;    cursor: ns-resize;   }
+        .lr-ne { top: -7px;  right: -7px;                       cursor: nesw-resize; }
+        .lr-e  { top: 50%;   right: -7px; margin-top: -6.5px;   cursor: ew-resize;   }
+        .lr-se { bottom: -7px; right: -7px;                     cursor: nwse-resize; }
+        .lr-s  { bottom: -7px; left: 50%; margin-left: -6.5px;  cursor: ns-resize;   }
+        .lr-sw { bottom: -7px; left: -7px;                      cursor: nesw-resize; }
+        .lr-w  { top: 50%;   left: -7px; margin-top: -6.5px;    cursor: ew-resize;   }
+        .lr-badge {
+            position: absolute;
+            top: 6px; left: 6px;
+            background: rgba(120,53,15,0.92);
+            color: white;
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.03em;
+            padding: 3px 8px;
+            border-radius: 5px;
+            pointer-events: none;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+        .lr-bar {
+            position: absolute;
+            bottom: -44px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 4px;
+            background: #1f2937;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            pointer-events: auto;
+            white-space: nowrap;
+        }
+        #live-resize-frame.bar-above .lr-bar { bottom: auto; top: -44px; }
+        .lr-bar button {
+            background: #374151;
+            color: #f9fafb;
+            border-radius: 7px;
+            font-size: 0.72rem; font-weight: 600;
+            padding: 5px 9px;
+            transition: background 0.15s;
+            line-height: 1.2;
+        }
+        .lr-bar button:hover { background: #b45309; }
+        .lr-bar button.danger:hover { background: #b91c1c; }
+        .lr-bar .lr-sep { width: 1px; background: #4b5563; margin: 2px 2px; }
+        .lr-tile-only { display: none; }
+        #live-resize-frame[data-mode="grid"] .lr-tile-only { display: block; }
+        body.lr-resizing, body.lr-resizing * { user-select: none !important; }
+        /* Editable tiles get a hover hint in edit mode */
+        body.edit-mode .bento-item, body.edit-mode .lay-tile {
+            outline: 1px dashed rgba(180,83,9,0.35);
+            outline-offset: 2px;
+        }
+        body.edit-mode .bento-item:hover, body.edit-mode .lay-tile:hover {
+            outline-color: #b45309;
+        }
+        /* Hover lift/zoom would make the tracked resize frame jitter */
+        body.edit-mode .bento-item:hover,
+        body.edit-mode .lay-tile:hover,
+        body.edit-mode [data-editable="image"]:hover {
+            transform: none;
+        }
+        body.edit-mode .masonry-item:hover img { transform: none; }
+
         /* Visual affordances on editable elements */
         body.edit-mode [data-editable="text"] {
             outline: 2px dashed rgba(180,83,9,0.45);
@@ -1488,25 +1852,25 @@
                     <!-- 2025 TEAM (4 members) -->
                     <div class="mode-tg grid md:grid-cols-2 lg:grid-cols-4 gap-12">
                         <div class="text-center fade-in">
-                            <img src="https://i.ibb.co/zV8qwzsJ/me.png" alt="Ugyen Rigpa Yeshey" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4">
+                            <img src="https://i.ibb.co/zV8qwzsJ/me.png" alt="Ugyen Rigpa Yeshey" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4" data-editable="image" data-edit-id="team-2025-ugyen">
                             <h3 class="text-xl font-bold">Ugyen Rigpa Yeshey</h3>
                             <p class="text-indigo-600 font-semibold mb-2">Team Leader</p>
                             <p class="text-gray-600">Hello! My name is Ugyen Rigpa Yeshey and I currently study in the ninth grade at The Royal Academy. Some of my interests include playing sports, writing, Gaming, and reading. For this project, I have mostly helped with the Coding and Design.</p>
                         </div>
                         <div class="text-center fade-in">
-                            <img src="https://i.ibb.co/JwFWq69c/Screenshot-2025-08-19-at-9-56-11-AM.png" alt="Tenzing Jangsel Dorjee" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4">
+                            <img src="https://i.ibb.co/JwFWq69c/Screenshot-2025-08-19-at-9-56-11-AM.png" alt="Tenzing Jangsel Dorjee" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4" data-editable="image" data-edit-id="team-2025-tenzing">
                             <h3 class="text-xl font-bold">Tenzing Jangsel Dorjee</h3>
                             <p class="text-indigo-600 font-semibold mb-2">Website Documentation</p>
                             <p class="text-gray-600">Hello, my interest is to explore and learn. Nothing is impossible if you put work into it that's what I have learned from my experiences.</p>
                         </div>
                         <div class="text-center fade-in">
-                           <img src="https://i.ibb.co/KpgXPsVf/IMG20250817210149.jpg" alt="Jigme Tshering" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4">
+                           <img src="https://i.ibb.co/KpgXPsVf/IMG20250817210149.jpg" alt="Jigme Tshering" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4" data-editable="image" data-edit-id="team-2025-jigme">
                             <h3 class="text-xl font-bold">Jigme Tshering</h3>
                             <p class="text-indigo-600 font-semibold mb-2">Documentation</p>
                             <p class="text-gray-600">Hi! My name is Jigme Tshering. Currently, I study in the ninth grade at The Royal Academy in Paro, Bhutan. I have a ton of hobbies, but some of them are playing chess, music, writing, and reading.</p>
                         </div>
                         <div class="text-center fade-in">
-                            <img src="https://i.ibb.co/RT8QNhrH/Photo-on-8-20-25-at-4-29-AM-2.jpg" alt="Tandin Wangyel" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4">
+                            <img src="https://i.ibb.co/RT8QNhrH/Photo-on-8-20-25-at-4-29-AM-2.jpg" alt="Tandin Wangyel" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4" data-editable="image" data-edit-id="team-2025-tandin">
                             <h3 class="text-xl font-bold">Tandin Wangyel</h3>
                             <p class="text-indigo-600 font-semibold mb-2">Circuit/Schematics</p>
                             <p class="text-gray-600">My name is Tandin Wangyel and I study in the ninth grade at The Royal Academy. I have my interests in playing sports, music, and in space and tech. For this project, I have mostly helped with the circuit and coding.</p>
@@ -1518,7 +1882,7 @@
                         <div class="text-center fade-in">
                             <img src="https://ui-avatars.com/api/?name=Ugyen+Rigpa&background=b45309&color=fff&size=300&bold=true&format=png"
                                  alt="Ugyen Rigpa Yeshey"
-                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100">
+                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100" data-editable="image" data-edit-id="team-2026-ugyen">
                             <h3 class="text-xl font-bold iron-text-dark cinzel">Ugyen Rigpa Yeshey</h3>
                             <p class="iron-text font-semibold mb-2">Team Lead &amp; Game Design</p>
                             <p class="text-gray-600">Returning from the 2025 team. Leading the crew again and driving the core game design for Iron &amp; Incense.</p>
@@ -1527,7 +1891,7 @@
                         <div class="text-center fade-in">
                             <img src="https://ui-avatars.com/api/?name=Tenzing+Jangsel&background=b45309&color=fff&size=300&bold=true&format=png"
                                  alt="Tenzing Jangsel Dorjee"
-                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100">
+                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100" data-editable="image" data-edit-id="team-2026-tenzing">
                             <h3 class="text-xl font-bold iron-text-dark cinzel">Tenzing Jangsel Dorjee</h3>
                             <p class="iron-text font-semibold mb-2">Website &amp; Programming</p>
                             <p class="text-gray-600">Returning from the 2025 team. Handling the site again and moving into pygame-ce work for the roguelike engine.</p>
@@ -1536,7 +1900,7 @@
                         <div class="text-center fade-in">
                             <img src="https://ui-avatars.com/api/?name=Zdrimet+Kuenga&background=78350f&color=fff&size=300&bold=true&format=png"
                                  alt="Zdrimet Kuenga"
-                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100">
+                                 class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100" data-editable="image" data-edit-id="team-2026-zdrimet">
                             <h3 class="text-xl font-bold iron-text-dark cinzel">Zdrimet Kuenga</h3>
                             <p class="iron-text font-semibold mb-2">Art &amp; Concept</p>
                             <p class="text-gray-600">New to the crew for 2026 — bringing fresh perspective to the historical concept art and visual direction of the game.</p>
@@ -2526,6 +2890,10 @@ def split_region(region):
                 <button data-layout="image-3col"><span class="et-add-icon">3</span>Three Images (Grid)</button>
                 <button data-layout="text-image"><span class="et-add-icon">T</span>Text + Image (Side by side)</button>
                 <div class="et-add-sep"></div>
+                <button data-layout="custom-grid"><span class="et-add-icon">⊞</span>Custom Layout (drag to resize)</button>
+                <button data-layout="bento"><span class="et-add-icon">▦</span>Bento Grid (4 images)</button>
+                <button data-layout="masonry"><span class="et-add-icon">▤</span>Masonry Gallery (6 images)</button>
+                <div class="et-add-sep"></div>
                 <button data-layout="tabs"><span class="et-add-icon">⧉</span>Tab System</button>
                 <button data-layout="divider"><span class="et-add-icon">—</span>Divider</button>
             </div>
@@ -2549,17 +2917,72 @@ def split_region(region):
         </div>
     </div>
 
+    <!-- In-place resize frame: follows whatever element is selected in edit mode -->
+    <div id="live-resize-frame" data-mode="free">
+        <div class="lr-h lr-nw" data-dir="nw"></div>
+        <div class="lr-h lr-n"  data-dir="n"></div>
+        <div class="lr-h lr-ne" data-dir="ne"></div>
+        <div class="lr-h lr-e"  data-dir="e"></div>
+        <div class="lr-h lr-se" data-dir="se"></div>
+        <div class="lr-h lr-s"  data-dir="s"></div>
+        <div class="lr-h lr-sw" data-dir="sw"></div>
+        <div class="lr-h lr-w"  data-dir="w"></div>
+        <div class="lr-badge" id="lr-badge">100%</div>
+        <div class="lr-bar">
+            <button type="button" data-lr="image" title="Change the image URL / crop">Image…</button>
+            <button type="button" data-lr="fit" title="Toggle Fill / Fit">Fill</button>
+            <button type="button" data-lr="reset" title="Reset to default size">Reset</button>
+            <span class="lr-sep lr-tile-only"></span>
+            <button type="button" class="lr-tile-only" data-lr="left" title="Move tile earlier">◀</button>
+            <button type="button" class="lr-tile-only" data-lr="right" title="Move tile later">▶</button>
+            <button type="button" class="lr-tile-only danger" data-lr="del" title="Delete tile">🗑</button>
+            <span class="lr-sep"></span>
+            <button type="button" data-lr="close" title="Deselect">✕</button>
+        </div>
+    </div>
+
     <div id="img-edit-modal" class="img-edit-modal">
-        <div class="img-edit-panel">
+        <div id="img-edit-panel" class="img-edit-panel">
             <h3 class="text-xl font-bold iron-text-dark mb-4 cinzel">Edit Image</h3>
-            <div class="img-edit-preview"><img id="ime-preview" src="" alt=""></div>
+
+            <!-- Preview: drag the image body to reposition the crop focus.
+                 Resizing lives on the page itself now (click an image → grab a handle). -->
+            <label class="ime-section-label">Preview <span class="text-gray-400 font-normal normal-case tracking-normal">(drag the image to choose the crop)</span></label>
+            <div class="ime-crop-stage" id="ime-crop-stage">
+                <div class="ime-crop-frame" id="ime-crop-frame" style="--frame-width: 100%;">
+                    <span class="ime-width-badge" id="ime-width-value">100%</span>
+                    <img id="ime-preview" src="" alt="">
+                    <div class="ime-focus-dot" id="ime-focus-dot" style="left: 50%; top: 50%;"></div>
+                </div>
+            </div>
+            <p class="ime-crop-hint">Drag the <strong style="color:#b45309">bronze dot</strong> anywhere on the image to pick which part stays visible when cropped. To <strong style="color:#b45309">resize</strong>, close this box and drag the image's handles right on the page.</p>
+
             <label for="ime-url">Image URL</label>
             <input type="url" id="ime-url" placeholder="https://i.postimg.cc/…">
-            <label for="ime-width">Max width: <span id="ime-width-value">100%</span></label>
-            <input type="range" id="ime-width" min="20" max="100" step="5" value="100">
+
+            <input type="hidden" id="ime-width" value="100">
+
             <label for="ime-alt">Alt text (accessibility)</label>
             <input type="text" id="ime-alt" placeholder="Describe the image">
-            <div class="flex justify-end gap-2 mt-2">
+
+            <label class="ime-section-label">Fit mode</label>
+            <div class="ime-btn-row" id="ime-fit-row">
+                <button type="button" data-fit="cover" class="active">Fill (crop to fit)</button>
+                <button type="button" data-fit="contain">Fit whole image</button>
+            </div>
+
+            <!-- Bento tile size — only shows when image is inside a bento grid -->
+            <div class="ime-bento-only">
+                <label class="ime-section-label">Bento tile size</label>
+                <div class="ime-btn-row" id="ime-bento-row">
+                    <button type="button" data-size="normal">1×1 Small</button>
+                    <button type="button" data-size="wide">2×1 Wide</button>
+                    <button type="button" data-size="tall">1×2 Tall</button>
+                    <button type="button" data-size="large">2×2 Large</button>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 mt-4">
                 <button id="ime-cancel" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition">Cancel</button>
                 <button id="ime-apply" class="px-5 py-2 rounded-full text-sm font-semibold text-white iron-btn transition">Apply</button>
             </div>
@@ -4000,9 +4423,22 @@ def split_region(region):
                         } else if (data.type === 'text' && typeof data.html === 'string') {
                             el.innerHTML = data.html;
                         } else if (data.type === 'image') {
-                            if (data.src) el.src = data.src;
+                            // Never overwrite a good in-HTML image with the
+                            // "Click to set image" placeholder URL — protects
+                            // hero pfps and other pre-populated images from
+                            // being wiped by an accidental save.
+                            const isPlaceholder = data.src && (
+                                data.src.includes('placehold.co') ||
+                                data.src.includes('Click+to+set') ||
+                                data.src === '' );
+                            if (data.src && !isPlaceholder) el.src = data.src;
+                            // Whole inline style first (holds the on-page resize),
+                            // then the individual fields as a fallback / override.
+                            if (data.styleCss) el.setAttribute('style', data.styleCss);
                             if (data.width) el.style.maxWidth = data.width + '%';
                             if (data.alt) el.alt = data.alt;
+                            if (data.objectPosition) el.style.objectPosition = data.objectPosition;
+                            if (data.objectFit) el.style.objectFit = data.objectFit;
                         }
                     });
                     // After loading, re-tag any newly-added inner elements
@@ -4034,7 +4470,10 @@ def split_region(region):
                             type: 'image',
                             src: el.src,
                             width: (el.style.maxWidth || '').replace('%', '') || null,
-                            alt: el.alt
+                            alt: el.alt,
+                            objectPosition: el.style.objectPosition || null,
+                            objectFit: el.style.objectFit || null,
+                            styleCss: el.getAttribute('style') || null
                         });
                     } else if (el.dataset.editable === 'block') {
                         editSnapshot.set(el, {
@@ -4058,7 +4497,10 @@ def split_region(region):
                     else if (v.type === 'image') {
                         el.src = v.src;
                         el.alt = v.alt || '';
-                        el.style.maxWidth = v.width ? (v.width + '%') : '';
+                        // Restoring the whole style attribute also undoes any
+                        // in-place resize (width / height / object-fit).
+                        if (v.styleCss) el.setAttribute('style', v.styleCss);
+                        else el.removeAttribute('style');
                     } else if (v.type === 'block') {
                         el.innerHTML = v.html;
                     }
@@ -4080,9 +4522,7 @@ def split_region(region):
                     el.setAttribute('contenteditable', 'true');
                     el.setAttribute('spellcheck', 'true');
                 });
-                document.querySelectorAll('[data-editable="image"]').forEach(img => {
-                    img.addEventListener('click', onEditableImageClick);
-                });
+                document.querySelectorAll('[data-editable="image"]').forEach(wireImageForEdit);
                 // Existing inserted blocks (from Firestore) — re-attach controls + drag
                 document.querySelectorAll('[data-editable="block"]').forEach(block => {
                     if (!block.querySelector('.block-controls')) {
@@ -4109,12 +4549,8 @@ def split_region(region):
                 document.querySelectorAll('#iron-doc [contenteditable], #iron-home [contenteditable], #team [contenteditable]').forEach(el => {
                     el.removeAttribute('contenteditable');
                 });
-                document.querySelectorAll('[data-editable="image"]').forEach(img => {
-                    if (img._editWired) {
-                        img.removeEventListener('click', onEditableImageClick);
-                        img._editWired = false;
-                    }
-                });
+                if (LiveResize) LiveResize.deselect();
+                document.querySelectorAll('[data-editable="image"]').forEach(unwireImageForEdit);
             }
 
             function saveEdits() {
@@ -4188,9 +4624,22 @@ def split_region(region):
                         const src = el.src;
                         const width = (el.style.maxWidth || '').replace('%', '') || null;
                         const alt = el.alt;
-                        if (!before || before.src !== src || before.width !== width || before.alt !== alt || isInsert) {
+                        const objectPosition = el.style.objectPosition || null;
+                        const objectFit = el.style.objectFit || null;
+                        // styleCss carries the in-place resize (width/height)
+                        const styleCss = el.getAttribute('style') || null;
+                        const changed = !before
+                            || before.src !== src
+                            || before.width !== width
+                            || before.alt !== alt
+                            || before.objectPosition !== objectPosition
+                            || before.objectFit !== objectFit
+                            || before.styleCss !== styleCss;
+                        if (changed || isInsert) {
                             batch.set(db.collection('page_edits').doc(id), {
-                                type: 'image', src, width, alt, isInsert, insertedIn,
+                                type: 'image', src, width, alt,
+                                objectPosition, objectFit, styleCss,
+                                isInsert, insertedIn,
                                 updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
                                 updatedBy: auth.currentUser?.email || 'unknown'
                             });
@@ -4216,17 +4665,178 @@ def split_region(region):
             let activeImg = null;             // <img> being edited (null in insert mode)
             let insertMode = false;           // true = create new image, false = edit existing
             let savedRange = null;            // caret position captured before opening modal
+            let selectedPosition = 'center';  // object-position choice
+            let selectedFit = 'cover';        // object-fit choice
+            let selectedBentoSize = 'normal'; // bento tile size choice
+
             const imgModal = document.getElementById('img-edit-modal');
+            const imgPanel = document.getElementById('img-edit-panel');
             const imePreview = document.getElementById('ime-preview');
             const imeUrl = document.getElementById('ime-url');
             const imeWidth = document.getElementById('ime-width');
             const imeWidthValue = document.getElementById('ime-width-value');
             const imeAlt = document.getElementById('ime-alt');
+            const imeFitRow = document.getElementById('ime-fit-row');
+            const imeBentoRow = document.getElementById('ime-bento-row');
+            const imeCropStage = document.getElementById('ime-crop-stage');
+            const imeCropFrame = document.getElementById('ime-crop-frame');
+            const imeFocusDot = document.getElementById('ime-focus-dot');
+
+            // Toggle-button helpers
+            function setActive(container, key, value) {
+                container.querySelectorAll('button').forEach(b => {
+                    b.classList.toggle('active', b.dataset[key] === value);
+                });
+            }
+
+            // ---- Drag-crop: focus dot on the preview ----
+            // Convert "50% 50%" ↔ { xPct, yPct }
+            function parsePosition(pos) {
+                if (!pos || pos === 'center') return { x: 50, y: 50 };
+                const map = { top: 0, bottom: 100, left: 0, right: 100, center: 50 };
+                const parts = pos.split(/\s+/);
+                if (parts.length === 1) {
+                    // e.g. "top", "left"
+                    const v = parts[0];
+                    if (v in map) {
+                        if (v === 'top' || v === 'bottom') return { x: 50, y: map[v] };
+                        return { x: map[v], y: 50 };
+                    }
+                    // parse "50%"
+                    const n = parseFloat(v); if (!isNaN(n)) return { x: n, y: n };
+                }
+                if (parts.length === 2) {
+                    // Could be "top left", "50% 30%", etc.
+                    const parse = (v) => (v in map) ? map[v] : parseFloat(v) || 50;
+                    // If words like "top left", first is Y-word, second is X-word
+                    const isYWord = (v) => v === 'top' || v === 'bottom' || v === 'center';
+                    const isXWord = (v) => v === 'left' || v === 'right' || v === 'center';
+                    if (isYWord(parts[0]) || isXWord(parts[1])) {
+                        return { x: parse(parts[1]), y: parse(parts[0]) };
+                    }
+                    return { x: parse(parts[0]), y: parse(parts[1]) };
+                }
+                return { x: 50, y: 50 };
+            }
+            function formatPosition(xPct, yPct) {
+                const clamp = (n) => Math.max(0, Math.min(100, Math.round(n)));
+                return `${clamp(xPct)}% ${clamp(yPct)}%`;
+            }
+            function setDot(xPct, yPct) {
+                imeFocusDot.style.left = xPct + '%';
+                imeFocusDot.style.top  = yPct + '%';
+                selectedPosition = formatPosition(xPct, yPct);
+                imePreview.style.objectPosition = selectedPosition;
+                if (activeImg) activeImg.style.objectPosition = selectedPosition;
+            }
+            function pickFocusFromEvent(e) {
+                // Position is relative to the actual image (inside the frame),
+                // so cropping percentages match how the browser interprets
+                // object-position on the real image.
+                const rect = imePreview.getBoundingClientRect();
+                const cx = e.clientX ?? (e.touches && e.touches[0].clientX);
+                const cy = e.clientY ?? (e.touches && e.touches[0].clientY);
+                if (cx == null) return;
+                const xPct = ((cx - rect.left) / rect.width) * 100;
+                const yPct = ((cy - rect.top)  / rect.height) * 100;
+                setDot(xPct, yPct);
+            }
+            let dragging = false;
+            imePreview.addEventListener('mousedown', (e) => {
+                dragging = true;
+                imeCropFrame.classList.add('dragging-focus');
+                pickFocusFromEvent(e);
+                e.preventDefault();
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (!dragging) return;
+                pickFocusFromEvent(e);
+            });
+            document.addEventListener('mouseup', () => {
+                if (!dragging) return;
+                dragging = false;
+                imeCropFrame.classList.remove('dragging-focus');
+            });
+            imePreview.addEventListener('touchstart', (e) => { dragging = true; imeCropFrame.classList.add('dragging-focus'); pickFocusFromEvent(e); e.preventDefault(); }, { passive: false });
+            document.addEventListener('touchmove', (e) => { if (dragging) pickFocusFromEvent(e); }, { passive: true });
+            document.addEventListener('touchend', () => { if (dragging) { dragging = false; imeCropFrame.classList.remove('dragging-focus'); } });
+
+            // ---- Preview width readout only ----
+            // Resizing itself was moved OUT of this modal and onto the page
+            // (see the LiveResize module below — click an image, grab a handle).
+            function setWidthPct(pct) {
+                const clamped = Math.max(5, Math.min(100, Math.round(pct)));
+                imeWidth.value = clamped;
+                imeWidthValue.textContent = clamped + '%';
+                imeCropFrame.style.setProperty('--frame-width', '100%');
+            }
+
+            imeFitRow.addEventListener('click', (e) => {
+                const btn = e.target.closest('button[data-fit]');
+                if (!btn) return;
+                selectedFit = btn.dataset.fit;
+                setActive(imeFitRow, 'fit', selectedFit);
+                if (activeImg) applyLiveImageStyle();
+                else imePreview.style.objectFit = selectedFit;
+            });
+            imeBentoRow.addEventListener('click', (e) => {
+                const btn = e.target.closest('button[data-size]');
+                if (!btn) return;
+                selectedBentoSize = btn.dataset.size;
+                setActive(imeBentoRow, 'size', selectedBentoSize);
+                // Live-apply the size class on the surrounding bento tile
+                if (activeImg) {
+                    const tile = activeImg.closest('.bento-item, .lay-tile');
+                    if (tile) { applyBentoSize(tile, selectedBentoSize); if (LiveResize) LiveResize.sync(); }
+                }
+            });
+
+            function applyLiveImageStyle() {
+                if (!activeImg) return;
+                activeImg.style.objectPosition = selectedPosition;
+                activeImg.style.objectFit = selectedFit;
+            }
+
+            // Bento presets now write INLINE spans, the same property the
+            // on-page drag handles write, so the two never fight each other.
+            const BENTO_PRESETS = { normal: [1,1], wide: [2,1], tall: [1,2], large: [2,2] };
+            function applyBentoSize(tile, size) {
+                const [c, r] = BENTO_PRESETS[size] || BENTO_PRESETS.normal;
+                tile.classList.remove('bento-item-lg', 'bento-item-wide', 'bento-item-tall');
+                setTileSpan(tile, c, r);
+            }
+
+            function readBentoSize(tile) {
+                if (!tile) return 'normal';
+                const { c, r } = getTileSpan(tile);
+                for (const k in BENTO_PRESETS) {
+                    if (BENTO_PRESETS[k][0] === c && BENTO_PRESETS[k][1] === r) return k;
+                }
+                return 'custom';   // hand-resized — no preset gets highlighted
+            }
+
+            // ---- Shared grid-span helpers (bento tiles + custom layout tiles) ----
+            function setTileSpan(tile, c, r) {
+                tile.style.gridColumn = 'span ' + Math.max(1, Math.round(c));
+                tile.style.gridRow    = 'span ' + Math.max(1, Math.round(r));
+            }
+            function getTileSpan(tile) {
+                const read = (inline, computed) => {
+                    const m = /span\s+(\d+)/.exec(inline || '');
+                    if (m) return parseInt(m[1]);
+                    const m2 = /span\s+(\d+)/.exec(computed || '');
+                    return m2 ? parseInt(m2[1]) : 1;
+                };
+                const cs = getComputedStyle(tile);
+                return {
+                    c: read(tile.style.gridColumn, cs.gridColumn),
+                    r: read(tile.style.gridRow, cs.gridRow)
+                };
+            }
 
             function openImageModal(img /* or null */) {
                 activeImg = img;
                 insertMode = !img;
-                // Save the caret so we know where to insert
                 const sel = window.getSelection();
                 savedRange = (sel && sel.rangeCount > 0) ? sel.getRangeAt(0).cloneRange() : null;
 
@@ -4237,26 +4847,76 @@ def split_region(region):
                     imeWidth.value = currentW;
                     imeWidthValue.textContent = currentW + '%';
                     imeAlt.value = img.alt || '';
+                    selectedPosition = img.style.objectPosition || 'center';
+                    selectedFit = img.style.objectFit || 'cover';
+
+                    // Detect if this image lives in a bento tile → show size controls
+                    const bentoTile = img.closest('.bento-item, .lay-tile');
+                    if (bentoTile) {
+                        imgPanel.dataset.context = 'bento';
+                        selectedBentoSize = readBentoSize(bentoTile);
+                        setActive(imeBentoRow, 'size', selectedBentoSize);
+                    } else {
+                        imgPanel.dataset.context = '';
+                    }
                 } else {
                     imePreview.removeAttribute('src');
                     imeUrl.value = '';
                     imeWidth.value = 100;
                     imeWidthValue.textContent = '100%';
                     imeAlt.value = '';
+                    selectedPosition = 'center';
+                    selectedFit = 'cover';
+                    imgPanel.dataset.context = '';
                 }
+                // Reflect current selection in the UI
+                setActive(imeFitRow, 'fit', selectedFit);
+                imePreview.style.objectPosition = selectedPosition;
+                imePreview.style.objectFit = selectedFit;
+                // Position the drag-crop focus dot
+                const { x, y } = parsePosition(selectedPosition);
+                imeFocusDot.style.left = x + '%';
+                imeFocusDot.style.top  = y + '%';
+                // Set the resizable frame width to reflect current
+                const currentW = img ? (parseInt(img.style.maxWidth) || 100) : 100;
+                setWidthPct(currentW);
+
                 imgModal.classList.add('open');
                 imeUrl.focus();
             }
+            // Single click selects the image (or its grid tile) and shows the
+            // on-page resize handles. Double-click still opens the full editor.
             function onEditableImageClick(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                if (!editModeActive) return;
+                LiveResize.select(e.currentTarget);
+            }
+            function onEditableImageDblClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!editModeActive) return;
                 openImageModal(e.currentTarget);
+            }
+            // One place to wire/unwire an image for edit mode
+            function wireImageForEdit(img) {
+                if (img._editWired) return;
+                img._editWired = true;
+                img.addEventListener('click', onEditableImageClick);
+                img.addEventListener('dblclick', onEditableImageDblClick);
+            }
+            function unwireImageForEdit(img) {
+                if (!img._editWired) return;
+                img._editWired = false;
+                img.removeEventListener('click', onEditableImageClick);
+                img.removeEventListener('dblclick', onEditableImageDblClick);
             }
             function closeImgModal() {
                 imgModal.classList.remove('open');
                 activeImg = null;
                 insertMode = false;
                 savedRange = null;
+                imgPanel.removeAttribute('data-context');
             }
 
             imeUrl && imeUrl.addEventListener('input', () => { imePreview.src = imeUrl.value; });
@@ -4288,6 +4948,279 @@ def split_region(region):
             });
             imgModal?.addEventListener('click', (e) => { if (e.target === imgModal) closeImgModal(); });
 
+
+            // =========================================================
+            // LIVE RESIZE — resize directly on the page, Windows style
+            // Click an image (or a grid tile) in edit mode and a frame
+            // with 8 grab handles snaps around it. Drag any edge or
+            // corner to resize. Grid tiles snap to the column/row grid;
+            // standalone images resize freely in % (+ px height).
+            // No modal required.
+            // =========================================================
+            var LiveResize = (function () {
+                const frame = document.getElementById('live-resize-frame');
+                const badge = document.getElementById('lr-badge');
+                if (!frame) return null;
+
+                let target = null;   // element that actually gets resized
+                let img    = null;   // the <img> inside it (may be the target)
+                let mode   = 'free'; // 'free' | 'grid'
+                let rafId  = null;
+                let active = false;
+
+                const MAX_ROWS = 16;
+                const cx = (e) => (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+                const cy = (e) => (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
+                const num = (v, fb) => { const n = parseFloat(v); return isNaN(n) ? fb : n; };
+
+                function sync() {
+                    if (!active) return;
+                    if (!target || !target.isConnected) { deselect(); return; }
+                    const r = target.getBoundingClientRect();
+                    // Target was hidden or deleted — don't leave a ghost frame
+                    if (r.width === 0 && r.height === 0) { deselect(); return; }
+                    frame.style.left   = r.left + 'px';
+                    frame.style.top    = r.top + 'px';
+                    frame.style.width  = r.width + 'px';
+                    frame.style.height = r.height + 'px';
+                    frame.classList.toggle('bar-above', r.bottom + 56 > window.innerHeight);
+                }
+                function loop() { sync(); rafId = requestAnimationFrame(loop); }
+
+                function updateBadge() {
+                    if (!target) return;
+                    if (mode === 'grid') {
+                        const sp = getTileSpan(target);
+                        badge.textContent = sp.c + ' \u00d7 ' + sp.r + '  (cols \u00d7 rows)';
+                    } else {
+                        const r = target.getBoundingClientRect();
+                        const par = target.parentElement;
+                        const pw = par ? par.getBoundingClientRect().width : r.width;
+                        const pct = pw ? Math.round((r.width / pw) * 100) : 100;
+                        badge.textContent = pct + '%  \u00b7  ' + Math.round(r.width) + ' \u00d7 ' + Math.round(r.height) + 'px';
+                    }
+                }
+
+                function refreshFitLabel() {
+                    const btn = frame.querySelector('[data-lr="fit"]');
+                    if (!btn) return;
+                    const fit = img ? (img.style.objectFit || getComputedStyle(img).objectFit) : 'cover';
+                    btn.textContent = (fit === 'contain') ? 'Fit' : 'Fill';
+                }
+
+                // ---- selection -------------------------------------------------
+                function select(el) {
+                    if (!el) return;
+                    const tile = el.closest ? el.closest('.bento-item, .lay-tile') : null;
+                    target = tile || el;
+                    img    = (el.tagName === 'IMG') ? el : target.querySelector('img');
+                    mode   = tile ? 'grid' : 'free';
+                    frame.dataset.mode = mode;
+                    active = true;
+                    frame.classList.add('active');
+                    refreshFitLabel();
+                    sync();
+                    updateBadge();
+                    if (!rafId) loop();
+                }
+                function deselect() {
+                    active = false;
+                    target = null; img = null;
+                    frame.classList.remove('active', 'dragging');
+                    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                }
+
+                // ---- dragging a handle ----------------------------------------
+                function onHandleDown(e) {
+                    const h = e.target.closest('.lr-h');
+                    if (!h || !target) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const dir = h.dataset.dir;
+                    const ex = dir.indexOf('e') > -1 ? 1 : (dir.indexOf('w') > -1 ? -1 : 0);
+                    const ey = dir.indexOf('s') > -1 ? 1 : (dir.indexOf('n') > -1 ? -1 : 0);
+                    const sx = cx(e), sy = cy(e);
+
+                    frame.classList.add('dragging');
+                    document.body.classList.add('lr-resizing');
+
+                    let ctx;
+                    if (mode === 'grid') {
+                        const grid = target.parentElement;
+                        const gs = getComputedStyle(grid);
+                        const cols = gs.gridTemplateColumns.split(' ').filter(Boolean);
+                        const sp = getTileSpan(target);
+                        ctx = {
+                            cols: Math.max(1, cols.length),
+                            colW: num(cols[0], 100),
+                            gapX: num(gs.columnGap, 0),
+                            rowH: num(gs.gridAutoRows, 100),
+                            gapY: num(gs.rowGap, 0),
+                            c0: sp.c, r0: sp.r
+                        };
+                    } else {
+                        const r = target.getBoundingClientRect();
+                        const par = target.parentElement;
+                        ctx = {
+                            w0: r.width,
+                            h0: r.height,
+                            pw: (par ? par.getBoundingClientRect().width : r.width) || r.width,
+                            ratio: r.height / (r.width || 1),
+                            hadHeight: !!target.style.height
+                        };
+                    }
+
+                    const move = (ev) => {
+                        const dx = (cx(ev) - sx) * ex;
+                        const dy = (cy(ev) - sy) * ey;
+                        if (mode === 'grid') {
+                            let c = ctx.c0, r = ctx.r0;
+                            if (ex) c = ctx.c0 + Math.round(dx / (ctx.colW + ctx.gapX));
+                            if (ey) r = ctx.r0 + Math.round(dy / (ctx.rowH + ctx.gapY));
+                            c = Math.max(1, Math.min(ctx.cols, c));
+                            r = Math.max(1, Math.min(MAX_ROWS, r));
+                            setTileSpan(target, c, r);
+                        } else {
+                            let w = ctx.w0 + (ex ? dx : 0);
+                            let h = ctx.h0 + (ey ? dy : 0);
+                            // Hold Shift on a corner to keep the aspect ratio
+                            if (ev.shiftKey && ex && ey) h = w * ctx.ratio;
+                            if (ex) {
+                                const pct = Math.max(5, Math.min(100, (w / ctx.pw) * 100));
+                                target.style.width = pct.toFixed(1) + '%';
+                                target.style.maxWidth = '100%';
+                            }
+                            if (ey || (ev.shiftKey && ex && ey)) {
+                                target.style.height = Math.max(40, Math.round(h)) + 'px';
+                                if (!target.style.objectFit) target.style.objectFit = 'cover';
+                            }
+                        }
+                        sync();
+                        updateBadge();
+                    };
+                    const end = () => {
+                        document.removeEventListener('mousemove', move);
+                        document.removeEventListener('mouseup', end);
+                        document.removeEventListener('touchmove', move);
+                        document.removeEventListener('touchend', end);
+                        frame.classList.remove('dragging');
+                        document.body.classList.remove('lr-resizing');
+                        sync();
+                    };
+                    document.addEventListener('mousemove', move);
+                    document.addEventListener('mouseup', end);
+                    document.addEventListener('touchmove', move, { passive: false });
+                    document.addEventListener('touchend', end);
+                }
+
+                // ---- floating action bar --------------------------------------
+                function siblingTiles(tile) {
+                    return Array.from(tile.parentElement.children)
+                        .filter(n => n.matches('.bento-item, .lay-tile'));
+                }
+                async function onBarClick(e) {
+                    const btn = e.target.closest('[data-lr]');
+                    if (!btn || !target) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const act = btn.dataset.lr;
+
+                    if (act === 'close') { deselect(); return; }
+
+                    if (act === 'image') {
+                        if (img) openImageModal(img);
+                        return;
+                    }
+                    if (act === 'fit') {
+                        if (!img) return;
+                        const cur = img.style.objectFit || getComputedStyle(img).objectFit;
+                        img.style.objectFit = (cur === 'contain') ? 'cover' : 'contain';
+                        refreshFitLabel();
+                        return;
+                    }
+                    if (act === 'reset') {
+                        if (mode === 'grid') {
+                            target.style.gridColumn = '';
+                            target.style.gridRow = '';
+                            target.classList.remove('bento-item-lg', 'bento-item-wide', 'bento-item-tall');
+                        } else {
+                            target.style.width = '';
+                            target.style.height = '';
+                            target.style.maxWidth = '';
+                        }
+                        sync(); updateBadge();
+                        return;
+                    }
+                    if (mode !== 'grid') return;
+
+                    if (act === 'left' || act === 'right') {
+                        const sibs = siblingTiles(target);
+                        const i = sibs.indexOf(target);
+                        const j = act === 'left' ? i - 1 : i + 1;
+                        if (j < 0 || j >= sibs.length) return;
+                        if (act === 'left') target.parentElement.insertBefore(target, sibs[j]);
+                        else target.parentElement.insertBefore(sibs[j], target);
+                        sync();
+                        return;
+                    }
+                    if (act === 'del') {
+                        const ok = await askConfirm(
+                            'This tile will be removed from the layout. Discard still undoes it before you save.',
+                            { title: 'Delete this tile?', confirmText: 'Delete', danger: true, icon: '\ud83d\uddd1' }
+                        );
+                        if (!ok) return;
+                        const t = target;
+                        deselect();
+                        t.remove();
+                    }
+                }
+
+                frame.addEventListener('mousedown', onHandleDown);
+                frame.addEventListener('touchstart', onHandleDown, { passive: false });
+                frame.addEventListener('click', onBarClick);
+                window.addEventListener('scroll', sync, true);
+                window.addEventListener('resize', sync);
+
+                // Click anywhere else = deselect. Clicking a tile = select it.
+                document.addEventListener('click', (e) => {
+                    if (!editModeActive) return;
+                    if (e.target.closest('#live-resize-frame')) return;
+                    if (e.target.closest('.img-edit-modal, .cm-overlay, .edit-toolbar')) return;
+                    if (e.target.closest('[data-editable="image"]')) return;   // handled by the img itself
+                    const tile = e.target.closest('.bento-item, .lay-tile');
+                    if (tile) { select(tile); return; }
+                    deselect();
+                });
+
+                return {
+                    select, deselect, sync,
+                    isActive: () => active,
+                    current: () => target
+                };
+            })();
+
+            // "+ Add tile" inside a custom layout grid (delegated so it also
+            // works for grids restored from Firestore).
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-role="lay-add"]');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+                if (!editModeActive) return;
+                const grid = btn.closest('.lay-grid');
+                if (!grid) return;
+                const tile = document.createElement('div');
+                tile.className = 'lay-tile';
+                tile.style.gridColumn = 'span 4';
+                tile.style.gridRow = 'span 3';
+                tile.innerHTML = '<img src="' + PLACEHOLDER_IMG + '" alt="Image">';
+                grid.insertBefore(tile, btn);
+                const block = grid.closest('[data-editable="block"]');
+                if (block) wireBlockInternals(block);
+                LiveResize && LiveResize.select(tile.querySelector('img'));
+            });
+
             // =========================================================
             // LAYOUT BLOCK SYSTEM
             // Insertable, movable, deletable content blocks that live
@@ -4317,6 +5250,28 @@ def split_region(region):
                 'text-image':  () => `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <p class="text-gray-700 leading-relaxed">Your text here — click to edit.</p>
                     <img src="${PLACEHOLDER_IMG}" alt="New image" class="rounded-lg shadow-md w-full">
+                </div>`,
+                'custom-grid': () => `<div class="lay-grid">
+                    <div class="lay-tile" style="grid-column: span 8; grid-row: span 4;"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="lay-tile" style="grid-column: span 4; grid-row: span 4;"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="lay-tile" style="grid-column: span 4; grid-row: span 3;"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="lay-tile" style="grid-column: span 4; grid-row: span 3;"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="lay-tile" style="grid-column: span 4; grid-row: span 3;"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <button type="button" class="lay-add-tile" data-role="lay-add">+ Add tile</button>
+                </div>`,
+                'bento':       () => `<div class="bento-grid">
+                    <div class="bento-item bento-item-lg"><img src="${PLACEHOLDER_IMG}" alt="Featured image"></div>
+                    <div class="bento-item bento-item-wide"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="bento-item"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                    <div class="bento-item"><img src="${PLACEHOLDER_IMG}" alt="Image"></div>
+                </div>`,
+                'masonry':     () => `<div class="masonry-gallery">
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 1"></div>
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 2"></div>
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 3"></div>
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 4"></div>
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 5"></div>
+                    <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 6"></div>
                 </div>`,
                 'divider':     () => `<hr class="border-orange-200">`,
                 'tabs':        () => `<div class="doc-sidetabs" data-tab-block>
@@ -4422,10 +5377,7 @@ def split_region(region):
                         img.dataset.editable = 'image';
                         img.dataset.editId = block.dataset.editId + '-i' + i;
                     }
-                    if (editModeActive && !img._editWired) {
-                        img.addEventListener('click', onEditableImageClick);
-                        img._editWired = true;
-                    }
+                    if (editModeActive) wireImageForEdit(img);
                 });
                 // Tab-specific wiring: tab labels + tab panels get contenteditable
                 block.querySelectorAll('.doc-tab-label').forEach(label => {
@@ -4433,6 +5385,17 @@ def split_region(region):
                 });
                 block.querySelectorAll('.doc-tab-panel').forEach(panel => {
                     if (editModeActive) panel.setAttribute('contenteditable', 'true');
+                });
+                // Custom layout grids: make sure the "+ Add tile" button exists
+                block.querySelectorAll('.lay-grid').forEach(grid => {
+                    if (!grid.querySelector('[data-role="lay-add"]')) {
+                        const b = document.createElement('button');
+                        b.type = 'button';
+                        b.className = 'lay-add-tile';
+                        b.dataset.role = 'lay-add';
+                        b.textContent = '+ Add tile';
+                        grid.appendChild(b);
+                    }
                 });
                 // Wire delete button on the block (guard against double-wire)
                 const del = block.querySelector('.block-controls [data-role="delete"]');
@@ -4654,7 +5617,11 @@ def split_region(region):
                         e.preventDefault();
                         saveEdits();
                     }
-                    if (e.key === 'Escape') exitEditMode(false);
+                    if (e.key === 'Escape') {
+                        // First Escape drops the resize selection, second exits
+                        if (LiveResize && LiveResize.isActive()) LiveResize.deselect();
+                        else exitEditMode(false);
+                    }
                 });
             }
 
@@ -4667,6 +5634,7 @@ def split_region(region):
                         const w = (el.style.maxWidth || '').replace('%', '') || null;
                         if (w !== before.width) return true;
                         if (el.alt !== before.alt) return true;
+                        if ((el.getAttribute('style') || null) !== before.styleCss) return true;
                     }
                 }
                 // Freshly-inserted or freshly-deleted blocks?
