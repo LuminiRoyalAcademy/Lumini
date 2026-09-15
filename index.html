@@ -1089,6 +1089,16 @@
             font-size: 0.75rem; color: #6b7280; text-align: center;
             margin-bottom: 14px;
         }
+        .ime-alt-warn {
+            display: none;
+            font-size: 0.72rem; color: #b91c1c; font-weight: 600;
+            margin-top: 5px;
+        }
+        .img-edit-panel.alt-missing .ime-alt-warn { display: block; }
+        .img-edit-panel.alt-missing #ime-alt {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
         .ime-btn-row {
             display: flex; flex-wrap: wrap; gap: 6px;
             margin-bottom: 14px;
@@ -1141,6 +1151,21 @@
             touch-action: none;
         }
         .lr-h:hover { transform: scale(1.3); background: #fef3e2; }
+        /* Fingers need a much bigger target than a mouse pointer */
+        @media (pointer: coarse) {
+            .lr-h { width: 22px; height: 22px; border-width: 3px; border-radius: 5px; }
+            .lr-nw { top: -11px; left: -11px; }
+            .lr-n  { top: -11px; margin-left: -11px; }
+            .lr-ne { top: -11px; right: -11px; }
+            .lr-e  { right: -11px; margin-top: -11px; }
+            .lr-se { bottom: -11px; right: -11px; }
+            .lr-s  { bottom: -11px; margin-left: -11px; }
+            .lr-sw { bottom: -11px; left: -11px; }
+            .lr-w  { left: -11px; margin-top: -11px; }
+            .lr-bar button { padding: 9px 13px; font-size: 0.8rem; }
+            #live-resize-frame.bar-above .lr-bar { top: -54px; }
+            .lr-bar { bottom: -54px; }
+        }
         .lr-nw { top: -7px;  left: -7px;                        cursor: nwse-resize; }
         .lr-n  { top: -7px;  left: 50%; margin-left: -6.5px;    cursor: ns-resize;   }
         .lr-ne { top: -7px;  right: -7px;                       cursor: nesw-resize; }
@@ -1228,6 +1253,13 @@
             cursor: pointer;
             transition: outline-color 0.15s, transform 0.15s;
             border-radius: 4px;
+        }
+        /* Missing or placeholder alt text — flag it while editing */
+        body.edit-mode img[data-editable="image"]:not([alt]),
+        body.edit-mode img[data-editable="image"][alt=""],
+        body.edit-mode img[data-editable="image"][alt="Image"],
+        body.edit-mode img[data-editable="image"][alt="New image"] {
+            outline: 2px dashed #dc2626;
         }
         body.edit-mode [data-editable="image"]:hover {
             outline-color: #b45309;
@@ -2639,12 +2671,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         <aside class="md:w-1/4 lg:w-1/5 fade-in">
                             <nav class="sticky top-28">
                                 <ul class="space-y-2">
-                                    <li><a href="#idoc-loop" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 iron-text-dark bg-orange-50 font-bold"><i data-feather="repeat" class="w-5 h-5"></i><span>Core Loop</span></a></li>
-                                    <li><a href="#idoc-soulknight" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50"><i data-feather="grid" class="w-5 h-5"></i><span>Soul Knight Adaptations</span></a></li>
-                                    <li><a href="#idoc-math" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50"><i data-feather="cpu" class="w-5 h-5"></i><span>Mathematical Systems</span></a></li>
-                                    <li><a href="#idoc-puzzles" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50"><i data-feather="key" class="w-5 h-5"></i><span>Linguistic Puzzles</span></a></li>
-                                    <li><a href="#idoc-tech" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50"><i data-feather="code" class="w-5 h-5"></i><span>Technical Stack</span></a></li>
-                                    <li><a href="#idoc-team" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50"><i data-feather="users" class="w-5 h-5"></i><span>Team &amp; Status</span></a></li>
+                                    <li><a href="#idoc-team" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 iron-text-dark bg-orange-50 font-bold"><i data-feather="users" class="w-5 h-5"></i><span>Team &amp; Status</span></a></li>
                                 </ul>
                                 <button id="iron-add-section-btn" class="idoc-add-section-btn" type="button">
                                     <i data-feather="plus-circle" class="w-4 h-4"></i>
@@ -2661,158 +2688,8 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         <!-- Content -->
                         <div class="md:w-3/4 lg:w-4/5 min-w-0 space-y-8">
 
-                            <!-- CORE LOOP -->
-                            <div id="idoc-loop" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in">
-                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="repeat" class="w-6 h-6 mr-3 iron-text"></i>1. Core Gameplay Loop &amp; Run-Based Design</h3>
-                                <p class="text-gray-700 mb-6">Instead of a continuous open world, the game is split into distinct "runs" representing Rigpa and the Sky Priests escaping from Paro Valley, fighting through regional blockades, and defending historical fortresses (Dzongs).</p>
-                                <pre class="bg-gray-900 text-orange-100 p-6 rounded-lg overflow-x-auto text-xs leading-relaxed"><code>┌─────────────────────────────────────────┐
-│           THE MONASTERY HUB             │
-│  - Craft / Upgrade Bhutanese Weapons    │
-│  - Translate Jesuit Journal Clues       │
-│  - Select Character Class / Boost Stats │
-└────────────────────┬────────────────────┘
-                     │
-                     ▼   [Start Run]
-┌─────────────────────────────────────────┐
-│      PROCEDURALLY GENERATED VALLEYS     │
-│  - Combat hostile regional militias     │
-│  - Solve Linguistic Puzzles for Loot    │
-│  - Protect the Priests (Panic Meter)    │
-└────────────────────┬────────────────────┘
-                     │
-          ┌──────────┴──────────┐
-          ▼ (Defeat)            ▼ (Victory)
-┌──────────────────┐   ┌──────────────────────────┐
-│     RETREAT      │   │     BOSS ENCOUNTER       │
-│ - Lose inventory │   │  (e.g., Tsang Invaders)  │
-│ - Keep permanent │   └────────┬─────────────────┘
-│      currency    │            │
-└─────────┬────────┘            ▼   [Next Area]
-          │           ┌──────────────────────────┐
-          └──────────►│      SEMTOKHA DZONG      │
-                      │  (Final Siege / Run End) │
-                      └──────────────────────────┘</code></pre>
-                            </div>
-
-                            <!-- SOUL KNIGHT ADAPTATIONS -->
-                            <div id="idoc-soulknight" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in hidden">
-                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="grid" class="w-6 h-6 mr-3 iron-text"></i>2. Soul Knight Features Adapted to Medieval Bhutan</h3>
-                                <div class="overflow-x-auto">
-                                    <table class="min-w-full border-collapse">
-                                        <thead>
-                                            <tr class="iron-bg-cream">
-                                                <th class="border border-orange-200 p-3 text-left iron-text-dark">Soul Knight Feature</th>
-                                                <th class="border border-orange-200 p-3 text-left iron-text-dark">Iron &amp; Incense Adaptation</th>
-                                                <th class="border border-orange-200 p-3 text-left iron-text-dark">Educational / Historical Integration</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-sm text-gray-700">
-                                            <tr>
-                                                <td class="border border-orange-100 p-3 font-semibold">Randomly Generated Dungeons</td>
-                                                <td class="border border-orange-100 p-3">Procedural "Dzong Courtyards" and "Forest Ridges" created via binary space partitioning algorithms.</td>
-                                                <td class="border border-orange-100 p-3">Players experience the architectural defensive layout of Bhutanese Dzongs — multi-tiered walls, narrow corridors, steep staircases.</td>
-                                            </tr>
-                                            <tr class="iron-bg-cream/40">
-                                                <td class="border border-orange-100 p-3 font-semibold">Vast Arsenal (400+ weapons)</td>
-                                                <td class="border border-orange-100 p-3">Authentic weapons: the <em>toktsey</em> (hoe), recurve bows (<em>zhu</em>), matchlock muskets, <em>patang</em> swords, plus rare Jesuit imports like the flintlock pistol and astrolabe-based spiritual tools.</td>
-                                                <td class="border border-orange-100 p-3">Weapon flavor text acts as historical cards detailing crafting materials, combat usage, and cultural significance in 17th-century warfare.</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="border border-orange-100 p-3 font-semibold">Diverse Heroes</td>
-                                                <td class="border border-orange-100 p-3">
-                                                    <strong>The Peasant (Rigpa):</strong> balanced, agricultural-tool buffs.<br>
-                                                    <strong>The Archer:</strong> fast ranged combat, traditional archery.<br>
-                                                    <strong>The Guardian Monk:</strong> defensive, prayer-wheel shields.<br>
-                                                    <strong>The Sky Priest:</strong> tactical support &amp; stun circles.
-                                                </td>
-                                                <td class="border border-orange-100 p-3">Demonstrates the diverse social strata of 17th-century Bhutan and the collaborative effort required to unify the country.</td>
-                                            </tr>
-                                            <tr class="iron-bg-cream/40">
-                                                <td class="border border-orange-100 p-3 font-semibold">The Living Room Hub</td>
-                                                <td class="border border-orange-100 p-3"><strong>The Traditional Courtyard:</strong> grow local medicinal herbs (cordyceps, blue poppy) for health potions, practice archery, and talk to Jesuit priests to decrypt text.</td>
-                                                <td class="border border-orange-100 p-3">Teaches traditional agriculture, medicine, and language. Solving linguistic puzzles at the hub prepares you with damage/defense buffs for the next run.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <!-- MATHEMATICAL SYSTEMS -->
-                            <div id="idoc-math" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in hidden space-y-6">
-                                <h3 class="text-2xl font-bold flex items-center iron-text-dark cinzel"><i data-feather="cpu" class="w-6 h-6 mr-3 iron-text"></i>3. Mathematical Systems &amp; Implementation</h3>
-                                <p class="text-gray-700">To build this fast-paced action engine in <code class="bg-gray-100 px-1 rounded">pygame-ce</code>, we use vector physics for movement, collision, and the core auto-aim mechanics.</p>
-
-                                <div class="border-l-4 iron-border pl-6">
-                                    <h4 class="text-xl font-bold iron-text-dark mb-2">3.1 Auto-Aim Target Acquisition</h4>
-                                    <p class="text-gray-700 mb-3">Like <em>Soul Knight</em>, weapons lock onto the closest enemy in range and line of sight. Given player position <code>P</code> and enemies <code>E_1 … E_n</code>, the auto-aim computes Euclidean distance:</p>
-                                    <pre class="bg-gray-900 text-orange-100 p-4 rounded-lg text-sm overflow-x-auto"><code>d_i = sqrt((x_i - x_p)^2 + (y_i - y_p)^2)
-
-T = argmin(d_i)   subject to   d_i ≤ R_max
-
-u = (E_T - P) / ||E_T - P||   // normalized direction
-v_proj = s · u                 // projectile velocity</code></pre>
-                                    <p class="text-gray-700 mt-3 text-sm">Where <code>R_max</code> is the maximum range of the equipped weapon and <code>s</code> is the projectile speed constant.</p>
-                                </div>
-
-                                <div class="border-l-4 iron-border pl-6">
-                                    <h4 class="text-xl font-bold iron-text-dark mb-2">3.2 Procedural Level Generation (BSP)</h4>
-                                    <p class="text-gray-700 mb-3">A Binary Space Partitioning algorithm splits a <code>W × H</code> map into rooms, guaranteeing no room falls below <code>w_min × h_min</code>:</p>
-                                    <pre class="bg-gray-900 text-orange-100 p-4 rounded-lg text-sm overflow-x-auto"><code># Procedural Room Generation Concept
-def split_region(region):
-    if region.width &gt; w_min and region.height &gt; h_min:
-        if random_choice() == HORIZONTAL:
-            y = random_range(h_min, region.height - h_min)
-            return (
-                Region(region.x, region.y, region.width, y),
-                Region(region.x, region.y + y, region.width, region.height - y),
-            )
-        else:
-            x = random_range(w_min, region.width - w_min)
-            return (
-                Region(region.x, region.y, x, region.height),
-                Region(region.x + x, region.y, region.width - x, region.height),
-            )
-    return region</code></pre>
-                                </div>
-                            </div>
-
-                            <!-- LINGUISTIC PUZZLES -->
-                            <div id="idoc-puzzles" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in hidden">
-                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="key" class="w-6 h-6 mr-3 iron-text"></i>4. Educational Linguistics Puzzle Integration</h3>
-                                <p class="text-gray-700 mb-6">To keep the game educational, high-tier loot chests and weapon vending machines are locked behind <strong>"Linguistic Barriers"</strong>. When Rigpa encounters a chest dropped by a Jesuit priest or found in monastery ruins:</p>
-                                <ol class="space-y-3 text-gray-700">
-                                    <li class="flex gap-3"><span class="iron-bg text-white rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center text-sm font-bold">1</span><span>A Portuguese or Latin phrase is presented — e.g. <em class="iron-text-dark">"Caminho seguro por aqui!"</em> (Safe path this way!).</span></li>
-                                    <li class="flex gap-3"><span class="iron-bg text-white rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center text-sm font-bold">2</span><span>The player uses context clues or previously decrypted journal entries in their inventory to select the correct translation.</span></li>
-                                    <li class="flex gap-3"><span class="iron-bg text-white rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center text-sm font-bold">3</span><span>Correct choice unlocks the chest instantly, awarding powerful weapons (e.g. Portuguese Firelocks) or restoring health.</span></li>
-                                    <li class="flex gap-3"><span class="iron-bg text-white rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center text-sm font-bold">4</span><span>Incorrect choices increase the <strong class="iron-text-dark">"Priests' Panic Meter"</strong> as communication breaks down.</span></li>
-                                </ol>
-                                <div class="mt-6 p-4 iron-bg-cream border-l-4 iron-border rounded-r-lg">
-                                    <p class="text-sm iron-text-dark"><strong>Design intent:</strong> the puzzles double as language exposure. The more players engage, the more the historical vocabulary sticks.</p>
-                                </div>
-                            </div>
-
-                            <!-- TECHNICAL STACK -->
-                            <div id="idoc-tech" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in hidden">
-                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="code" class="w-6 h-6 mr-3 iron-text"></i>5. Technical Stack Upgrades for Python</h3>
-                                <p class="text-gray-700 mb-6">To handle hundreds of projectiles, enemies, and smooth particle effects on standard student laptops:</p>
-                                <div class="grid md:grid-cols-3 gap-4">
-                                    <div class="p-5 iron-bg-cream rounded-lg border iron-border border-opacity-30">
-                                        <h4 class="font-bold iron-text-dark mb-2">Pygame-CE</h4>
-                                        <p class="text-sm text-gray-700">Community Edition — mandatory for sprite batching and hardware-accelerated drawing routines.</p>
-                                    </div>
-                                    <div class="p-5 iron-bg-cream rounded-lg border iron-border border-opacity-30">
-                                        <h4 class="font-bold iron-text-dark mb-2">Double Buffering + Dirty Rectangles</h4>
-                                        <p class="text-sm text-gray-700">Only redraw moving entities and projectiles instead of the whole screen — sustains a smooth 60 FPS.</p>
-                                    </div>
-                                    <div class="p-5 iron-bg-cream rounded-lg border iron-border border-opacity-30">
-                                        <h4 class="font-bold iron-text-dark mb-2">Component-Based Entities</h4>
-                                        <p class="text-sm text-gray-700">Separation of collision, rendering, and AI logic prevents processing bottlenecks as complexity grows.</p>
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- TEAM & STATUS -->
-                            <div id="idoc-team" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in hidden">
+                            <div id="idoc-team" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in">
                                 <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="users" class="w-6 h-6 mr-3 iron-text"></i>Team &amp; Current Status</h3>
                                 <p class="text-gray-700 mb-6">Same crew as 2025 — Jigme, Tandin, Ugyen, and Tenzing. The blueprint on this page is the working design; expect updates as we prototype in pygame-ce.</p>
                                 <div class="grid md:grid-cols-2 gap-4">
@@ -2962,7 +2839,8 @@ def split_region(region):
             <input type="hidden" id="ime-width" value="100">
 
             <label for="ime-alt">Alt text (accessibility)</label>
-            <input type="text" id="ime-alt" placeholder="Describe the image">
+            <input type="text" id="ime-alt" placeholder="Describe the image — e.g. 'Peasant hero fighting in a dzong courtyard'">
+            <p id="ime-alt-warn" class="ime-alt-warn">Screen readers and search engines read this. Please describe what's in the image.</p>
 
             <label class="ime-section-label">Fit mode</label>
             <div class="ime-btn-row" id="ime-fit-row">
@@ -3089,6 +2967,14 @@ def split_region(region):
                 status.className = "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800";
             }
         }
+        // Themed alert with a native fallback for the brief window before
+        // the custom modal is wired up.
+        function uiAlert(message, opts = {}) {
+            if (typeof window.showInfo === 'function') return window.showInfo(message, opts);
+            alert(message);
+            return Promise.resolve(true);
+        }
+
         function showToast(title, message, type = 'success') {
             const toast = document.getElementById('toast-notification');
             const titleEl = document.getElementById('toast-title');
@@ -3239,10 +3125,13 @@ def split_region(region):
         function handleForgotPassword() {
             const emailField = document.getElementById('signin-email');
             const email = emailField.value;
-            if (!email) { alert('Enter your email first, then click "Forgot Password".'); return; }
+            if (!email) {
+                uiAlert('Enter your email first, then click "Forgot Password".', { title: 'Email needed', iconClass: 'warn', icon: '\u26a0' });
+                return;
+            }
             firebase.auth().sendPasswordResetEmail(email)
-                .then(() => alert('Password reset email sent! Check your inbox.'))
-                .catch(err => alert('Error: ' + err.message));
+                .then(() => uiAlert('Check your inbox for the reset link.', { title: 'Reset email sent', iconClass: 'success', icon: '\u2713' }))
+                .catch(err => uiAlert(err.message, { title: 'Could not send reset email', iconClass: 'warn' }));
         }
 
         // =========================================================
@@ -3814,7 +3703,11 @@ def split_region(region):
                 if (pageId === 'roadmap') await renderRoadmap();
                 if (pageId === 'contact') await displayQuestions();
                 if (pageId === 'documentation') showDocSection('doc-new-things');
-                if (pageId === 'iron-doc') showIDocSection('idoc-loop');
+                if (pageId === 'iron-doc') showIDocSection(firstIDocSectionId());
+                // Pull this page's saved edits the first time it's opened
+                if (pageId === 'iron-home' || pageId === 'iron-doc' || pageId === 'team') {
+                    ensurePageEdits(pageId);
+                }
 
                 document.querySelectorAll(`#${pageId} .fade-in`).forEach(fader => {
                     fader.classList.remove('visible');
@@ -3873,6 +3766,13 @@ def split_region(region):
             // --- Iron & Incense Documentation Tabs ---
             // We RE-QUERY on every call so newly-added custom sections
             // (added via "+ Add Section") get picked up automatically.
+            // Whichever sidebar entry sits first — so deleting or adding
+            // sections never leaves the page opening on a dead id.
+            function firstIDocSectionId() {
+                const first = document.querySelector('#iron-doc aside nav .idoc-nav-link');
+                const href = first && first.getAttribute('href');
+                return (href && href.startsWith('#')) ? href.substring(1) : 'idoc-team';
+            }
             function showIDocSection(sectionId) {
                 document.querySelectorAll('.idoc-section').forEach(s => s.classList.add('hidden'));
                 const target = document.getElementById(sectionId);
@@ -3983,15 +3883,20 @@ def split_region(region):
                     const content = document.getElementById('new-thing-content').value;
                     const imageUrl = document.getElementById('new-thing-image').value;
                     const user = auth.currentUser;
-                    if (!user) { alert("You must be logged in."); return; }
+                    if (!user) {
+                        showInfo('You need to be signed in to post an update.', { title: 'Not signed in', iconClass: 'warn', icon: '\u26a0' });
+                        return;
+                    }
                     try {
                         await db.collection('new_things').add({
                             title, content, imageUrl, author: user.email,
                             timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         });
                         newThingsForm.reset();
-                        alert('Update posted successfully!');
-                    } catch (err) { alert('Error posting update: ' + err.message); }
+                        showToast('Posted', 'Your update is live', 'success');
+                    } catch (err) {
+                        showInfo(err.message, { title: 'Could not post update', iconClass: 'warn' });
+                    }
                 });
             }
 
@@ -4131,9 +4036,11 @@ def split_region(region):
                             timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         });
                         document.getElementById('question').value = '';
-                        alert('Thank you! Your question has been submitted.');
+                        showToast('Question sent', 'Thanks \u2014 we\'ll get back to you', 'success');
                         displayQuestions();
-                    } catch (err) { alert('Error: ' + err.message); }
+                    } catch (err) {
+                        showInfo(err.message, { title: 'Could not submit', iconClass: 'warn' });
+                    }
                 });
             }
 
@@ -4238,17 +4145,24 @@ def split_region(region):
                 document.querySelectorAll('.save-progress-btn').forEach(btn => {
                     btn.addEventListener('click', async function () {
                         const taskId = this.dataset.taskId;
-                        const password = prompt("Please enter the password to save changes:");
-                        if (password === 'lumini') {
-                            const tc = document.getElementById(`task-${taskId}`);
-                            const newProgress = tc.querySelector('input[type="range"]').value;
-                            try {
-                                await db.collection('roadmap_progress').doc(taskId).set({ progress: parseInt(newProgress, 10) });
-                                alert('Progress saved!');
-                                renderRoadmap();
-                            } catch (err) { alert('Error: ' + err.message); }
-                        } else if (password !== null) {
-                            alert('Incorrect password.');
+                        const password = await askPrompt(
+                            'Enter the roadmap password to save this change.',
+                            '',
+                            { title: 'Password required', icon: '\ud83d\udd12', inputType: 'password', placeholder: 'Password', confirmText: 'Save' }
+                        );
+                        if (password === null) return;   // cancelled
+                        if (password !== 'lumini') {
+                            showInfo('That password did not match.', { title: 'Incorrect password', iconClass: 'warn', icon: '\u26a0' });
+                            return;
+                        }
+                        const tc = document.getElementById(`task-${taskId}`);
+                        const newProgress = tc.querySelector('input[type="range"]').value;
+                        try {
+                            await db.collection('roadmap_progress').doc(taskId).set({ progress: parseInt(newProgress, 10) });
+                            showToast('Saved', 'Roadmap progress updated', 'success');
+                            renderRoadmap();
+                        } catch (err) {
+                            showInfo(err.message, { title: 'Could not save', iconClass: 'warn' });
                         }
                     });
                 });
@@ -4281,6 +4195,7 @@ def split_region(region):
                     confirmBtn.textContent = opts.confirmText || (type === 'alert' ? 'Got it' : 'OK');
                     confirmBtn.className = 'cm-btn cm-btn-confirm' + (opts.danger ? ' danger' : '');
 
+                    input.type = opts.inputType || 'text';
                     input.value = opts.defaultValue || '';
                     input.placeholder = opts.placeholder || '';
                     input.classList.toggle('visible', showInput);
@@ -4320,6 +4235,11 @@ def split_region(region):
                 showModal({ type: 'prompt', message, defaultValue, showInput: true, ...opts });
             const showInfo = (message, opts = {}) =>
                 showModal({ type: 'alert', message, ...opts });
+            // Some handlers live outside this scope (e.g. handleForgotPassword),
+            // so publish the wrappers for them.
+            window.showInfo = showInfo;
+            window.askConfirm = askConfirm;
+            window.askPrompt = askPrompt;
 
             // =========================================================
             // ADMIN EDIT MODE
@@ -4344,7 +4264,7 @@ def split_region(region):
                 if (editModeInitialized) return;
                 editModeInitialized = true;
                 tagEditableElements();
-                loadPageEdits();               // apply saved edits from Firestore
+                // Edits load lazily per page now; enterEditMode pulls the rest.
                 wireEditToolbar();
                 document.getElementById('edit-mode-fab').classList.add('visible');
                 if (typeof feather !== 'undefined') feather.replace();
@@ -4379,40 +4299,87 @@ def split_region(region):
                 });
             }
 
-            function loadPageEdits() {
-                db.collection('page_edits').get().then(snap => {
-                    // Sort so block ordering is preserved (order = numeric timestamp)
-                    const docs = snap.docs.slice().sort((a, b) => {
+            // =========================================================
+            // PAGE EDITS LOADING
+            // Edits are fetched PER SCOPE (iron-home / iron-doc / team)
+            // and only when that page is first opened, instead of pulling
+            // the whole `page_edits` collection on every visit. Two extra
+            // benefits: edits orphaned by a deleted section are never
+            // fetched at all, and a visitor who only sees the home page
+            // pays for zero reads.
+            // =========================================================
+            const loadedEditScopes = new Map();   // scope -> Promise
+            // Resolves once loadCustomSections() has injected the admin-added
+            // sidebar sections. Fetching iron-doc edits before that would miss
+            // any block living inside one of them.
+            let customSectionsReady = null;
+
+            // Which container ids can hold blocks for a given scope?
+            function sectionIdsForScope(scope) {
+                if (scope === 'iron-doc') {
+                    const ids = Array.from(document.querySelectorAll('#iron-doc .idoc-section'))
+                        .map(sec => sec.id).filter(Boolean);
+                    return ids.length ? ids.concat('iron-doc') : ['iron-doc'];
+                }
+                return [scope];
+            }
+
+            // Auto-tagged edit ids are prefixed with their scope
+            // ("iron-doc-t-3", "team-2025-ugyen"), so a document-id range
+            // query picks them up. Inserted blocks are found by insertedIn.
+            async function fetchScopeDocs(scope) {
+                if (scope === 'iron-doc' && customSectionsReady) {
+                    try { await customSectionsReady; } catch (_) {}
+                }
+                const col = db.collection('page_edits');
+                const FP = firebase.firestore.FieldPath.documentId();
+                const targets = sectionIdsForScope(scope);
+                const queries = [
+                    col.orderBy(FP).startAt(scope).endAt(scope + '\uf8ff').get()
+                ];
+                for (let i = 0; i < targets.length; i += 10) {
+                    queries.push(col.where('insertedIn', 'in', targets.slice(i, i + 10)).get());
+                }
+                const snaps = await Promise.all(queries);
+                const byId = new Map();
+                snaps.forEach(sn => sn.docs.forEach(d => byId.set(d.id, d)));
+                return Array.from(byId.values());
+            }
+
+            // Load one scope, once. Repeat calls reuse the same promise.
+            function ensurePageEdits(scope) {
+                if (!scope) return Promise.resolve();
+                if (loadedEditScopes.has(scope)) return loadedEditScopes.get(scope);
+                const job = fetchScopeDocs(scope)
+                    .catch(err => {
+                        // Range/`in` queries can fail on odd data — fall back to
+                        // the old whole-collection read rather than showing
+                        // stale content.
+                        console.warn('Scoped page-edit load failed, falling back:', err);
+                        return db.collection('page_edits').get().then(sn => sn.docs);
+                    })
+                    .then(docList => applyPageEditDocs(docList))
+                    .catch(err => {
+                        loadedEditScopes.delete(scope);   // let a later visit retry
+                        console.warn('Page edits load failed:', err);
+                    });
+                loadedEditScopes.set(scope, job);
+                return job;
+            }
+
+            // Admin edit mode touches every scope at once, so load them all.
+            function ensureAllPageEdits() {
+                return Promise.all(['iron-home', 'iron-doc', 'team'].map(ensurePageEdits));
+            }
+
+            function applyPageEditDocs(docList) {
+                return Promise.resolve().then(() => {
+                    // Sort so block ordering is preserved
+                    const docs = docList.slice().sort((a, b) => {
                         return (a.data().order || 0) - (b.data().order || 0);
                     });
-                    docs.forEach(doc => {
-                        const id = doc.id;
-                        const data = doc.data();
-                        let el = document.querySelector(`[data-edit-id="${id}"]`);
-
-                        // Recreate inserted elements that don't yet exist in DOM
-                        if (!el && data.isInsert) {
-                            const targetId = data.insertedIn || 'iron-doc';
-                            const parent = document.getElementById(targetId) || document.getElementById('iron-doc');
-                            if (!parent) return;
-                            if (data.type === 'block') {
-                                el = document.createElement('div');
-                                el.className = 'my-6';
-                                el.dataset.blockType = data.blockType || '';
-                            } else if (data.type === 'image') {
-                                el = document.createElement('img');
-                                el.className = 'rounded-lg shadow-md my-4 mx-auto block';
-                            } else {
-                                el = document.createElement('p');
-                                el.className = 'text-gray-700 my-4';
-                            }
-                            el.dataset.editable = data.type;
-                            el.dataset.editId = id;
-                            el.dataset.insertedIn = targetId;
-                            parent.appendChild(el);
-                        }
-                        if (!el) return;
-
+                    // Applies one Firestore doc to one DOM element
+                    const applyDoc = (data, el) => {
                         if (data.type === 'block' && typeof data.html === 'string') {
                             el.innerHTML = data.html;
                             // Tag any inner text/images so click-to-edit works
@@ -4439,10 +4406,72 @@ def split_region(region):
                             if (data.objectPosition) el.style.objectPosition = data.objectPosition;
                             if (data.objectFit) el.style.objectFit = data.objectFit;
                         }
+                    };
+
+                    // PASS 1 — apply to elements that already exist in the DOM.
+                    // Restoring a block's HTML can itself create nested elements,
+                    // so this has to happen before we decide what's missing.
+                    const pending = [];
+                    docs.forEach(doc => {
+                        const el = document.querySelector(`[data-edit-id="${doc.id}"]`);
+                        if (el) applyDoc(doc.data(), el);
+                        else pending.push(doc);
                     });
+
+                    // PASS 2 — recreate inserted elements that are still missing.
+                    // If the section they belonged to no longer exists (a tab was
+                    // deleted), the edit is orphaned: skip it rather than dumping
+                    // the content at the bottom of the whole page.
+                    pending.forEach(doc => {
+                        const id = doc.id;
+                        const data = doc.data();
+                        if (document.querySelector(`[data-edit-id="${id}"]`)) return;
+                        if (!data.isInsert) return;
+                        const targetId = data.insertedIn || 'iron-doc';
+                        const parent = document.getElementById(targetId);
+                        if (!parent) return;   // orphaned — its section is gone
+                        let el;
+                        if (data.type === 'block') {
+                            el = document.createElement('div');
+                            el.className = 'my-6';
+                            el.dataset.blockType = data.blockType || '';
+                        } else if (data.type === 'image') {
+                            el = document.createElement('img');
+                            el.className = 'rounded-lg shadow-md my-4 mx-auto block';
+                            el.setAttribute('loading', 'lazy');
+                            el.setAttribute('decoding', 'async');
+                        } else {
+                            el = document.createElement('p');
+                            el.className = 'text-gray-700 my-4';
+                        }
+                        el.dataset.editable = data.type;
+                        el.dataset.editId = id;
+                        el.dataset.insertedIn = targetId;
+                        parent.appendChild(el);
+                        applyDoc(data, el);
+                    });
+
                     // After loading, re-tag any newly-added inner elements
                     tagEditableElements();
-                }).catch(err => console.warn('Page edits load failed:', err));
+                    markLazyImages();
+                });
+            }
+
+            // Defer off-screen images. Browsers still fetch lazy images that
+            // are already in the viewport, so this is safe to apply broadly;
+            // the hero backgrounds are CSS, not <img>, so they're unaffected.
+            function markLazyImages(root) {
+                (root || document).querySelectorAll('img').forEach(img => {
+                    if (img.hasAttribute('data-no-lazy')) return;
+                    if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+                });
+            }
+
+            // Alt text that is missing or left at a template default
+            function altIsWeak(img) {
+                const a = (img.getAttribute('alt') || '').trim();
+                return !a || a === 'Image' || a === 'New image';
             }
 
             // Lightweight tagger for freshly-loaded block content (visitor mode)
@@ -4457,6 +4486,7 @@ def split_region(region):
                     img.dataset.editable = 'image';
                     img.dataset.editId = block.dataset.editId + '-i' + i;
                 });
+                markLazyImages(block);
             }
 
             function snapshotEditables() {
@@ -4512,7 +4542,19 @@ def split_region(region):
                 });
             }
 
-            function enterEditMode() {
+            async function enterEditMode() {
+                if (editModeActive) return;
+                // Snapshotting before every scope is loaded would make later
+                // arrivals look like unsaved changes, so wait for them all.
+                const fab = document.getElementById('edit-mode-fab');
+                const fabLabel = fab && fab.querySelector('span');
+                const originalLabel = fabLabel ? fabLabel.textContent : '';
+                if (fabLabel) fabLabel.textContent = 'Loading\u2026';
+                try {
+                    await ensureAllPageEdits();
+                } finally {
+                    if (fabLabel) fabLabel.textContent = originalLabel;
+                }
                 if (editModeActive) return;
                 editModeActive = true;
                 document.body.classList.add('edit-mode');
@@ -4869,6 +4911,7 @@ def split_region(region):
                     imgPanel.dataset.context = '';
                 }
                 // Reflect current selection in the UI
+                refreshAltWarning();
                 setActive(imeFitRow, 'fit', selectedFit);
                 imePreview.style.objectPosition = selectedPosition;
                 imePreview.style.objectFit = selectedFit;
@@ -4918,6 +4961,11 @@ def split_region(region):
                 imgPanel.removeAttribute('data-context');
             }
 
+            function refreshAltWarning() {
+                const v = (imeAlt.value || '').trim();
+                imgPanel.classList.toggle('alt-missing', !v || v === 'Image' || v === 'New image');
+            }
+            imeAlt && imeAlt.addEventListener('input', refreshAltWarning);
             imeUrl && imeUrl.addEventListener('input', () => { imePreview.src = imeUrl.value; });
             imeWidth && imeWidth.addEventListener('input', () => {
                 imeWidthValue.textContent = imeWidth.value + '%';
@@ -4998,6 +5046,7 @@ def split_region(region):
                         const pct = pw ? Math.round((r.width / pw) * 100) : 100;
                         badge.textContent = pct + '%  \u00b7  ' + Math.round(r.width) + ' \u00d7 ' + Math.round(r.height) + 'px';
                     }
+                    if (img && altIsWeak(img)) badge.textContent += '  \u00b7  \u26a0 no alt text';
                 }
 
                 function refreshFitLabel() {
@@ -5378,6 +5427,7 @@ def split_region(region):
                     }
                     if (editModeActive) wireImageForEdit(img);
                 });
+                markLazyImages(block);
                 // Tab-specific wiring: tab labels + tab panels get contenteditable
                 block.querySelectorAll('.doc-tab-label').forEach(label => {
                     if (editModeActive) label.setAttribute('contenteditable', 'true');
@@ -5727,7 +5777,7 @@ def split_region(region):
                             li.remove();
                             section.remove();
                             showInfo('Section removed.', { title: 'Deleted', iconClass: 'success', icon: '✓' });
-                            showIDocSection('idoc-loop');
+                            showIDocSection(firstIDocSectionId());
                         } catch (err) {
                             showInfo(err.message, { title: 'Could not delete', iconClass: 'warn' });
                         }
@@ -5782,10 +5832,15 @@ def split_region(region):
             (function loadForVisitors() {
                 // Wait one tick so the Iron pages are in the DOM
                 setTimeout(async () => {
-                    await loadCustomSections();     // adds custom parent tabs
+                    customSectionsReady = loadCustomSections();
+                    await customSectionsReady;      // adds custom parent tabs
                     tagEditableElements();          // safe even if already tagged
-                    loadPageEdits();                // fill in text/image/block content
+                    markLazyImages();               // below-the-fold images load on demand
                     initTabDelegation();            // so tab clicks work for everyone
+                    // Content itself is fetched by ensurePageEdits() when the
+                    // relevant page is opened — see showPage().
+                    const openNow = (location.hash || '').replace('#', '');
+                    if (['iron-home', 'iron-doc', 'team'].includes(openNow)) ensurePageEdits(openNow);
                 }, 100);
             })();
 
