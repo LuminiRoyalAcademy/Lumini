@@ -1670,6 +1670,121 @@
             width: 100%; margin-bottom: 16px; accent-color: #b45309;
         }
 
+        /* ============================================
+           VIDEO BLOCK
+           Responsive media frame that holds either an
+           <iframe> embed (YouTube / Vimeo) or a native
+           <video> file. Admins customise it through the
+           #video-edit-modal; the markup + data-* options
+           persist inside the block's saved innerHTML.
+           ============================================ */
+        .doc-video-block { margin: 0; }
+        .doc-video {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0f0a06;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(120,53,15,0.18);
+        }
+        .doc-video[data-video-ratio="4/3"]  { aspect-ratio: 4 / 3; }
+        .doc-video[data-video-ratio="1/1"]  { aspect-ratio: 1 / 1; }
+        .doc-video[data-video-ratio="21/9"] { aspect-ratio: 21 / 9; }
+        .doc-video > iframe,
+        .doc-video > video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            background: #000;
+            object-fit: cover;
+        }
+        /* Empty-state placeholder when no source has been set yet */
+        .doc-video-empty {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #fef3e2;
+            background:
+                radial-gradient(circle at 50% 40%, rgba(180,83,9,0.55), transparent 60%),
+                linear-gradient(135deg, #78350f, #b45309);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-align: center;
+            padding: 1rem;
+        }
+        .doc-video-empty .dv-play {
+            width: 54px; height: 54px; border-radius: 9999px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.4);
+            font-size: 1.25rem;
+        }
+        .doc-video-empty small { font-weight: 500; opacity: 0.85; font-size: 0.75rem; }
+
+        /* Admin "customise" overlay — only shown in edit mode */
+        .doc-video-edit {
+            display: none;
+            position: absolute;
+            top: 10px; right: 10px;
+            z-index: 3;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 13px;
+            border-radius: 9999px;
+            background: rgba(20,15,10,0.82);
+            color: #fef3e2;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            border: 1px solid rgba(255,255,255,0.18);
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: background 0.15s, transform 0.15s;
+        }
+        .doc-video-edit:hover { background: #b45309; transform: translateY(-1px); }
+        body.edit-mode .doc-video-edit { display: inline-flex; }
+        /* In edit mode block the media from grabbing clicks so the
+           whole frame acts as an "open customiser" target. */
+        body.edit-mode .doc-video > iframe { pointer-events: none; }
+        body.edit-mode .doc-video::after {
+            content: "";
+            position: absolute; inset: 0; z-index: 2;
+            cursor: pointer;
+        }
+        body.edit-mode .doc-video .doc-video-edit,
+        body.edit-mode .doc-video .doc-video-empty { z-index: 4; }
+        .doc-video-caption {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            color: #6b5646;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Video customiser modal option rows */
+        .ve-opt-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .ve-check {
+            display: flex; align-items: center; gap: 8px;
+            padding: 9px 12px; border: 1px solid #e5e7eb; border-radius: 8px;
+            font-size: 0.82rem; font-weight: 600; color: #78350f;
+            cursor: pointer; text-transform: none; letter-spacing: normal;
+        }
+        .ve-check input { accent-color: #b45309; width: 16px; height: 16px; }
+        .ve-ratio-row .active { background: #b45309; color: #fff; border-color: #b45309; }
+
         /* Respect user's reduced-motion preference */
         @media (prefers-reduced-motion: reduce) {
             .page:not(.hidden),
@@ -3260,9 +3375,11 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 <button data-layout="image-caption"><span class="et-add-icon">C</span>Image + Caption</button>
                 <button data-layout="image-2col"><span class="et-add-icon">2</span>Two Images (Row)</button>
                 <button data-layout="image-3col"><span class="et-add-icon">3</span>Three Images (Grid)</button>
-                <button data-layout="text-image"><span class="et-add-icon">T</span>Text + Image (Side by side)</button>
-                <div class="et-add-sep"></div>
-                <button data-layout="custom-grid"><span class="et-add-icon">⊞</span>Custom Layout (drag to resize)</button>
+                                <button data-layout="text-image"><span class="et-add-icon">T</span>Text + Image (Side by side)</button>
+                                <div class="et-add-sep"></div>
+                                <button data-layout="video"><span class="et-add-icon">▶</span>Video (YouTube, Vimeo, or file)</button>
+                                <div class="et-add-sep"></div>
+                                <button data-layout="custom-grid"><span class="et-add-icon">⊞</span>Custom Layout (drag to resize)</button>
                 <button data-layout="bento"><span class="et-add-icon">▦</span>Bento Grid (4 images)</button>
                 <button data-layout="masonry"><span class="et-add-icon">▤</span>Masonry Gallery (6 images)</button>
                 <div class="et-add-sep"></div>
@@ -3360,6 +3477,50 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 <button id="ime-apply" class="px-5 py-2 rounded-full text-sm font-semibold text-white iron-btn transition">Apply</button>
             </div>
             <p class="text-xs text-gray-500 mt-4">Tip: upload to <a href="https://postimages.org" target="_blank" class="iron-text underline">postimages.org</a> or <a href="https://imgbb.com" target="_blank" class="iron-text underline">imgbb.com</a> and paste the direct link.</p>
+        </div>
+    </div>
+
+    <!-- Modal for customising a Video block (admin edit mode) -->
+    <div id="video-edit-modal" class="img-edit-modal">
+        <div id="video-edit-panel" class="img-edit-panel">
+            <h3 class="text-xl font-bold iron-text-dark mb-4 cinzel">Customize Video</h3>
+
+            <label class="ime-section-label">Preview</label>
+            <div class="doc-video" id="ve-preview" data-video-ratio="16/9" style="margin-bottom:18px;">
+                <div class="doc-video-empty"><span class="dv-play">▶</span><span>No video yet</span><small>Paste a link below</small></div>
+            </div>
+
+            <label for="ve-url">Video link or file URL</label>
+            <input type="url" id="ve-url" placeholder="https://youtu.be/… , https://vimeo.com/… , or https://…/clip.mp4">
+            <p class="text-xs text-gray-500" style="margin:-10px 0 16px;">Works with YouTube, Vimeo, or a direct <strong>.mp4 / .webm</strong> file. You can also paste a full <code>&lt;iframe&gt;</code> embed code.</p>
+
+            <label class="ime-section-label">Aspect ratio</label>
+            <div class="ime-btn-row ve-ratio-row" id="ve-ratio-row">
+                <button type="button" data-ratio="16/9" class="active">16:9</button>
+                <button type="button" data-ratio="4/3">4:3</button>
+                <button type="button" data-ratio="1/1">1:1</button>
+                <button type="button" data-ratio="21/9">21:9</button>
+            </div>
+
+            <label class="ime-section-label" style="margin-top:16px;">Playback options</label>
+            <div class="ve-opt-row">
+                <label class="ve-check"><input type="checkbox" id="ve-controls" checked> Show controls</label>
+                <label class="ve-check"><input type="checkbox" id="ve-autoplay"> Autoplay</label>
+                <label class="ve-check"><input type="checkbox" id="ve-loop"> Loop</label>
+                <label class="ve-check"><input type="checkbox" id="ve-muted"> Muted</label>
+            </div>
+            <p class="text-xs text-gray-500" style="margin:-8px 0 16px;">Most browsers require <strong>Muted</strong> for Autoplay to work.</p>
+
+            <label for="ve-poster">Poster image URL <span class="text-gray-400 font-normal normal-case tracking-normal">(optional, file videos only)</span></label>
+            <input type="url" id="ve-poster" placeholder="https://…/thumbnail.jpg">
+
+            <label for="ve-caption">Caption <span class="text-gray-400 font-normal normal-case tracking-normal">(optional)</span></label>
+            <input type="text" id="ve-caption" placeholder="Describe the clip — shown under the video">
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="ve-cancel" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition">Cancel</button>
+                <button id="ve-apply" class="px-5 py-2 rounded-full text-sm font-semibold text-white iron-btn transition">Apply</button>
+            </div>
         </div>
     </div>
 
@@ -5462,6 +5623,10 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                     img.dataset.editable = 'image';
                     img.dataset.editId = block.dataset.editId + '-i' + i;
                 });
+                // Rebuild any video frames from their saved data-* options.
+                if (typeof renderVideoMedia === 'function') {
+                    block.querySelectorAll('.doc-video').forEach(renderVideoMedia);
+                }
                 markLazyImages(block);
             }
 
@@ -5982,6 +6147,234 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
 
 
             // =========================================================
+            // VIDEO BLOCK CUSTOMISER
+            // A "Video" layout block holds a responsive .doc-video frame.
+            // Its source + playback options live in data-* attributes so
+            // they persist inside the block's saved innerHTML. Admins
+            // click the frame (edit mode) to open #video-edit-modal.
+            // Supports YouTube, Vimeo, direct video files, or a pasted
+            // <iframe> embed.
+            // =========================================================
+            function veEscAttr(s) {
+                return String(s == null ? '' : s)
+                    .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+                    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            // Turn whatever the admin pasted into a { type, src } pair.
+            function parseVideoSource(raw) {
+                const s = (raw || '').trim();
+                if (!s) return { type: '', src: '' };
+                if (/<iframe/i.test(s)) {
+                    const m = s.match(/src=["']([^"']+)["']/i);
+                    return { type: 'iframe', src: m ? m[1] : '' };
+                }
+                let m = s.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{6,})/i);
+                if (m) return { type: 'youtube', src: m[1] };
+                m = s.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
+                if (m) return { type: 'vimeo', src: m[1] };
+                if (/\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i.test(s)) return { type: 'file', src: s };
+                return { type: 'iframe', src: s };
+            }
+
+            // Rebuild a pasteable URL from stored type + src (for re-editing).
+            function rawFromVideoOpts(o) {
+                if (!o.src) return '';
+                if (o.type === 'youtube') return 'https://youtu.be/' + o.src;
+                if (o.type === 'vimeo') return 'https://vimeo.com/' + o.src;
+                return o.src;
+            }
+
+            function readVideoOpts(wrapper) {
+                const d = wrapper.dataset;
+                return {
+                    type: d.videoType || '',
+                    src: d.videoSrc || '',
+                    ratio: d.videoRatio || '16/9',
+                    controls: d.controls !== 'false',
+                    autoplay: d.autoplay === 'true',
+                    loop: d.loop === 'true',
+                    muted: d.muted === 'true',
+                    poster: d.poster || ''
+                };
+            }
+
+            // Produce the <iframe> / <video> markup for a set of options.
+            function buildVideoMediaHTML(o) {
+                if (!o.src || !o.type) {
+                    return '<div class="doc-video-empty"><span class="dv-play">&#9654;</span>' +
+                           '<span>No video yet</span><small>Click &ldquo;Customize video&rdquo; to add one</small></div>';
+                }
+                if (o.type === 'file') {
+                    const attrs = [
+                        o.controls ? 'controls' : '',
+                        o.autoplay ? 'autoplay' : '',
+                        o.loop ? 'loop' : '',
+                        (o.muted || o.autoplay) ? 'muted' : '',
+                        'playsinline', 'preload="metadata"',
+                        o.poster ? ('poster="' + veEscAttr(o.poster) + '"') : ''
+                    ].filter(Boolean).join(' ');
+                    return '<video ' + attrs + '><source src="' + veEscAttr(o.src) + '"></video>';
+                }
+                let url; const p = [];
+                if (o.type === 'youtube') {
+                    url = 'https://www.youtube-nocookie.com/embed/' + o.src;
+                    if (o.autoplay) p.push('autoplay=1');
+                    if (o.loop) { p.push('loop=1'); p.push('playlist=' + o.src); }
+                    if (o.muted || o.autoplay) p.push('mute=1');
+                    if (!o.controls) p.push('controls=0');
+                    p.push('rel=0');
+                } else if (o.type === 'vimeo') {
+                    url = 'https://player.vimeo.com/video/' + o.src;
+                    if (o.autoplay) p.push('autoplay=1');
+                    if (o.loop) p.push('loop=1');
+                    if (o.muted || o.autoplay) p.push('muted=1');
+                    if (!o.controls) p.push('controls=0');
+                } else {
+                    url = o.src;
+                }
+                const q = p.length ? ((url.indexOf('?') >= 0 ? '&' : '?') + p.join('&')) : '';
+                return '<iframe src="' + veEscAttr(url + q) + '" ' +
+                       'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+                       'allowfullscreen loading="lazy" title="Embedded video"></iframe>';
+            }
+
+            // Render (or re-render) the media inside a .doc-video wrapper from
+            // its data-* options, preserving the admin "Customize" button.
+            function renderVideoMedia(wrapper) {
+                if (!wrapper) return;
+                const o = readVideoOpts(wrapper);
+                wrapper.setAttribute('data-video-ratio', o.ratio);
+                wrapper.querySelectorAll(':scope > iframe, :scope > video, :scope > .doc-video-empty').forEach(n => n.remove());
+                const editBtn = wrapper.querySelector('.doc-video-edit');
+                const tmp = document.createElement('div');
+                tmp.innerHTML = buildVideoMediaHTML(o);
+                while (tmp.firstChild) wrapper.insertBefore(tmp.firstChild, editBtn || null);
+            }
+
+            // Make sure a video wrapper has its admin controls wired.
+            function wireVideoForEdit(wrapper) {
+                if (!wrapper.querySelector('.doc-video-edit')) {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'doc-video-edit';
+                    b.dataset.role = 'video-edit';
+                    b.innerHTML = '&#9654; Customize video';
+                    wrapper.appendChild(b);
+                }
+                renderVideoMedia(wrapper);
+            }
+
+            // ---- Video modal ----
+            let activeVideoWrapper = null;
+            const vidModal   = document.getElementById('video-edit-modal');
+            const vePreview  = document.getElementById('ve-preview');
+            const veUrl      = document.getElementById('ve-url');
+            const veRatioRow = document.getElementById('ve-ratio-row');
+            const veControls = document.getElementById('ve-controls');
+            const veAutoplay = document.getElementById('ve-autoplay');
+            const veLoop     = document.getElementById('ve-loop');
+            const veMuted    = document.getElementById('ve-muted');
+            const vePoster   = document.getElementById('ve-poster');
+            const veCaption  = document.getElementById('ve-caption');
+            let veRatio = '16/9';
+            const CAPTION_PLACEHOLDER = 'Add a caption — click to edit';
+
+            function currentModalOpts() {
+                const parsed = parseVideoSource(veUrl ? veUrl.value : '');
+                return {
+                    type: parsed.type, src: parsed.src, ratio: veRatio,
+                    controls: veControls.checked, autoplay: veAutoplay.checked,
+                    loop: veLoop.checked, muted: veMuted.checked,
+                    poster: vePoster.value.trim()
+                };
+            }
+            function updateVideoPreview() {
+                const o = currentModalOpts();
+                vePreview.setAttribute('data-video-ratio', o.ratio);
+                vePreview.querySelectorAll('iframe, video, .doc-video-empty').forEach(n => n.remove());
+                const tmp = document.createElement('div');
+                // Never autoplay inside the preview
+                tmp.innerHTML = buildVideoMediaHTML(Object.assign({}, o, { autoplay: false }));
+                while (tmp.firstChild) vePreview.appendChild(tmp.firstChild);
+            }
+            function openVideoModal(wrapper) {
+                if (!vidModal) return;
+                activeVideoWrapper = wrapper;
+                const o = readVideoOpts(wrapper);
+                veUrl.value = rawFromVideoOpts(o);
+                veRatio = o.ratio;
+                setActive(veRatioRow, 'ratio', veRatio);
+                veControls.checked = o.controls;
+                veAutoplay.checked = o.autoplay;
+                veLoop.checked = o.loop;
+                veMuted.checked = o.muted;
+                vePoster.value = o.poster;
+                const fig = wrapper.closest('.doc-video-block');
+                const cap = fig && fig.querySelector('.doc-video-caption');
+                const capText = cap ? cap.textContent.trim() : '';
+                veCaption.value = (capText === CAPTION_PLACEHOLDER) ? '' : capText;
+                updateVideoPreview();
+                vidModal.classList.add('open');
+                veUrl.focus();
+            }
+            function closeVideoModal() {
+                if (!vidModal) return;
+                vidModal.classList.remove('open');
+                activeVideoWrapper = null;
+            }
+            function applyVideoModal() {
+                if (!activeVideoWrapper) return;
+                const o = currentModalOpts();
+                if (!o.src) {
+                    showInfo('Paste a video link or file URL first.', { title: 'Missing video link', iconClass: 'warn' });
+                    return;
+                }
+                const w = activeVideoWrapper;
+                w.dataset.videoSrc = o.src;
+                w.dataset.videoType = o.type;
+                w.dataset.videoRatio = o.ratio;
+                w.dataset.controls = String(o.controls);
+                w.dataset.autoplay = String(o.autoplay);
+                w.dataset.loop = String(o.loop);
+                w.dataset.muted = String(o.muted);
+                w.dataset.poster = o.poster;
+                renderVideoMedia(w);
+                const fig = w.closest('.doc-video-block');
+                const cap = fig && fig.querySelector('.doc-video-caption');
+                if (cap) {
+                    const text = veCaption.value.trim();
+                    cap.textContent = text || CAPTION_PLACEHOLDER;
+                }
+                closeVideoModal();
+            }
+
+            veRatioRow && veRatioRow.addEventListener('click', (e) => {
+                const btn = e.target.closest('button[data-ratio]');
+                if (!btn) return;
+                veRatio = btn.dataset.ratio;
+                setActive(veRatioRow, 'ratio', veRatio);
+                updateVideoPreview();
+            });
+            [veUrl, vePoster].forEach(el => el && el.addEventListener('input', updateVideoPreview));
+            [veControls, veAutoplay, veLoop, veMuted].forEach(el => el && el.addEventListener('change', updateVideoPreview));
+            document.getElementById('ve-cancel')?.addEventListener('click', closeVideoModal);
+            document.getElementById('ve-apply')?.addEventListener('click', applyVideoModal);
+            vidModal && vidModal.addEventListener('click', (e) => { if (e.target === vidModal) closeVideoModal(); });
+
+            // Delegated: click anywhere on a video frame (edit mode) to customise.
+            document.addEventListener('click', (e) => {
+                if (!editModeActive) return;
+                if (e.target.closest('#video-edit-modal')) return;
+                const wrapper = e.target.closest('.doc-video');
+                if (!wrapper) return;
+                e.preventDefault();
+                e.stopPropagation();
+                openVideoModal(wrapper);
+            });
+
+
+            // =========================================================
             // LIVE RESIZE — resize directly on the page, Windows style
             // Click an image (or a grid tile) in edit mode and a frame
             // with 8 grab handles snaps around it. Drag any edge or
@@ -6306,6 +6699,13 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                     <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 5"></div>
                     <div class="masonry-item"><img src="${PLACEHOLDER_IMG}" alt="Image 6"></div>
                 </div>`,
+                'video':       () => `<figure class="doc-video-block">
+                    <div class="doc-video" data-video-src="" data-video-type="" data-video-ratio="16/9" data-controls="true" data-autoplay="false" data-loop="false" data-muted="false" data-poster="">
+                        <div class="doc-video-empty"><span class="dv-play">&#9654;</span><span>No video yet</span><small>Click &ldquo;Customize video&rdquo; to add one</small></div>
+                        <button type="button" class="doc-video-edit" data-role="video-edit">&#9654; Customize video</button>
+                    </div>
+                    <figcaption class="doc-video-caption">Add a caption — click to edit</figcaption>
+                </figure>`,
                 'divider':     () => `<hr class="border-orange-200">`,
                 'tabs':        () => `<div class="doc-sidetabs" data-tab-block>
                     <div class="doc-sidetabs-inner">
@@ -6420,6 +6820,8 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 block.querySelectorAll('.doc-tab-panel').forEach(panel => {
                     if (editModeActive) panel.setAttribute('contenteditable', 'true');
                 });
+                // Video blocks: ensure the "Customize video" control + media
+                block.querySelectorAll('.doc-video').forEach(wireVideoForEdit);
                 // Custom layout grids: make sure the "+ Add tile" button exists
                 block.querySelectorAll('.lay-grid').forEach(grid => {
                     if (!grid.querySelector('[data-role="lay-add"]')) {
