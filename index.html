@@ -66,7 +66,7 @@
         /* ============================================
            DUAL-THEME PALETTE
            Telegraph (2025) = indigo #4f46e5
-           Iron & Incense (2026) = bronze/amber #b45309
+           Drugyel (2026) = bronze/amber #b45309
            Bridge = gradient of the two
            ============================================ */
         :root {
@@ -78,7 +78,7 @@
             --ii-cream: #fef3e2;
         }
 
-        /* Iron & Incense accent utility classes */
+        /* Drugyel accent utility classes */
         .iron-text { color: #b45309; }
         .iron-text-dark { color: #78350f; }
         .iron-bg { background-color: #b45309; }
@@ -815,33 +815,280 @@
         body.edit-mode .idoc-add-section-btn { display: flex; }
         .idoc-add-section-btn:hover { background: rgba(180,83,9,0.18); }
 
-        /* Section delete/rename controls on custom sections' nav links */
-        .idoc-nav-link {
-            position: relative;
+        /* ============================================
+           SIDEBAR SECTION CONTROLS (rename / reorder / delete)
+           The controls are SIBLINGS of the <a>, never children:
+           a <button> inside an <a> is invalid HTML and makes
+           clicks land unpredictably.
+           ============================================ */
+        .idoc-nav-item { position: relative; }
+        .idoc-nav-link { position: relative; min-width: 0; }
+        .idoc-nav-link .idoc-nav-label {
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-radius: 4px;
+            padding: 1px 3px;
+            margin: -1px -3px;
         }
-        .idoc-nav-link .idoc-section-delete {
+        /* While renaming, the label becomes a live text field */
+        .idoc-nav-link .idoc-nav-label[contenteditable="true"] {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            outline: 2px solid #b45309;
+            background: #fff;
+            cursor: text;
+            box-shadow: 0 2px 10px rgba(180,83,9,0.22);
+        }
+        .idoc-sec-ctrls {
             display: none;
             position: absolute;
-            right: 6px;
+            right: 4px;
             top: 50%;
             transform: translateY(-50%);
+            gap: 2px;
+            z-index: 3;
+            background: rgba(255,255,255,0.94);
+            border-radius: 8px;
+            padding: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        body.edit-mode .idoc-nav-item .idoc-sec-ctrls { display: flex; }
+        .idoc-sec-btn {
             width: 22px; height: 22px;
-            border-radius: 9999px;
-            background: rgba(220,38,38,0.15);
-            color: #b91c1c;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-        }
-        body.edit-mode .idoc-nav-link[data-custom-section="true"] .idoc-section-delete {
+            border-radius: 6px;
             display: inline-flex;
+            align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            line-height: 1;
+            color: #78350f;
+            background: #fef3e2;
+            transition: background 0.15s, color 0.15s, opacity 0.15s;
         }
-        .idoc-nav-link .idoc-section-delete:hover {
-            background: rgba(220,38,38,0.35);
-            color: white;
+        .idoc-sec-btn:hover { background: #b45309; color: #fff; }
+        .idoc-sec-btn.danger { color: #b91c1c; background: rgba(220,38,38,0.12); }
+        .idoc-sec-btn.danger:hover { background: #b91c1c; color: #fff; }
+        .idoc-sec-btn[disabled] { opacity: 0.3; pointer-events: none; }
+        /* Built-in sections can be renamed and moved, but not deleted */
+        .idoc-nav-item:not([data-custom-section="true"]) .idoc-sec-btn.danger { display: none; }
+        /* Give the label room so the controls never sit on top of the text */
+        body.edit-mode .idoc-nav-link { padding-right: 96px; }
+        @media (pointer: coarse) {
+            .idoc-sec-btn { width: 30px; height: 30px; font-size: 0.9rem; }
+            body.edit-mode .idoc-nav-link { padding-right: 130px; }
         }
+        /* Flash a section that just moved, so the jump is legible */
+        @keyframes idocMoved {
+            0%   { background: rgba(180,83,9,0.28); }
+            100% { background: transparent; }
+        }
+        .idoc-nav-item.just-moved > .idoc-nav-link { animation: idocMoved 0.6s ease-out; }
         /* Hide "This section is empty" placeholder once a block is added */
         .idoc-section:has([data-editable="block"]) .idoc-empty-placeholder { display: none; }
+
+        /* ============================================
+           BLUEPRINT DOCS — search, mobile nav, footer nav
+           ============================================ */
+        .idoc-search-wrap { position: relative; margin-bottom: 0.75rem; }
+        .idoc-search {
+            width: 100%;
+            padding: 9px 30px 9px 32px;
+            font-size: 0.85rem;
+            border: 1px solid #e7e0d5;
+            border-radius: 10px;
+            background: #fffdf9;
+            color: #44403c;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .idoc-search::placeholder { color: #a8a29e; }
+        .idoc-search:focus {
+            outline: none;
+            border-color: #b45309;
+            box-shadow: 0 0 0 3px rgba(180,83,9,0.13);
+        }
+        .idoc-search-icon {
+            position: absolute; left: 10px; top: 50%;
+            transform: translateY(-50%);
+            width: 15px; height: 15px;
+            color: #a8a29e; pointer-events: none;
+        }
+        .idoc-search-clear {
+            position: absolute; right: 7px; top: 50%;
+            transform: translateY(-50%);
+            width: 19px; height: 19px;
+            border-radius: 9999px;
+            display: none;
+            align-items: center; justify-content: center;
+            font-size: 0.8rem; line-height: 1;
+            color: #78716c; background: #f0ebe3;
+        }
+        .idoc-search-clear:hover { background: #b45309; color: #fff; }
+        .idoc-search-wrap.has-query .idoc-search-clear { display: inline-flex; }
+        .idoc-search-count {
+            font-size: 0.7rem;
+            color: #78350f;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 2px 2px 6px;
+            display: none;
+        }
+        .idoc-search-wrap.has-query + .idoc-search-count { display: block; }
+        /* A sidebar entry filtered out by the search */
+        .idoc-nav-item.search-hidden { display: none; }
+        /* Matched run of text inside a section */
+        .idoc-hit {
+            background: #fde68a;
+            border-radius: 3px;
+            box-shadow: 0 0 0 2px #fde68a;
+        }
+        .idoc-hit.current { background: #fbbf24; box-shadow: 0 0 0 2px #fbbf24; }
+        .idoc-no-results {
+            display: none;
+            font-size: 0.8rem;
+            color: #78716c;
+            padding: 10px 12px;
+            background: #faf7f2;
+            border: 1px dashed #ddd5c8;
+            border-radius: 9px;
+            line-height: 1.5;
+        }
+        .idoc-no-results.visible { display: block; }
+
+        /* ---- Mobile section nav: horizontal pills ---- */
+        .idoc-mobile-nav {
+            display: none;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 2px 10px;
+            margin-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .idoc-mobile-nav::-webkit-scrollbar { display: none; }
+        .idoc-mobile-pill {
+            flex: 0 0 auto;
+            padding: 8px 15px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            background: #fff;
+            color: #57534e;
+            border: 1px solid #e7e0d5;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        .idoc-mobile-pill.active {
+            background: #b45309; color: #fff; border-color: #b45309;
+            box-shadow: 0 3px 10px rgba(180,83,9,0.3);
+        }
+        @media (max-width: 767px) {
+            .idoc-mobile-nav { display: flex; }
+            /* On phones the vertical list is redundant; keep the search + tools */
+            #iron-doc aside nav > ul { display: none; }
+            body.edit-mode #iron-doc aside nav > ul { display: block; }
+        }
+
+        /* ---- Prev / next section footer ---- */
+        .idoc-pager {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 12px;
+            margin-top: 2rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid #f0ebe3;
+        }
+        .idoc-pager a {
+            flex: 1 1 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 12px 16px;
+            border-radius: 11px;
+            border: 1px solid #e7e0d5;
+            background: #fffdf9;
+            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+        }
+        .idoc-pager a:hover {
+            border-color: #b45309;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(180,83,9,0.13);
+        }
+        .idoc-pager a.next { text-align: right; align-items: flex-end; }
+        .idoc-pager .dir {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: #b45309;
+        }
+        .idoc-pager .name {
+            font-weight: 700; color: #44403c;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            max-width: 100%;
+        }
+        .idoc-pager .spacer { flex: 1 1 0; }
+
+        /* ---- Richer empty state ---- */
+        .idoc-empty-placeholder {
+            display: block;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border: 2px dashed #e7e0d5;
+            border-radius: 14px;
+            background: #fffdf9;
+            color: #78716c;
+            font-style: normal;
+            line-height: 1.6;
+        }
+        .idoc-empty-placeholder strong { color: #b45309; }
+
+        /* ---- Reading position bar ---- */
+        .idoc-progress {
+            position: sticky;
+            top: 0;
+            height: 3px;
+            border-radius: 3px;
+            background: #f0ebe3;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            z-index: 5;
+        }
+        .idoc-progress > span {
+            display: block; height: 100%; width: 0%;
+            background: linear-gradient(90deg, #d97706, #b45309);
+            transition: width 0.1s linear;
+        }
+
+        /* ============================================
+           CONCEPT GALLERY TILES
+           No caption overlay — the art speaks for itself.
+           ============================================ */
+        .concept-tile {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            aspect-ratio: 4 / 3;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.16);
+            background: #1c1917;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+        }
+        .concept-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 44px rgba(0,0,0,0.26);
+        }
+        .concept-tile img {
+            transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+        }
+        .concept-tile:hover img { transform: scale(1.05); }
+        @media (prefers-reduced-motion: reduce) {
+            .concept-tile, .concept-tile img { transition: none; }
+            .concept-tile:hover { transform: none; }
+            .concept-tile:hover img { transform: none; }
+        }
 
         /* ============================================
            BENTO GRID (asymmetric hero + small tiles)
@@ -1378,6 +1625,93 @@
             filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
         }
         .morph-headline svg path { fill: #fff; }
+
+        /* ============================================
+           DRUGYEL — epic 2026 title treatment
+           Forged-gold lettering with a warm glow, wide
+           tracking and flanking rules. Applies to both
+           render paths: the morphed SVG and the plain
+           text fallback.
+           ============================================ */
+        body.iron-mode .morph-headline svg {
+            max-width: min(92vw, 780px);
+            filter:
+                drop-shadow(0 0 22px rgba(245,158,11,0.55))
+                drop-shadow(0 4px 16px rgba(0,0,0,0.65));
+        }
+        body.iron-mode .morph-headline svg path {
+            fill: #fbeccb;
+        }
+        .hero-title-ii {
+            display: block;
+            font-size: clamp(2.9rem, 12.2vw, 8.5rem);
+            line-height: 0.95;
+            letter-spacing: 0.14em;
+            text-indent: 0.14em;          /* balance the trailing track */
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(177deg, #fffaf0 4%, #fbdd9a 32%, #d99323 62%, #fdf0d0 92%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            filter: drop-shadow(0 0 26px rgba(245,158,11,0.5)) drop-shadow(0 5px 14px rgba(0,0,0,0.6));
+        }
+        /* Flanking rules with a centre diamond */
+        .hero-eyebrow-ii {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 0 auto 0.65rem;
+            max-width: 420px;
+        }
+        .hero-eyebrow-ii::before,
+        .hero-eyebrow-ii::after {
+            content: "";
+            flex: 1 1 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(251,221,154,0.85));
+        }
+        .hero-eyebrow-ii::after { transform: scaleX(-1); }
+        .hero-eyebrow-ii span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: #fbdd9a;
+            white-space: nowrap;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        }
+        /* Epithet beneath the wordmark */
+        .hero-epithet-ii {
+            display: block;
+            margin-top: 0.85rem;
+            font-size: clamp(0.78rem, 2.1vw, 1.02rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: rgba(253,240,208,0.92);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+        }
+        .hero-epithet-ii .sep { color: #f59e0b; margin: 0 0.5em; }
+        @media (max-width: 640px) {
+            .hero-title-ii { letter-spacing: 0.07em; text-indent: 0.07em; }
+            .hero-epithet-ii { letter-spacing: 0.16em; }
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            body.iron-mode .hero-title-ii { animation: drugyelIgnite 1.5s cubic-bezier(0.16,1,0.3,1) both; }
+            body.iron-mode .hero-epithet-ii { animation: drugyelFade 1.3s 0.45s ease-out both; }
+            body.iron-mode .hero-eyebrow-ii { animation: drugyelFade 1.1s 0.2s ease-out both; }
+        }
+        @keyframes drugyelIgnite {
+            0%   { opacity: 0; letter-spacing: 0.5em; filter: blur(14px) drop-shadow(0 0 0 rgba(245,158,11,0)); }
+            100% { opacity: 1; letter-spacing: 0.14em; filter: blur(0) drop-shadow(0 0 26px rgba(245,158,11,0.5)) drop-shadow(0 5px 14px rgba(0,0,0,0.6)); }
+        }
+        @keyframes drugyelFade {
+            0%   { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
         .morph-headline.ready .morph-fallback { display: none !important; }
         /* Hide the "wrong" fallback until the SVG takes over */
         .morph-headline:not(.ready) .morph-fallback { display: block; }
@@ -1466,7 +1800,7 @@
                 <!-- Project year switcher chip -->
                 <div id="project-switch" class="project-switch hidden md:inline-flex" title="Switch between our Tech Trek projects">
                     <button id="ps-tg" class="active-tg" data-project="telegraph">2025 · Telegraph</button>
-                    <button id="ps-ii" data-project="iron">2026 · Iron &amp; Incense</button>
+                    <button id="ps-ii" data-project="iron">2026 · Drugyel</button>
                 </div>
             </div>
 
@@ -1487,7 +1821,7 @@
                         <a href="#contact" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Contact</a>
                         <a href="#telegraph" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50">Live Telegraph</a>
 
-                        <div class="px-4 py-2 text-xs font-bold uppercase tracking-wider border-b border-t border-gray-100 iron-text mt-1">2026 · Iron &amp; Incense</div>
+                        <div class="px-4 py-2 text-xs font-bold uppercase tracking-wider border-b border-t border-gray-100 iron-text mt-1">2026 · Drugyel</div>
                         <a href="#iron-home" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50">Project Overview</a>
                         <a href="#iron-doc" class="nav-link block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50">Blueprint / Documentation</a>
                     </div>
@@ -1513,7 +1847,7 @@
             <div class="flex justify-center my-3">
                 <div class="project-switch">
                     <button class="active-tg" data-project="telegraph">2025 · Telegraph</button>
-                    <button data-project="iron">2026 · Iron &amp; Incense</button>
+                    <button data-project="iron">2026 · Drugyel</button>
                 </div>
             </div>
             <a href="#home" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Home</a>
@@ -1524,7 +1858,7 @@
             <a href="#roadmap" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Roadmap</a>
             <a href="#contact" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Contact</a>
             <a href="#telegraph" class="nav-link block py-2 text-gray-600 hover:text-indigo-600">Live Telegraph</a>
-            <p class="pt-3 text-xs font-bold uppercase iron-text">2026 · Iron &amp; Incense</p>
+            <p class="pt-3 text-xs font-bold uppercase iron-text">2026 · Drugyel</p>
             <a href="#iron-home" class="nav-link block py-2 text-gray-600 hover:iron-text">Project Overview</a>
             <a href="#iron-doc" class="nav-link block py-2 text-gray-600 hover:iron-text">Blueprint / Documentation</a>
             <div class="border-t border-gray-200 mt-4 pt-4">
@@ -1546,7 +1880,7 @@
         <!-- ==============================================
              PAGE: HOME (Merged half / half hero)
              Left  = 2025 Telegraph
-             Right = 2026 Iron & Incense
+             Right = 2026 Drugyel
              ============================================== -->
         <div id="home" class="page">
 
@@ -1577,19 +1911,22 @@
                     <!-- Ornament label (still fades between modes) -->
                     <div>
                         <span class="dzong-ornament mb-5 mode-tg">Tech Trek · 2025</span>
-                        <span class="dzong-ornament mb-5 mode-ii">Tech Trek · 2026</span>
+                        <div class="hero-eyebrow-ii mode-ii"><span>Tech Trek · 2026</span></div>
                     </div>
 
                     <!-- MORPHING HEADLINE — each glyph liquid-morphs into the next.
                          Falls back to plain text if opentype.js/flubber can't load. -->
                     <h1 class="morph-headline text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg text-white"
                         data-morph-tg="Bringing Glory To Olden Days"
-                        data-morph-ii="Iron &amp; Incense"
+                        data-morph-ii="Drugyel"
                         data-morph-font-tg="inter"
                         data-morph-font-ii="cinzel">
                         <span class="morph-fallback mode-tg">Bringing Glory To Olden Days</span>
-                        <span class="morph-fallback mode-ii cinzel">Iron &amp; Incense</span>
+                        <span class="morph-fallback mode-ii cinzel hero-title-ii">Drugyel</span>
                     </h1>
+                    <div class="mode-ii">
+                        <span class="hero-epithet-ii cinzel">Paro <span class="sep">&#9670;</span> 1649 <span class="sep">&#9670;</span> The Victorious Druk</span>
+                    </div>
 
                     <!-- Subtitle + CTAs still fade between modes -->
                     <div class="theme-view mode-tg">
@@ -1600,7 +1937,7 @@
                         </div>
                     </div>
                     <div class="theme-view mode-ii">
-                        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-orange-50 drop-shadow-md">A top-down action-roguelike set in 17th-century Bhutan. Dzongs, matchlocks, monks, and Jesuit journals — history you can play.</p>
+                        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-orange-50 drop-shadow-md">A First-Person Action game set in 17th-Century Bhutan. Dzongs, matchlocks, Tibetans and mountains — History you can play.</p>
                         <div class="flex flex-wrap gap-3 justify-center">
                             <a href="#iron-home" class="nav-link bg-orange-600 hover:bg-orange-500 text-white px-7 py-3 rounded-full font-semibold shadow-xl transition transform hover:scale-105">Enter the Valley</a>
                             <a href="#iron-doc" class="nav-link bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/40 text-white px-7 py-3 rounded-full font-semibold transition">Read the Blueprint</a>
@@ -1623,7 +1960,7 @@
                             <img class="mode-ii rounded-lg shadow-2xl w-full h-auto"
                                  src="https://i.postimg.cc/wTywgch3/two-eras.jpg"
                                  loading="lazy"
-                                 alt="17th-century Bhutanese scene — the two-eras concept for Iron &amp; Incense">
+                                 alt="17th-century Bhutanese scene — the two-eras concept for Drugyel">
                         </div>
                         <div class="fade-in">
                             <!-- 2025 copy -->
@@ -1635,7 +1972,7 @@
                             <!-- 2026 copy -->
                             <div class="theme-view mode-ii">
                                 <h2 class="text-3xl md:text-4xl font-bold mb-4 iron-text-dark cinzel">Welcome to Our 2026 Project</h2>
-                                <p class="text-gray-600 mb-4 leading-relaxed">For this year's Tech Trek, we're bringing 17th-century Bhutan to life as a fast-paced action-roguelike. Play as Rigpa and the Sky Priests, escaping Paro Valley, fighting through regional blockades, and defending historical Dzongs — the same buildings you can visit today.</p>
+                                <p class="text-gray-600 mb-4 leading-relaxed">For this year's Tech Trek, we're bringing 17th-century Bhutan to life as a first-person action game. Play as Rigpa and the Sky Priests, holding the mountain passes against Tibetan incursions and defending historical Dzongs — the same buildings you can visit today.</p>
                                 <p class="text-gray-600 mb-6 leading-relaxed">Same mission as last year: take something old, understand it deeply, and rebuild it so people can experience it. This time the medium is a game, and the "invention" is a slice of our country's own history.</p>
                             </div>
                         </div>
@@ -1714,7 +2051,7 @@
                 </div>
             </section>
 
-            <!-- GALLERY — Iron & Incense only (2026) -->
+            <!-- GALLERY — Drugyel only (2026) -->
             <section class="py-20 bg-white theme-section mode-ii">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12 fade-in">
@@ -1722,26 +2059,23 @@
                         <p class="text-gray-600 mt-4">17th-century Bhutan, as we're imagining it.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
-                        <div class="relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]">
-                            <img src="https://i.postimg.cc/wq58dH9r/hero-forge.jpg" alt="Sky Priest lighting incense" class="w-full h-full object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                <p class="text-white font-semibold">The Sky Priest</p>
-                                <p class="text-orange-100 text-sm">Class concept · tactical support</p>
-                            </div>
+                        <div class="concept-tile">
+                            <img src="https://i.postimg.cc/nzDqpByq/Reference-used-for-Tibetan-Cavalryman.png"
+                                 alt="Concept reference for a Tibetan cavalryman"
+                                 loading="lazy" decoding="async"
+                                 class="w-full h-full object-cover">
                         </div>
-                        <div class="relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]">
-                            <img src="https://images.unsplash.com/photo-1608236475087-615bfbcdf772?w=1200&auto=format&fit=crop&q=80" alt="Bhutanese Dzong" class="w-full h-full object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                <p class="text-white font-semibold">Semtokha Dzong</p>
-                                <p class="text-orange-100 text-sm">Final siege location</p>
-                            </div>
+                        <div class="concept-tile">
+                            <img src="https://i.postimg.cc/DzyK9cbS/Screenshot-2026-09-19-at-11-01-22-PM.png"
+                                 alt="In-engine concept view of the Drugyel world"
+                                 loading="lazy" decoding="async"
+                                 class="w-full h-full object-cover">
                         </div>
-                        <div class="relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]">
-                            <img src="https://images.unsplash.com/photo-1729176989417-10cab5aa9076?w=1200&auto=format&fit=crop&q=80" alt="Mountain fortress" class="w-full h-full object-cover">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                <p class="text-white font-semibold">Forest Ridge</p>
-                                <p class="text-orange-100 text-sm">Procedural biome</p>
-                            </div>
+                        <div class="concept-tile">
+                            <img src="https://i.postimg.cc/8zGGHGkS/Screenshot-2026-09-19-at-10-00-14-PM.png"
+                                 alt="In-engine concept view of a Bhutanese mountain pass"
+                                 loading="lazy" decoding="async"
+                                 class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -1761,7 +2095,7 @@
                             <!-- 2026 bridge -->
                             <div class="theme-view mode-ii">
                                 <h2 class="text-3xl md:text-4xl font-bold cinzel">A Country's History, Made Playable</h2>
-                                <p class="mt-6 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">Iron &amp; Incense is our attempt to take a real chapter of Bhutan's 17th century — the unification, the Dzongs, the arrival of Jesuit priests — and let people actually <em>live inside it</em> for a while.</p>
+                                <p class="mt-6 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">Drugyel is our attempt to take a real chapter of Bhutan's 17th century — the unification, the Dzongs, the arrival of Jesuit priests — and let people actually <em>live inside it</em> for a while.</p>
                                 <p class="mt-4 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">Every run teaches something: architecture, weapons, language. It's still the same mission as our telegraph — reinvent the old so people can meet it today.</p>
                             </div>
                             <div class="mt-8">
@@ -1874,9 +2208,9 @@
                             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">The four minds behind the 2025 Smart Telegraph project.</p>
                         </div>
                         <div class="theme-view mode-ii">
-                            <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">2026 · Iron &amp; Incense Team</span>
+                            <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">2026 · The Drugyel Team</span>
                             <h2 class="text-4xl md:text-5xl font-bold iron-text-dark cinzel">Meet the Team</h2>
-                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">A smaller crew this year — two returning members and one new face — building Iron &amp; Incense together.</p>
+                            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">A smaller crew this year — two returning members and one new face — building Drugyel together.</p>
                         </div>
                     </div>
 
@@ -1916,7 +2250,7 @@
                                  class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100" data-editable="image" data-edit-id="team-2026-ugyen">
                             <h3 class="text-xl font-bold iron-text-dark cinzel">Ugyen Rigpa Yeshey</h3>
                             <p class="iron-text font-semibold mb-2">Team Lead &amp; Game Design</p>
-                            <p class="text-gray-600">Returning from the 2025 team. Leading the crew again and driving the core game design for Iron &amp; Incense.</p>
+                            <p class="text-gray-600">Returning from the 2025 team. Leading the crew again and driving the core game design for Drugyel.</p>
                             <span class="inline-block mt-3 text-xs font-semibold uppercase tracking-widest bg-orange-50 iron-text px-2 py-1 rounded-full">Returning</span>
                         </div>
                         <div class="text-center fade-in">
@@ -1925,7 +2259,7 @@
                                  class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 ring-4 ring-orange-100" data-editable="image" data-edit-id="team-2026-tenzing">
                             <h3 class="text-xl font-bold iron-text-dark cinzel">Tenzing Jangsel Dorjee</h3>
                             <p class="iron-text font-semibold mb-2">Website &amp; Programming</p>
-                            <p class="text-gray-600">Returning from the 2025 team. Handling the site again and moving into pygame-ce work for the roguelike engine.</p>
+                            <p class="text-gray-600">Returning from the 2025 team. Handling the site again and moving into engine work for the first-person build.</p>
                             <span class="inline-block mt-3 text-xs font-semibold uppercase tracking-widest bg-orange-50 iron-text px-2 py-1 rounded-full">Returning</span>
                         </div>
                         <div class="text-center fade-in">
@@ -2589,9 +2923,9 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             <section class="relative py-20 overflow-hidden" style="background: linear-gradient(180deg, #fef3e2 0%, #fff 100%);">
                 <div class="container mx-auto px-6 fade-in">
                     <div class="max-w-4xl mx-auto text-center">
-                        <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Tech Trek 2026 · Roguelike Redesign</span>
-                        <h1 class="text-4xl md:text-6xl font-extrabold iron-text-dark cinzel mb-4">Iron &amp; Incense</h1>
-                        <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">A fast-paced, top-down 2D action-roguelike, heavily inspired by <em>Soul Knight</em>, while keeping an authentic 17th-century Bhutanese historical and educational core.</p>
+                        <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Tech Trek 2026 · First-Person Action</span>
+                        <h1 class="text-4xl md:text-6xl font-extrabold iron-text-dark cinzel mb-4">Drugyel</h1>
+                        <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">A first-person action game set in 17th-century Bhutan — matchlocks, mountain passes and Dzongs — built on an authentic historical and educational core.</p>
                         <div class="flex flex-wrap gap-3 justify-center mt-8">
                             <a href="#iron-doc" class="nav-link iron-btn px-6 py-3 rounded-full font-semibold shadow-md">Read the Blueprint</a>
                             <a href="#home" class="nav-link iron-btn-outline px-6 py-3 rounded-full font-semibold">Back to Home</a>
@@ -2661,8 +2995,8 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             <section class="py-16">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12 fade-in">
-                        <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">Blueprint · Roguelike Redesign</span>
-                        <h2 class="text-4xl md:text-5xl font-bold iron-text-dark cinzel">Iron &amp; Incense Documentation</h2>
+                        <span class="iron-chip inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">Blueprint · First-Person Action</span>
+                        <h2 class="text-4xl md:text-5xl font-bold iron-text-dark cinzel">Drugyel Documentation</h2>
                         <p class="text-gray-600 mt-3 max-w-3xl mx-auto">The full design blueprint for our 2026 Tech Trek project. Switch back to the 2025 Telegraph docs any time via the header.</p>
                     </div>
 
@@ -2670,9 +3004,16 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         <!-- Sidebar -->
                         <aside class="md:w-1/4 lg:w-1/5 fade-in">
                             <nav class="sticky top-28">
+                                <div class="idoc-search-wrap" id="idoc-search-wrap">
+                                    <svg class="idoc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+                                    <input type="search" id="idoc-search" class="idoc-search" placeholder="Search the blueprint…" autocomplete="off" aria-label="Search the blueprint">
+                                    <button type="button" class="idoc-search-clear" id="idoc-search-clear" title="Clear search" aria-label="Clear search">&times;</button>
+                                </div>
+                                <p class="idoc-search-count" id="idoc-search-count"></p>
                                 <ul class="space-y-2">
-                                    <li><a href="#idoc-team" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 iron-text-dark bg-orange-50 font-bold"><i data-feather="users" class="w-5 h-5"></i><span>Team &amp; Status</span></a></li>
+                                    <li class="idoc-nav-item"><a href="#idoc-team" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 iron-text-dark bg-orange-50 font-bold"><i data-feather="users" class="w-5 h-5"></i><span class="idoc-nav-label">Team &amp; Status</span></a></li>
                                 </ul>
+                                <p class="idoc-no-results" id="idoc-no-results">No section matches that search. Try a shorter word, or clear the box to see everything.</p>
                                 <button id="iron-add-section-btn" class="idoc-add-section-btn" type="button">
                                     <i data-feather="plus-circle" class="w-4 h-4"></i>
                                     <span>Add Section</span>
@@ -2688,10 +3029,16 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         <!-- Content -->
                         <div class="md:w-3/4 lg:w-4/5 min-w-0 space-y-8">
 
+                            <!-- Phone-friendly section switcher (built from the sidebar) -->
+                            <div class="idoc-mobile-nav" id="idoc-mobile-nav" role="tablist" aria-label="Blueprint sections"></div>
+
+                            <!-- Reading position within the open section -->
+                            <div class="idoc-progress" aria-hidden="true"><span id="idoc-progress-bar"></span></div>
+
                             <!-- TEAM & STATUS -->
                             <div id="idoc-team" class="idoc-section bg-white p-8 rounded-lg shadow-lg fade-in">
-                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="users" class="w-6 h-6 mr-3 iron-text"></i>Team &amp; Current Status</h3>
-                                <p class="text-gray-700 mb-6">Same crew as 2025 — Jigme, Tandin, Ugyen, and Tenzing. The blueprint on this page is the working design; expect updates as we prototype in pygame-ce.</p>
+                                <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel"><i data-feather="users" class="w-6 h-6 mr-3 iron-text"></i><span class="idoc-section-title">Team &amp; Current Status</span></h3>
+                                <p class="text-gray-700 mb-6">A three-person crew this year — Ugyen and Tenzing returning from 2025, with Zdrimet joining on art and concept. The blueprint on this page is the working design, and it changes as the prototype does.</p>
                                 <div class="grid md:grid-cols-2 gap-4">
                                     <div class="p-4 iron-bg-cream rounded-lg">
                                         <p class="text-xs font-bold uppercase iron-text tracking-widest mb-1">Phase</p>
@@ -2699,7 +3046,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                                     </div>
                                     <div class="p-4 iron-bg-cream rounded-lg">
                                         <p class="text-xs font-bold uppercase iron-text tracking-widest mb-1">Next milestone</p>
-                                        <p class="text-lg font-bold iron-text-dark">Auto-aim &amp; BSP prototype</p>
+                                        <p class="text-lg font-bold iron-text-dark">First-person movement prototype</p>
                                     </div>
                                 </div>
                                 <div class="mt-6 text-center">
@@ -3432,7 +3779,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             // =========================================================
             // AUTO-LIGHTBOX
             // Wraps every image inside the documentation sections
-            // (both 2025 Telegraph and 2026 Iron & Incense) with a
+            // (both 2025 Telegraph and 2026 Drugyel) with a
             // lightbox anchor so clicking any image expands it —
             // matching the behaviour of the original site without
             // needing to hand-wrap each <img>.
@@ -3595,7 +3942,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 overlay.style.setProperty('--tr', r + 'px');
                 overlay.innerHTML = `
                     <div class="tt-year">${target === 'iron' ? '2026' : '2025'}</div>
-                    <div class="tt-label">${target === 'iron' ? 'Iron &amp; Incense' : 'Lumini · Telegraph'}</div>
+                    <div class="tt-label">${target === 'iron' ? 'Drugyel' : 'Lumini · Telegraph'}</div>
                 `;
                 document.body.appendChild(overlay);
 
@@ -3763,7 +4110,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 });
             });
 
-            // --- Iron & Incense Documentation Tabs ---
+            // --- Drugyel Documentation Tabs ---
             // We RE-QUERY on every call so newly-added custom sections
             // (added via "+ Add Section") get picked up automatically.
             // Whichever sidebar entry sits first — so deleting or adding
@@ -3773,7 +4120,25 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 const href = first && first.getAttribute('href');
                 return (href && href.startsWith('#')) ? href.substring(1) : 'idoc-team';
             }
-            function showIDocSection(sectionId) {
+            function showIDocSection(sectionId, opts) {
+                opts = opts || {};
+                // Navigating by hand ends a search; navigating BECAUSE of a
+                // search must keep its highlights.
+                if (!opts.keepSearch && typeof clearDocHighlights === 'function') {
+                    const box = document.getElementById('idoc-search');
+                    if (box && box.value) {
+                        box.value = '';
+                        const wrap = document.getElementById('idoc-search-wrap');
+                        if (wrap) wrap.classList.remove('has-query');
+                        const cnt = document.getElementById('idoc-search-count');
+                        if (cnt) cnt.textContent = '';
+                        const nr = document.getElementById('idoc-no-results');
+                        if (nr) nr.classList.remove('visible');
+                        document.querySelectorAll('#iron-doc aside nav ul > li')
+                            .forEach(li => li.classList.remove('search-hidden'));
+                    }
+                    clearDocHighlights();
+                }
                 document.querySelectorAll('.idoc-section').forEach(s => s.classList.add('hidden'));
                 const target = document.getElementById(sectionId);
                 if (target) {
@@ -3794,15 +4159,273 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         link.classList.remove('text-gray-600', 'hover:bg-orange-50');
                     }
                 });
+                if (typeof refreshDocChrome === 'function') refreshDocChrome();
                 if (typeof feather !== 'undefined') feather.replace();
             }
+
+            // =========================================================
+            // BLUEPRINT DOCS ENHANCEMENTS
+            // Search across every section, a phone-friendly section
+            // switcher, prev/next footers and a reading-position bar.
+            // All of it derives from the sidebar, so admin-added and
+            // renamed sections are picked up with no extra wiring.
+            // =========================================================
+
+            function idocSections() {
+                return Array.from(document.querySelectorAll('#iron-doc aside nav ul > li'))
+                    .map(li => {
+                        const id = navItemSectionId(li);
+                        const labelEl = li.querySelector('.idoc-nav-label');
+                        return {
+                            id,
+                            li,
+                            label: labelEl ? labelEl.textContent.trim() : (id || ''),
+                            section: id ? document.getElementById(id) : null
+                        };
+                    })
+                    .filter(x => x.id && x.section);
+            }
+
+            // ---------- phone pill switcher ----------
+            function rebuildMobileNav() {
+                const wrap = document.getElementById('idoc-mobile-nav');
+                if (!wrap) return;
+                const open = document.querySelector('.idoc-section:not(.hidden)');
+                const openId = open && open.id;
+                wrap.innerHTML = '';
+                idocSections().forEach(sec => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'idoc-mobile-pill' + (sec.id === openId ? ' active' : '');
+                    b.textContent = sec.label;
+                    b.dataset.target = sec.id;
+                    b.setAttribute('role', 'tab');
+                    b.setAttribute('aria-selected', sec.id === openId ? 'true' : 'false');
+                    wrap.appendChild(b);
+                });
+                const active = wrap.querySelector('.idoc-mobile-pill.active');
+                if (active && active.scrollIntoView) {
+                    active.scrollIntoView({ block: 'nearest', inline: 'center' });
+                }
+            }
+            document.addEventListener('click', (e) => {
+                const pill = e.target.closest('.idoc-mobile-pill');
+                if (!pill) return;
+                e.preventDefault();
+                showIDocSection(pill.dataset.target);
+            });
+
+            // ---------- prev / next ----------
+            function rebuildPager() {
+                const list = idocSections();
+                const open = document.querySelector('.idoc-section:not(.hidden)');
+                if (!open) return;
+                const i = list.findIndex(x => x.id === open.id);
+                if (i === -1) return;
+
+                open.querySelectorAll('.idoc-pager').forEach(n => n.remove());
+                if (list.length < 2) return;
+
+                const prev = list[i - 1];
+                const next = list[i + 1];
+                const pager = document.createElement('nav');
+                pager.className = 'idoc-pager';
+                pager.setAttribute('aria-label', 'Section navigation');
+
+                const link = (sec, dir) => {
+                    const a = document.createElement('a');
+                    a.href = '#' + sec.id;
+                    a.className = dir;
+                    a.innerHTML = '<span class="dir">' +
+                        (dir === 'prev' ? '← Previous' : 'Next →') +
+                        '</span><span class="name"></span>';
+                    a.querySelector('.name').textContent = sec.label;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showIDocSection(sec.id);
+                        const top = document.getElementById('iron-doc');
+                        if (top && top.scrollIntoView) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                    return a;
+                };
+                if (prev) pager.appendChild(link(prev, 'prev'));
+                else pager.appendChild(Object.assign(document.createElement('span'), { className: 'spacer' }));
+                if (next) pager.appendChild(link(next, 'next'));
+                else pager.appendChild(Object.assign(document.createElement('span'), { className: 'spacer' }));
+
+                open.appendChild(pager);
+            }
+
+            // ---------- reading position ----------
+            function updateDocProgress() {
+                const bar = document.getElementById('idoc-progress-bar');
+                const open = document.querySelector('#iron-doc .idoc-section:not(.hidden)');
+                if (!bar || !open) return;
+                const page = document.getElementById('iron-doc');
+                if (!page || page.classList.contains('hidden')) return;
+                const r = open.getBoundingClientRect();
+                const vh = window.innerHeight || 1;
+                const total = r.height - vh;
+                const pct = total <= 0 ? 100 : Math.max(0, Math.min(100, (-r.top / total) * 100));
+                bar.style.width = pct.toFixed(1) + '%';
+            }
+            window.addEventListener('scroll', updateDocProgress, { passive: true });
+            window.addEventListener('resize', updateDocProgress);
+
+            // ---------- search ----------
+            let idocSearchTimer = null;
+
+            // Remove every highlight span we injected, restoring the original text.
+            function clearDocHighlights(root) {
+                (root || document).querySelectorAll('#iron-doc .idoc-hit').forEach(m => {
+                    const parent = m.parentNode;
+                    if (!parent) return;
+                    parent.replaceChild(document.createTextNode(m.textContent), m);
+                    parent.normalize();
+                });
+            }
+
+            // Wrap every case-insensitive occurrence of `term` in text nodes.
+            // Editable content, scripts and existing marks are left alone.
+            function highlightInSection(section, term) {
+                if (!section || !term) return 0;
+                const SKIP = 'SCRIPT,STYLE,TEXTAREA,INPUT,CODE,PRE';
+                const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {
+                    acceptNode(node) {
+                        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                        const p = node.parentElement;
+                        if (!p) return NodeFilter.FILTER_REJECT;
+                        if (SKIP.split(',').includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+                        if (p.closest('.idoc-pager, .block-controls')) return NodeFilter.FILTER_REJECT;
+                        if (p.closest('[contenteditable="true"]')) return NodeFilter.FILTER_REJECT;
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+                const targets = [];
+                let n;
+                while ((n = walker.nextNode())) targets.push(n);
+
+                const needle = term.toLowerCase();
+                let count = 0;
+                targets.forEach(node => {
+                    const text = node.nodeValue;
+                    const lower = text.toLowerCase();
+                    if (lower.indexOf(needle) === -1) return;
+                    const frag = document.createDocumentFragment();
+                    let at = 0, idx;
+                    while ((idx = lower.indexOf(needle, at)) !== -1) {
+                        if (idx > at) frag.appendChild(document.createTextNode(text.slice(at, idx)));
+                        const mark = document.createElement('mark');
+                        mark.className = 'idoc-hit';
+                        mark.textContent = text.slice(idx, idx + needle.length);
+                        frag.appendChild(mark);
+                        at = idx + needle.length;
+                        count++;
+                    }
+                    if (at < text.length) frag.appendChild(document.createTextNode(text.slice(at)));
+                    node.parentNode.replaceChild(frag, node);
+                });
+                return count;
+            }
+
+            function runDocSearch(raw) {
+                const term = (raw || '').trim();
+                const wrap = document.getElementById('idoc-search-wrap');
+                const countEl = document.getElementById('idoc-search-count');
+                const noRes = document.getElementById('idoc-no-results');
+                if (!wrap) return;
+
+                wrap.classList.toggle('has-query', !!term);
+                clearDocHighlights();
+
+                const list = idocSections();
+                if (!term) {
+                    list.forEach(x => x.li.classList.remove('search-hidden'));
+                    if (countEl) countEl.textContent = '';
+                    if (noRes) noRes.classList.remove('visible');
+                    rebuildMobileNav();
+                    return;
+                }
+
+                const needle = term.toLowerCase();
+                let sectionsMatched = 0, totalHits = 0, firstMatch = null;
+
+                list.forEach(x => {
+                    const inLabel = x.label.toLowerCase().includes(needle);
+                    const hits = highlightInSection(x.section, term);
+                    const match = inLabel || hits > 0;
+                    x.li.classList.toggle('search-hidden', !match);
+                    if (match) {
+                        sectionsMatched++;
+                        totalHits += hits;
+                        if (!firstMatch) firstMatch = x;
+                    }
+                });
+
+                if (countEl) {
+                    countEl.textContent = sectionsMatched
+                        ? sectionsMatched + ' section' + (sectionsMatched === 1 ? '' : 's') +
+                          (totalHits ? ' · ' + totalHits + ' match' + (totalHits === 1 ? '' : 'es') : '')
+                        : '';
+                }
+                if (noRes) noRes.classList.toggle('visible', sectionsMatched === 0);
+
+                // Jump to the first section that matched, so hits are visible
+                const open = document.querySelector('#iron-doc .idoc-section:not(.hidden)');
+                if (firstMatch && (!open || open.id !== firstMatch.id)) {
+                    const openStill = list.find(x => open && x.id === open.id);
+                    const openMatches = openStill && !openStill.li.classList.contains('search-hidden');
+                    if (!openMatches) showIDocSection(firstMatch.id, { keepSearch: true });
+                }
+
+                const firstHit = document.querySelector('#iron-doc .idoc-section:not(.hidden) .idoc-hit');
+                if (firstHit) {
+                    firstHit.classList.add('current');
+                    if (firstHit.scrollIntoView) firstHit.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            (function wireDocSearch() {
+                const input = document.getElementById('idoc-search');
+                const clear = document.getElementById('idoc-search-clear');
+                if (!input) return;
+                input.addEventListener('input', () => {
+                    clearTimeout(idocSearchTimer);
+                    idocSearchTimer = setTimeout(() => runDocSearch(input.value), 160);
+                });
+                input.addEventListener('keydown', (e) => {
+                    e.stopPropagation();   // don't trip the edit-mode shortcuts
+                    if (e.key === 'Escape') {
+                        input.value = '';
+                        runDocSearch('');
+                        input.blur();
+                    }
+                });
+                if (clear) clear.addEventListener('click', () => {
+                    input.value = '';
+                    runDocSearch('');
+                    input.focus();
+                });
+            })();
+
+            // Keep everything in step after any section change.
+            function refreshDocChrome() {
+                rebuildMobileNav();
+                rebuildPager();
+                updateDocProgress();
+                refreshNavArrows();
+            }
+
             // Delegate the click at the nav container so late-added
             // custom nav links also work without re-wiring.
             document.querySelectorAll('#iron-doc aside nav').forEach(nav => {
                 nav.addEventListener('click', function (e) {
+                    // Control buttons live outside the <a>, but guard anyway
+                    if (e.target.closest('.idoc-sec-btn')) return;
+                    // A rename in progress must not navigate away
+                    if (e.target.closest('[contenteditable="true"]')) return;
                     const link = e.target.closest('.idoc-nav-link');
                     if (!link) return;
-                    if (e.target.closest('[data-role="section-delete"]')) return;
                     e.preventDefault();
                     const href = link.getAttribute('href');
                     if (!href || !href.startsWith('#')) return;
@@ -4490,6 +5113,8 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             }
 
             function snapshotEditables() {
+                // Never capture transient search highlights as real content
+                if (typeof clearDocHighlights === 'function') clearDocHighlights();
                 editSnapshot.clear();
                 document.querySelectorAll('[data-editable]').forEach(el => {
                     if (el.dataset.editable === 'text') {
@@ -4558,6 +5183,11 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 if (editModeActive) return;
                 editModeActive = true;
                 document.body.classList.add('edit-mode');
+                // A live search filters the sidebar and injects highlights;
+                // neither should be in play while editing.
+                const searchBox = document.getElementById('idoc-search');
+                if (searchBox && searchBox.value) { searchBox.value = ''; runDocSearch(''); }
+                decorateAllNavItems();   // sections added since boot get controls too
                 snapshotEditables();
                 document.querySelectorAll('[data-editable="text"]').forEach(el => {
                     el.setAttribute('contenteditable', 'true');
@@ -4595,6 +5225,8 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             }
 
             function saveEdits() {
+                // Same guard as the snapshot: highlights are not content.
+                if (typeof clearDocHighlights === 'function') clearDocHighlights();
                 const batch = db.batch();
                 let count = 0;
 
@@ -5555,6 +6187,40 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 }
             }
 
+            // ============================================================
+            // STUCK-STATE SAFETY NET
+            // Any drag can be interrupted in ways that skip its cleanup
+            // (mouse released outside the window, tab switched mid-drag,
+            // a dialog stealing focus). Left behind, `draggable="true"`
+            // or `body.lr-resizing` makes the cursor go to a move/crosshair
+            // shape and silently swallows clicks. This clears all of it.
+            // ============================================================
+            function clearStuckInteractionState() {
+                document.querySelectorAll('[draggable="true"]').forEach(el => {
+                    el.draggable = false;
+                    el.classList.remove('dragging');
+                });
+                document.querySelectorAll('.drop-above, .drop-below').forEach(el => {
+                    el.classList.remove('drop-above', 'drop-below');
+                });
+                document.body.classList.remove('lr-resizing');
+                const lrf = document.getElementById('live-resize-frame');
+                if (lrf) lrf.classList.remove('dragging');
+                const icf = document.getElementById('ime-crop-frame');
+                if (icf) icf.classList.remove('dragging-focus');
+            }
+            // Whenever no mouse button is held, nothing should be mid-drag.
+            document.addEventListener('mousemove', (e) => {
+                if (e.buttons === 0 && document.querySelector('[draggable="true"]')) {
+                    clearStuckInteractionState();
+                }
+            });
+            window.addEventListener('blur', clearStuckInteractionState);
+            document.addEventListener('mouseleave', clearStuckInteractionState);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') clearStuckInteractionState();
+            });
+
             // ---- Drag & drop reordering ----
             let draggedBlock = null;
             function makeBlockDraggable(block) {
@@ -5564,9 +6230,23 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 if (!dragHandle) return;
 
                 // We only want the handle to initiate drag, not the whole block
-                // (so images/text inside are still clickable)
-                dragHandle.addEventListener('mousedown', () => { block.draggable = true; });
-                dragHandle.addEventListener('mouseup',   () => { block.draggable = false; });
+                // (so images/text inside are still clickable).
+                //
+                // The release MUST be watched on `document`, not on the handle:
+                // if the pointer drifts a few pixels before you let go, a
+                // handle-bound mouseup never fires, `draggable` stays true, and
+                // from then on the browser shows a move cursor over the block
+                // and eats every click inside it (buttons stop responding).
+                dragHandle.addEventListener('mousedown', () => {
+                    block.draggable = true;
+                    const release = () => {
+                        block.draggable = false;
+                        document.removeEventListener('mouseup', release);
+                        document.removeEventListener('dragend', release);
+                    };
+                    document.addEventListener('mouseup', release);
+                    document.addEventListener('dragend', release);
+                });
                 block.addEventListener('dragstart', (e) => {
                     draggedBlock = block;
                     block.classList.add('dragging');
@@ -5713,9 +6393,296 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             async function loadCustomSections() {
                 try {
                     const snap = await db.collection('iron_sections').orderBy('order').get();
-                    snap.forEach(doc => addCustomSectionToDOM(doc.id, doc.data()));
+                    const metaById = new Map();
+                    snap.forEach(doc => {
+                        const data = doc.data();
+                        metaById.set(doc.id, data);
+                        // A doc for a section that's hardcoded in the page is a
+                        // rename/reorder override, not a section to create.
+                        if (!document.getElementById(doc.id)) {
+                            addCustomSectionToDOM(doc.id, data);
+                        }
+                    });
+                    applyNavOverrides(metaById);
                 } catch (err) { console.warn('Custom section load failed:', err); }
+                decorateAllNavItems();
+                if (typeof refreshDocChrome === 'function') refreshDocChrome();
             }
+
+            // Apply saved labels, then sort the sidebar by saved order.
+            // Entries without a saved order keep their markup position, after
+            // the ones that have one.
+            function applyNavOverrides(metaById) {
+                const list = document.querySelector('#iron-doc aside nav ul');
+                if (!list) return;
+                const items = Array.from(list.children);
+
+                items.forEach(li => {
+                    const id = navItemSectionId(li);
+                    const meta = id && metaById.get(id);
+                    if (!meta) return;
+                    if (meta.label) {
+                        const label = li.querySelector('.idoc-nav-label') || li.querySelector('.idoc-nav-link span');
+                        if (label) {
+                            label.classList.add('idoc-nav-label');
+                            label.textContent = meta.label;
+                        }
+                        const sec = document.getElementById(id);
+                        const title = sec && sec.querySelector('.idoc-section-title');
+                        if (title) title.textContent = meta.label;
+                    }
+                });
+
+                const BIG = 10000;
+                const keyed = items.map((li, i) => {
+                    const id = navItemSectionId(li);
+                    const meta = id && metaById.get(id);
+                    const ord = (meta && typeof meta.order === 'number') ? meta.order : BIG + i;
+                    return { li, ord, i };
+                });
+                keyed.sort((a, b) => (a.ord - b.ord) || (a.i - b.i));
+                keyed.forEach(k => list.appendChild(k.li));
+                reorderContentSections();
+            }
+
+
+            // =========================================================
+            // SIDEBAR SECTION MANAGER
+            // Every blueprint section — built-in or admin-added — can be
+            // renamed in place and moved up/down. Built-ins can't be
+            // deleted. Label + order overrides for built-ins are stored
+            // in `iron_sections` alongside the custom ones, keyed by the
+            // section's own id, with builtIn: true.
+            // =========================================================
+
+            // Attach controls to one <li> in the blueprint sidebar.
+            function decorateNavItem(li) {
+                if (!li || li._secWired) return;
+                const link = li.querySelector('.idoc-nav-link');
+                if (!link) return;
+                li._secWired = true;
+                li.classList.add('idoc-nav-item');
+
+                // Make sure there's a label span we can edit
+                let label = link.querySelector('.idoc-nav-label');
+                if (!label) {
+                    label = link.querySelector('span');
+                    if (label) label.classList.add('idoc-nav-label');
+                }
+                if (!label) return;
+
+                // Carry the custom-section flag from the <a> up to the <li>
+                if (link.dataset.customSection === 'true') {
+                    li.dataset.customSection = 'true';
+                }
+
+                // Remove any legacy delete button that lived inside the <a>
+                link.querySelectorAll('[data-role="section-delete"]').forEach(b => b.remove());
+
+                if (!li.querySelector('.idoc-sec-ctrls')) {
+                    const ctrls = document.createElement('div');
+                    ctrls.className = 'idoc-sec-ctrls';
+                    ctrls.innerHTML =
+                        '<button type="button" class="idoc-sec-btn" data-sec="up"     title="Move up">\u25b2</button>' +
+                        '<button type="button" class="idoc-sec-btn" data-sec="down"   title="Move down">\u25bc</button>' +
+                        '<button type="button" class="idoc-sec-btn" data-sec="rename" title="Rename">\u270e</button>' +
+                        '<button type="button" class="idoc-sec-btn danger" data-sec="delete" title="Delete section">\u00d7</button>';
+                    li.appendChild(ctrls);
+                }
+                refreshNavArrows();
+            }
+
+            function decorateAllNavItems() {
+                document.querySelectorAll('#iron-doc aside nav ul > li').forEach(decorateNavItem);
+                refreshNavArrows();
+            }
+
+            // Grey out ▲ on the first item and ▼ on the last
+            function refreshNavArrows() {
+                const items = Array.from(document.querySelectorAll('#iron-doc aside nav ul > li'));
+                items.forEach((li, i) => {
+                    const up = li.querySelector('[data-sec="up"]');
+                    const down = li.querySelector('[data-sec="down"]');
+                    if (up) up.disabled = (i === 0);
+                    if (down) down.disabled = (i === items.length - 1);
+                });
+            }
+
+            function navItemSectionId(li) {
+                const link = li.querySelector('.idoc-nav-link');
+                const href = link && link.getAttribute('href');
+                return (href && href.startsWith('#')) ? href.substring(1) : null;
+            }
+
+            // Persist the current visual order of every sidebar entry.
+            async function persistNavOrder() {
+                const items = Array.from(document.querySelectorAll('#iron-doc aside nav ul > li'));
+                const batch = db.batch();
+                let n = 0;
+                items.forEach((li, i) => {
+                    const id = navItemSectionId(li);
+                    if (!id) return;
+                    const labelEl = li.querySelector('.idoc-nav-label');
+                    batch.set(db.collection('iron_sections').doc(id), {
+                        order: i,
+                        label: labelEl ? labelEl.textContent.trim() : '',
+                        builtIn: li.dataset.customSection !== 'true',
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        updatedBy: auth.currentUser?.email || 'unknown'
+                    }, { merge: true });
+                    n++;
+                });
+                if (!n) return;
+                await batch.commit();
+            }
+
+            // Move one entry up or down, then save the new order.
+            async function moveNavItem(li, dir) {
+                const sibling = dir === 'up' ? li.previousElementSibling : li.nextElementSibling;
+                if (!sibling) return;
+                if (dir === 'up') li.parentNode.insertBefore(li, sibling);
+                else li.parentNode.insertBefore(sibling, li);
+
+                refreshNavArrows();
+                li.classList.remove('just-moved');
+                void li.offsetWidth;
+                li.classList.add('just-moved');
+
+                // Content sections follow the sidebar, so the page reads in
+                // the same order the nav does.
+                reorderContentSections();
+
+                try {
+                    await persistNavOrder();
+                    showToast('Order saved', 'Sidebar order updated', 'success');
+                } catch (err) {
+                    showInfo(err.message, { title: 'Could not save order', iconClass: 'warn' });
+                }
+            }
+
+            // Mirror the sidebar order onto the content column.
+            function reorderContentSections() {
+                const area = document.querySelector('#iron-doc .md\\:w-3\\/4');
+                if (!area) return;
+                document.querySelectorAll('#iron-doc aside nav ul > li').forEach(li => {
+                    const id = navItemSectionId(li);
+                    const sec = id && document.getElementById(id);
+                    if (sec && sec.parentNode === area) area.appendChild(sec);
+                });
+            }
+
+            // Inline rename. Enter or blur commits, Escape reverts.
+            function startRename(li) {
+                const label = li.querySelector('.idoc-nav-label');
+                if (!label || label.getAttribute('contenteditable') === 'true') return;
+                const original = label.textContent.trim();
+                const id = navItemSectionId(li);
+
+                label.setAttribute('contenteditable', 'true');
+                label.setAttribute('spellcheck', 'false');
+                label.focus();
+                // Select the whole label so typing replaces it
+                const range = document.createRange();
+                range.selectNodeContents(label);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+
+                let done = false;
+                const finish = async (commit) => {
+                    if (done) return;
+                    done = true;
+                    label.removeAttribute('contenteditable');
+                    label.removeEventListener('keydown', onKey);
+                    label.removeEventListener('blur', onBlur);
+
+                    const next = label.textContent.replace(/\s+/g, ' ').trim();
+                    if (!commit || !next || next === original) {
+                        label.textContent = original;
+                        return;
+                    }
+                    label.textContent = next;
+
+                    // Keep the section's own heading in step with the nav
+                    const sec = id && document.getElementById(id);
+                    const title = sec && sec.querySelector('.idoc-section-title');
+                    if (title) title.textContent = next;
+
+                    try {
+                        await db.collection('iron_sections').doc(id).set({
+                            label: next,
+                            builtIn: li.dataset.customSection !== 'true',
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            updatedBy: auth.currentUser?.email || 'unknown'
+                        }, { merge: true });
+                        showToast('Renamed', '\u201c' + next + '\u201d saved', 'success');
+                    } catch (err) {
+                        label.textContent = original;
+                        if (title) title.textContent = original;
+                        showInfo(err.message, { title: 'Could not rename', iconClass: 'warn' });
+                    }
+                };
+                const onKey = (e) => {
+                    e.stopPropagation();
+                    if (e.key === 'Enter') { e.preventDefault(); finish(true); }
+                    else if (e.key === 'Escape') { e.preventDefault(); finish(false); }
+                };
+                const onBlur = () => finish(true);
+                label.addEventListener('keydown', onKey);
+                label.addEventListener('blur', onBlur);
+            }
+
+            async function deleteNavSection(li) {
+                const id = navItemSectionId(li);
+                if (!id || li.dataset.customSection !== 'true') return;
+                const label = li.querySelector('.idoc-nav-label');
+                const name = label ? label.textContent.trim() : 'this section';
+                const ok = await askConfirm(
+                    'The section <strong>\u201c' + escapeHtml(name) + '\u201d</strong> and every block inside it will be removed. This can\'t be undone.',
+                    { title: 'Delete this section?', confirmText: 'Delete section', danger: true, icon: '\ud83d\uddd1' }
+                );
+                if (!ok) return;
+                try {
+                    await db.collection('iron_sections').doc(id).delete();
+                    const inside = await db.collection('page_edits').where('insertedIn', '==', id).get();
+                    const batch = db.batch();
+                    inside.forEach(d => batch.delete(d.ref));
+                    await batch.commit();
+                    const sec = document.getElementById(id);
+                    li.remove();
+                    if (sec) sec.remove();
+                    refreshNavArrows();
+                    await persistNavOrder();
+                    showToast('Deleted', 'Section removed', 'success');
+                    showIDocSection(firstIDocSectionId());
+                } catch (err) {
+                    showInfo(err.message, { title: 'Could not delete', iconClass: 'warn' });
+                }
+            }
+
+            // One delegated listener for every sidebar control, so entries
+            // added later need no extra wiring.
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('.idoc-sec-btn');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+                const li = btn.closest('li');
+                if (!li) return;
+                const act = btn.dataset.sec;
+                if (act === 'up' || act === 'down') moveNavItem(li, act);
+                else if (act === 'rename') startRename(li);
+                else if (act === 'delete') deleteNavSection(li);
+            });
+            // Double-clicking the label is a shortcut for rename
+            document.addEventListener('dblclick', (e) => {
+                if (!editModeActive) return;
+                const label = e.target.closest('#iron-doc .idoc-nav-label');
+                if (!label) return;
+                e.preventDefault();
+                e.stopPropagation();
+                startRename(label.closest('li'));
+            });
 
             function addCustomSectionToDOM(id, data) {
                 const navList = document.querySelector('#iron-doc aside nav ul');
@@ -5723,13 +6690,15 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                 if (!navList || !contentArea) return;
                 if (document.querySelector(`.idoc-nav-link[href="#${id}"]`)) return; // already there
 
-                // Nav item
+                // Nav item. Controls are added by decorateNavItem() as
+                // siblings of the <a>, never inside it.
                 const li = document.createElement('li');
+                li.className = 'idoc-nav-item';
+                li.dataset.customSection = 'true';
                 li.innerHTML = `
                     <a href="#${id}" class="idoc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-orange-50" data-custom-section="true">
                         <i data-feather="${escapeAttr(data.icon || 'file-text')}" class="w-5 h-5"></i>
                         <span class="idoc-nav-label">${escapeHtml(data.label || 'Untitled')}</span>
-                        <button class="idoc-section-delete" title="Delete section" data-role="section-delete">×</button>
                     </a>
                 `;
                 navList.appendChild(li);
@@ -5743,46 +6712,19 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                     <h3 class="text-2xl font-bold flex items-center mb-4 iron-text-dark cinzel">
                         <i data-feather="${escapeAttr(data.icon || 'file-text')}" class="w-6 h-6 mr-3 iron-text"></i><span class="idoc-section-title">${escapeHtml(data.label || 'Untitled')}</span>
                     </h3>
-                    <p class="text-gray-500 italic idoc-empty-placeholder">This section is empty. Enter edit mode and click <strong>+ Add Block ▾</strong> to start building.</p>
+                    <p class="idoc-empty-placeholder">Nothing here yet.<br>Enter edit mode and use <strong>+ Add Block &#9662;</strong> to add headings, images, galleries or tabs.</p>
                 `;
                 contentArea.appendChild(section);
 
                 // Wire the nav click to the doc-router
                 li.querySelector('a').addEventListener('click', function (e) {
-                    // Don't navigate if user clicked the delete button
-                    if (e.target.closest('[data-role="section-delete"]')) return;
+                    // Control buttons and an in-progress rename aren't navigation
+                    if (e.target.closest('.idoc-sec-btn')) return;
+                    if (e.target.closest('[contenteditable="true"]')) return;
                     e.preventDefault();
                     showIDocSection(id);
                 });
-                // Wire delete
-                const delBtn = li.querySelector('[data-role="section-delete"]');
-                if (delBtn) {
-                    delBtn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        const ok = await askConfirm(
-                            `The section <strong>"${escapeHtml(data.label || 'Untitled')}"</strong> and every block inside it will be removed. This can't be undone.`,
-                            { title: 'Delete this section?', confirmText: 'Delete section', danger: true, icon: '🗑' }
-                        );
-                        if (!ok) return;
-                        try {
-                            // Delete the section doc
-                            await db.collection('iron_sections').doc(id).delete();
-                            // Delete every block that was inside it
-                            const inside = await db.collection('page_edits').where('insertedIn', '==', id).get();
-                            const batch = db.batch();
-                            inside.forEach(d => batch.delete(d.ref));
-                            await batch.commit();
-                            // Remove from DOM
-                            li.remove();
-                            section.remove();
-                            showInfo('Section removed.', { title: 'Deleted', iconClass: 'success', icon: '✓' });
-                            showIDocSection(firstIDocSectionId());
-                        } catch (err) {
-                            showInfo(err.message, { title: 'Could not delete', iconClass: 'warn' });
-                        }
-                    });
-                }
+                decorateNavItem(li);
 
                 if (typeof feather !== 'undefined') feather.replace();
             }
@@ -5795,7 +6737,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             if (addSectionBtn) {
                 addSectionBtn.addEventListener('click', async () => {
                     const label = await askPrompt(
-                        'What would you like to call this section? It appears in the sidebar of the Iron & Incense Blueprint page.',
+                        'What would you like to call this section? It appears in the sidebar of the Drugyel Blueprint page.',
                         '',
                         { title: 'New Section', placeholder: 'e.g. Marketing, Playtesting, Sound Design', confirmText: 'Create', icon: '＋' }
                     );
