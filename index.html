@@ -2556,6 +2556,7 @@
                             <nav id="doc-nav" class="sticky top-28">
                                 <ul class="space-y-2">
                                     <li><a href="#doc-new-things" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="star" class="w-5 h-5"></i><span>New Things</span></a></li>
+                                    <li><a href="#doc-v2-upgrade" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="zap" class="w-5 h-5"></i><span>Version 2: Rotary Upgrade</span></a></li>
                                     <li><a href="#doc-circuit-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="cpu" class="w-5 h-5"></i><span>Circuit Design</span></a></li>
                                     <li><a href="#doc-making-design" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="settings" class="w-5 h-5"></i><span>Making the Design</span></a></li>
                                     <li><a href="#doc-morse-code" class="doc-nav-link flex items-center gap-3 w-full text-left p-3 rounded-md transition duration-150 text-gray-600 hover:bg-gray-100"><i data-feather="message-circle" class="w-5 h-5"></i><span>Learn Morse Code</span></a></li>
@@ -2587,6 +2588,63 @@
                                     </form>
                                 </div>
                                 <div id="new-things-container" class="space-y-8"><p class="text-gray-500 italic">Loading updates...</p></div>
+                            </div>
+
+
+                            <!-- SECTION: Version 2 Rotary Upgrade (documentation of our 2026 changes) -->
+                            <div id="doc-v2-upgrade" class="doc-section hidden bg-white p-8 rounded-lg shadow-lg fade-in space-y-6">
+                                <h3 class="text-2xl font-bold flex items-center mb-2"><i data-feather="zap" class="w-6 h-6 mr-3 text-indigo-600"></i>Version 2: Rotary Upgrade</h3>
+<p class="text-gray-500 text-sm">Everything we changed after the 2025 project: what we built, how it works, what went wrong, and what is still open. Written from our build history.</p>
+                                <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-lg"><p class="text-indigo-800 leading-relaxed"><strong>Status in one line:</strong> the two-knob typing device, shortcuts, serial numbers with the student directory, inbox, announcements, menu and website chat are built and compile. The PIN login system and the laser-cut case are designed and generated but not yet running on real hardware or a real broker. Each section says which is which.</p></div>
+                                <div class="p-4 rounded-lg bg-gray-50 border border-gray-200"><p class="font-semibold text-gray-800 mb-2">On this page</p><ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 text-sm"><li><a href="#v2-why" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-why').scrollIntoView({behavior:'smooth'});">1. Why we changed it</a></li><li><a href="#v2-timeline" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-timeline').scrollIntoView({behavior:'smooth'});">2. Build history, step by step</a></li><li><a href="#v2-hardware" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-hardware').scrollIntoView({behavior:'smooth'});">3. Hardware and pinout</a></li><li><a href="#v2-controls" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-controls').scrollIntoView({behavior:'smooth'});">4. How to use it</a></li><li><a href="#v2-shortcuts" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-shortcuts').scrollIntoView({behavior:'smooth'});">5. Text abbreviations</a></li><li><a href="#v2-serials" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-serials').scrollIntoView({behavior:'smooth'});">6. Serial numbers and the student list</a></li><li><a href="#v2-messaging" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-messaging').scrollIntoView({behavior:'smooth'});">7. Messages, inbox, announcements, blind mode</a></li><li><a href="#v2-website" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-website').scrollIntoView({behavior:'smooth'});">8. The website Live Telegraph</a></li><li><a href="#v2-case" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-case').scrollIntoView({behavior:'smooth'});">9. Knob, case and laser-cut files</a></li><li><a href="#v2-fusion" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-fusion').scrollIntoView({behavior:'smooth'});">9a. How we made the 3D model (Fusion screenshots)</a></li><li><a href="#v2-sketches" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-sketches').scrollIntoView({behavior:'smooth'});">9b. Design sketches and renders</a></li><li><a href="#v2-downloads" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-downloads').scrollIntoView({behavior:'smooth'});">9c. Downloads: 3D models and cutting files</a></li><li><a href="#v2-pin" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-pin').scrollIntoView({behavior:'smooth'});">10. PIN login system (on hold)</a></li><li><a href="#v2-lessons" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-lessons').scrollIntoView({behavior:'smooth'});">11. Problems we hit and how we fixed them</a></li><li><a href="#v2-open" class="text-indigo-700 hover:underline" onclick="event.preventDefault();document.getElementById('v2-open').scrollIntoView({behavior:'smooth'});">12. Open items</a></li></ul></div>
+                                <h4 id="v2-why" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">1. Why we changed it</h4>
+                                <p class="text-gray-700 leading-relaxed">The 2025 telegraph typed Morse with one button, which is slow and hard to learn. Our goal for 2026 was to remove the one-button input while staying <strong>cheap and reproducible</strong>: parts from the same shops, jumper wires and a breadboard, no custom PCBs.</p>
+                                <p class="text-gray-700 leading-relaxed">We first studied two options: a <strong>mini keyboard</strong> and a <strong>microphone with speech-to-text</strong> (including audio transfer). We wrote up the feasibility, costs and parts links in a shared Google Doc. We then chose a third idea that came from the team: <strong>rotary encoders</strong>. A rotary encoder is a knob you turn that also has a push button, so one part can move through letters and also press, which keeps the parts count and the price low.</p>
+                                <h4 id="v2-timeline" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">2. Build history, step by step</h4>
+                                <ol class="list-decimal pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Research.</strong> Studied a mini-keyboard variation and a microphone variation (speech to text) for the Smart Telegraph. Listed costs, parts and links in a Google Doc. Looked at smaller boards as a possible replacement for the ESP32 DevKit.</li><li><strong>Rotary encoder idea.</strong> Decided that a rotary encoder with a built-in push button could replace the single Morse button for navigation and typing. Worked out the wiring and built it on a breadboard from a Wokwi diagram.</li><li><strong>First bring-up and wiring problems.</strong> The knob gave no counts. The cause was power: the 3V3 and GND wires were on the wrong breadboard rails, so every pin read the wrong level. After rewiring (3V3 on the minus rail strip, GND on the plus rail strip of our particular board) the knob responded. A separate fix was needed in the code, see section 11.</li><li><strong>Screen change.</strong> Swapped the 0.96" OLED for a 1.3" one. It first showed static (snow). That was the wrong driver: the 1.3" module is an SH1106, not an SSD1306. We added a one-line driver switch. Later the OLED stopped working after rewiring because its power wires had been moved, which we fixed by rebuilding the rails.</li><li><strong>Cursor knob.</strong> First use of the knob: turn to move the cursor left or right in the typed message. We replaced the encoder library with our own 1 ms sampler so it works on the ESP32 core we use.</li><li><strong>Two-knob typing.</strong> Right knob = a wheel of letters, left knob = cursor and editing. Press the right knob to insert the letter shown.</li><li><strong>Shortcuts.</strong> Added text abbreviations: type wyd and the phrase "what are you doing?" is offered. 29 abbreviations in total (section 5).</li><li><strong>Serial numbers, inbox, announcements.</strong> Each device has a serial number. Messages go to a specific serial. Received messages go to an inbox instead of appearing instantly. Teachers (serial starts with T) can announce to every device at once.</li><li><strong>NAV button and menu.</strong> Added a NAV button that opens a menu (Compose, Inbox, Send to, Clear message). Later added Change WiFi.</li><li><strong>Sending and deleting.</strong> Send is now pressing both knobs together (instead of a 5-second hold). Delete is a double press of the left knob (instead of a 2-second hold). The buzzer volume was lowered.</li><li><strong>Website.</strong> The Live Telegraph on this site now uses serial numbers too, can send to a specific serial, shows the signed-in name in the chat, and has quick phrases. Messages are drawn as plain text so nothing typed can run as HTML.</li><li><strong>Knob design.</strong> Measured the encoder shaft from our STL: a 6.0 mm D-shaft with a 4.5 mm flat. Designed and checked a scalloped knob (22 mm, 6 scoops) and fit-test rings.</li><li><strong>Enclosure concepts.</strong> Four layouts around our 95 x 65 mm breadboard (open deck, sloped console, handheld, closed box). We built the handheld (layout C) as a printable base and top plate. The case was modelled in Autodesk Fusion with named parameters (screenshots in section 9a).</li><li><strong>Printing was too slow.</strong> The full shell would take about 15 hours to print, which we did not have. We switched to laser-cut 6 mm acrylic. We generated several versions: finger-joint box, chamfered finger-joint box, a stack of layers cut from the original shell, and a rounded stack. Section 9 lists them.</li><li><strong>Student directory.</strong> Read the school student-work site for batches 2018 to 2026: 469 students. Each gets a serial (badge number followed by the 2-digit year, for example badge 56 in 2023 is 5623). The list is built into the device and the website so names appear next to serials.</li><li><strong>PIN login design.</strong> Worked out how serials could have PINs: a private HiveMQ broker, a Cloudflare Worker PIN service, an admin page on this site. Built and tested against mock services. On hold, see section 10.</li><li><strong>Latest firmware changes.</strong> Blind mode plays only the words of a message. Hold NAV for 3 seconds on the SELECT MODE page to change the serial. Menu item Change WiFi. Lists (menu, inbox, Send to) scroll with either knob.</li></ol>
+                                <h4 id="v2-hardware" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">3. Hardware and pinout</h4>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Board:</strong> ESP32 DevKit (30-pin, WROOM-32). Arduino core 3.3.2.</li><li><strong>Screen:</strong> 1.3" I2C OLED (SH1106, address 0x3C). The 0.96" SSD1306 also works by changing one line in the sketch.</li><li><strong>Input:</strong> two rotary encoder modules (HW-040 / KY-040 type, with a push button built in) and one NAV push button.</li><li><strong>Sound:</strong> a small buzzer driven by PWM, volume 40 out of 100.</li><li><strong>Build:</strong> breadboard (95 x 65 mm, 10 mm thick) and jumper wires. Everything runs from 3.3 V.</li></ul>
+                                <div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Part</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Signal</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">ESP32 pin</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Left knob (cursor, space, delete)</td><td class="px-3 py-2 text-gray-700 align-top">CLK / DT / push</td><td class="px-3 py-2 text-gray-700 align-top">25 / 33 / 32</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Right knob (letter wheel)</td><td class="px-3 py-2 text-gray-700 align-top">CLK / DT / push</td><td class="px-3 py-2 text-gray-700 align-top">16 / 17 / 18</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">NAV button (menu)</td><td class="px-3 py-2 text-gray-700 align-top">input, pull-up</td><td class="px-3 py-2 text-gray-700 align-top">27</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Buzzer</td><td class="px-3 py-2 text-gray-700 align-top">PWM output</td><td class="px-3 py-2 text-gray-700 align-top">26</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">OLED</td><td class="px-3 py-2 text-gray-700 align-top">SDA / SCL</td><td class="px-3 py-2 text-gray-700 align-top">21 / 22</td></tr></tbody></table></div>
+                                <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg"><p class="text-amber-800 leading-relaxed">Power the encoder modules from <strong>3V3</strong> only. If every pin reads the wrong way round, check which breadboard rail is connected to 3V3 and which to GND. Some boards have the rails marked the opposite way to what you expect.</p></div>
+                                <h4 id="v2-controls" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">4. How to use it</h4>
+                                <div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Action</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">How</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Move the cursor</td><td class="px-3 py-2 text-gray-700 align-top">Turn the <strong>left knob</strong></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Pick a letter</td><td class="px-3 py-2 text-gray-700 align-top">Turn the <strong>right knob</strong> (A to Z, 0 to 9, @ and !)</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Insert the letter</td><td class="px-3 py-2 text-gray-700 align-top">Press the right knob</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Switch UPPER / lower case</td><td class="px-3 py-2 text-gray-700 align-top">Hold the right knob for 0.8 seconds</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Space (or accept a shortcut)</td><td class="px-3 py-2 text-gray-700 align-top">Single press of the left knob</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Delete the letter before the cursor</td><td class="px-3 py-2 text-gray-700 align-top">Double press of the left knob (a delete right after a shortcut undoes the expansion)</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Send the message</td><td class="px-3 py-2 text-gray-700 align-top">Press <strong>both knobs together</strong></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Open / close the menu</td><td class="px-3 py-2 text-gray-700 align-top">Press <strong>NAV</strong></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Scroll a list (menu, inbox, Send to)</td><td class="px-3 py-2 text-gray-700 align-top">Turn either knob; click the left knob to choose</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Back inside Send to (from a batch)</td><td class="px-3 py-2 text-gray-700 align-top">Double press of the left knob</td></tr></tbody></table></div>
+                                <h5 class="font-bold text-gray-800 mt-2">Start-up screens</h5>
+                                <ol class="list-decimal pl-6 space-y-1 text-gray-700 leading-relaxed"><li>Start screen (5 seconds): hold the <strong>left knob</strong> for 3 seconds to forget the saved Wi-Fi.</li><li>SELECT MODE: click the left knob for NORMAL, hold it for BLIND. Hold <strong>NAV for 3 seconds</strong> on this page to enter a new serial.</li><li>Serial entry (first start, or when you asked for a new one): right knob picks a character, press adds it, double press of the left knob deletes, hold the left knob for 5 seconds to confirm. A Welcome screen shows your name.</li><li>Wi-Fi: it tries the saved network; if there is none it lists the networks and asks for the password.</li></ol>
+                                <h5 class="font-bold text-gray-800 mt-2">Menu</h5>
+                                <p class="text-gray-700 leading-relaxed">Compose, Inbox, Send to, Clear message, Change WiFi. <strong>Change WiFi</strong> forgets the saved network and restarts so you can pick a network again. Unread messages are lost on restart because they are only kept in memory.</p>
+                                <h4 id="v2-shortcuts" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">5. Text abbreviations</h4>
+                                <p class="text-gray-700 leading-relaxed">Type the abbreviation and the full phrase is offered on screen. Press space (single press of the left knob) to accept it. To add one, add a line {"abbr", "full phrase"} to the SHORTCUTS list in the sketch, with the abbreviation in lower case.</p>
+                                <div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Abbreviation</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Meaning</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Abbreviation</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Meaning</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">wyd</code></td><td class="px-3 py-2 text-gray-700 align-top">what are you doing?</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">wya</code></td><td class="px-3 py-2 text-gray-700 align-top">where are you at?</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">wdym</code></td><td class="px-3 py-2 text-gray-700 align-top">what do you mean?</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">hru</code></td><td class="px-3 py-2 text-gray-700 align-top">how are you?</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">hbu</code></td><td class="px-3 py-2 text-gray-700 align-top">how about you?</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">omw</code></td><td class="px-3 py-2 text-gray-700 align-top">on my way</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">brb</code></td><td class="px-3 py-2 text-gray-700 align-top">be right back</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">gtg</code></td><td class="px-3 py-2 text-gray-700 align-top">got to go</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">ttyl</code></td><td class="px-3 py-2 text-gray-700 align-top">talk to you later</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">cya</code></td><td class="px-3 py-2 text-gray-700 align-top">see you later</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">lmk</code></td><td class="px-3 py-2 text-gray-700 align-top">let me know</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">idk</code></td><td class="px-3 py-2 text-gray-700 align-top">i do not know</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">ikr</code></td><td class="px-3 py-2 text-gray-700 align-top">i know right</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">nvm</code></td><td class="px-3 py-2 text-gray-700 align-top">never mind</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">np</code></td><td class="px-3 py-2 text-gray-700 align-top">no problem</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">ty</code></td><td class="px-3 py-2 text-gray-700 align-top">thank you</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">thx</code></td><td class="px-3 py-2 text-gray-700 align-top">thanks</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">yw</code></td><td class="px-3 py-2 text-gray-700 align-top">you are welcome</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">pls</code></td><td class="px-3 py-2 text-gray-700 align-top">please</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">sry</code></td><td class="px-3 py-2 text-gray-700 align-top">sorry</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">ofc</code></td><td class="px-3 py-2 text-gray-700 align-top">of course</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">tbh</code></td><td class="px-3 py-2 text-gray-700 align-top">to be honest</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">rn</code></td><td class="px-3 py-2 text-gray-700 align-top">right now</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">tmr</code></td><td class="px-3 py-2 text-gray-700 align-top">tomorrow</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">bc</code></td><td class="px-3 py-2 text-gray-700 align-top">because</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">hw</code></td><td class="px-3 py-2 text-gray-700 align-top">homework</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">gm</code></td><td class="px-3 py-2 text-gray-700 align-top">good morning</td><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">gn</code></td><td class="px-3 py-2 text-gray-700 align-top">good night</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top"><code class="px-1 py-0.5 bg-gray-100 rounded text-sm">sec</code></td><td class="px-3 py-2 text-gray-700 align-top">one second please</td><td class="px-3 py-2 text-gray-700 align-top"></td><td class="px-3 py-2 text-gray-700 align-top"></td></tr></tbody></table></div>
+                                <h4 id="v2-serials" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">6. Serial numbers and the student list</h4>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Students:</strong> serial = badge number followed by the 2-digit year. Badge 56 from 2023 is <strong>5623</strong>. The year of a serial is its last two digits.</li><li><strong>Teachers:</strong> the letter T and digits, for example T33. Teacher names are not in the list yet. A T serial still works and shows without a name.</li><li><strong>Source:</strong> the names come from the school student-work site, batches 2018 to 2026: 469 students. The badge number is the position on each batch page, which we checked on one student.</li><li><strong>Names on the screen:</strong> shortened to fit, for example "Zdrimet K.". The website shows the full name.</li><li><strong>Send to on the device:</strong> choose a batch first (your own batch is at the top), then the person. There is also "Type a serial" and, for teachers, "ALL (announce)". There is no default recipient.</li></ul>
+                                <h4 id="v2-messaging" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">7. Messages, inbox, announcements, blind mode</h4>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Transport:</strong> MQTT over Wi-Fi. At the moment the public broker broker.hivemq.com is used, with the topic root morse/tj-project-final.</li><li><strong>A private message</strong> goes to the topic .../dm/&lt;serial&gt;. <strong>An announcement</strong> goes to .../announce. The payload is serial|name|text and a message is at most 100 characters.</li><li><strong>Inbox:</strong> a new private message gives two beeps and raises the unread count. It is read in the inbox (it keeps the last 10). In the inbox, a click replies to the sender and a double press deletes the message.</li><li><strong>Announcements:</strong> a teacher chooses ALL in Send to and sends. Every device takes over the screen with ANNOUNCEMENT, beeps three times, and beeps again every 10 seconds until someone presses a button. It is also saved in the inbox. Devices and the website ignore an announcement unless the sender serial starts with T.</li><li><strong>Blind mode:</strong> chosen on the SELECT MODE screen. A new message plays its words in Morse on the buzzer (not the sender or serial). An announcement plays its text after the alert beeps.</li></ul>
+                                <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg"><p class="text-amber-800 leading-relaxed"><strong>Security limit while the PIN system is on hold:</strong> on the public broker the serial is simply typed in, so anyone can claim a T serial and send announcements. That is fine for a demo and is the reason the PIN design exists (section 10).</p></div>
+                                <h4 id="v2-website" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">8. The website Live Telegraph</h4>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li>A serial box saves who you are in this browser. Teachers (T serials) can also send to ALL.</li><li>The Send to box takes a name or a serial; typing a name finds the student and shows the batch year.</li><li>If you are signed in to the site, your name shows in the chat. If not, the name for your serial is used.</li><li>Quick phrase buttons: What are you doing?, Where are you at?, On my way, Be right back.</li><li>Messages are written as plain text, never as HTML, so a message cannot run code on the page.</li><li>It talks to the same topics as the devices, so a message from the website reaches a device and the other way round.</li></ul>
+                                <h4 id="v2-case" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">9. Knob, case and laser-cut files</h4>
+                                <h5 class="font-bold text-gray-800 mt-2">Knob</h5>
+                                <p class="text-gray-700 leading-relaxed">Scalloped knob, 22 mm across, 10 mm tall, six scoops. The shaft hole is a D shape: 6.0 mm round with a 4.5 mm flat (measured from our encoder STL), hole depth 5.0 mm. Fit-test rings were generated so the clearance can be tuned before printing the real knob.</p>
+                                <h5 class="font-bold text-gray-800 mt-2">Case</h5>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Layouts:</strong> open deck, sloped console, handheld and closed box, all sized around the 95 x 65 mm breadboard. The handheld (about 132 x 80 mm) became the printable base and top plate.</li><li><strong>Measurements used:</strong> breadboard 10 mm thick; 1.3" OLED 35 x 32 mm; NAV button 12 x 12 mm with a 13 mm cap; buzzer 12 mm across and 8 mm thick; encoder bushing assumed M7 (not measured); USB opening 20 x 10 mm in the right wall.</li><li><strong>Printing was too slow</strong> (about 15 hours), so we moved to laser cutting 6 mm acrylic. The lid became a flat SVG.</li><li><strong>Laser-cut versions generated:</strong> a finger-joint box; a chamfered finger-joint box with a bigger 10.5 mm chamfer (a 6 mm sheet cannot hold fingers in the original 10 mm corner panel); a stack of 3 mm or 6 mm layers cut from the original shell; and a rounded stack of seven wall rings on a floor, with the lid and screen frames glued under it.</li><li><strong>Lid features that a flat sheet cannot make</strong> (screen frame, buzzer ring) are cut as extra layers glued under the lid.</li></ul>
+                                <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg"><p class="text-amber-800 leading-relaxed">The laser files were checked by assembling the parts on a computer. They have not been cut and fitted yet. A 6 mm lid may leave too little thread for the encoder nuts, so check the bushing length first.</p></div>
+                                <h5 id="v2-fusion" class="font-bold text-gray-800 mt-6 scroll-mt-28">How we made the 3D model (Fusion screenshots)</h5>
+<p class="text-gray-700 leading-relaxed">We modelled the case in Autodesk Fusion. These are screenshots from our own work, in the order we did it: draw the outline, make it a box, add the screw holes, then turn the sizes into named parameters so the case can be resized by changing a few numbers. This is why we could change the case when the breadboard or the parts changed.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4"><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-1-outline.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-1-outline.webp" alt="Step 1: the outline" width="748" height="574" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Step 1: the outline.</strong> A 110 x 65 mm rectangle with a 10 mm cut on each of the four corners. Every dimension is a number we can change later.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-2-box.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-2-box.webp" alt="Step 2: the box" width="1100" height="684" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Step 2: the box.</strong> The outline is extruded up and shelled into a hollow box with a 3 mm wall (the 3 being typed in the box on the right).</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-3-screw-holes.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-3-screw-holes.webp" alt="Step 3: screw holes" width="777" height="519" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Step 3: screw holes.</strong> Four 3 mm holes, one near each corner, placed by dimensions measured from the corner cuts.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-4-parameters.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-4-parameters.webp" alt="Step 4: named parameters" width="1100" height="304" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Step 4: named parameters.</strong> The sizes are saved as named parameters: box length 110 mm, corner cut 10 mm, box height 40 mm, corner angle 135 degrees, hole diameter 3 mm, and hole positions worked out from the box size. Change one number and the whole model follows.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-5-base-top.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-5-base-top.webp" alt="The base from above" width="1100" height="660" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">The base from above.</strong> The base with the 3 mm wall and four round screw posts, one in each corner.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-6-parameters-later.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-6-parameters-later.webp" alt="Parameters, later version" width="1100" height="441" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Parameters, later version.</strong> The parameters after changes: hole diameter 2.8 mm, wall thickness 3 mm and BBx = 95 mm (the breadboard length). The model now follows the breadboard size.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-7-base-and-lid.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-7-base-and-lid.webp" alt="Base and lid plate" width="922" height="680" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Base and lid plate.</strong> The base (below) and the lid plate (above). The lid has the screen window, a ring of buzzer holes, two round knob holes with a square holder around each, a square NAV button hole in the middle and four screw holes.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/fusion-8-lid-sketch.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/fusion-8-lid-sketch.webp" alt="Sketching the lid" width="1060" height="560" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Sketching the lid.</strong> The lid sketch in a second file (telegraph_shell): the 110 x 65 mm outline with 10 mm corner cuts at 135 degrees, two 7.30 mm knob holes, 2.80 mm screw holes, the screen window, and a 7 mm square for the NAV button.</figcaption></figure></div>
+<h5 id="v2-sketches" class="font-bold text-gray-800 mt-6 scroll-mt-28">Design sketches and renders</h5>
+<p class="text-gray-700 leading-relaxed">The pictures below are our design drawings and renders, in the order we made them. They are computer-made views of the 3D models, not photographs. Click a picture to open it full size.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4"><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/layouts-four-options.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/layouts-four-options.webp" alt="Four layouts around the 95 x 65 mm breadboard" width="1100" height="786" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Four layouts around the 95 x 65 mm breadboard.</strong> A open deck, B sloped console, C compact two-thumb handheld, D closed box. Case sizes were placeholders at this stage (the breadboard thickness was assumed). We chose layout C.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/first-assembled-concept.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/first-assembled-concept.webp" alt="First assembled concept" width="1100" height="742" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">First assembled concept.</strong> Solid, x-ray, top view and exploded view of the first concept: two knobs, the NAV button in the middle, the OLED at the top and the buzzer holes at the top right. Sizes and positions were placeholders.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/knob-ideas.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/knob-ideas.webp" alt="Six knob ideas" width="1100" height="777" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Six knob ideas.</strong> Top and side views of knob ideas A to F for the 6.0 mm D-shaft (flat 4.5 mm). We made F, the scalloped knob (22 mm across, 10 mm tall, six finger scoops).</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/scalloped-knob.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/scalloped-knob.webp" alt="Scalloped knob, first version" width="1100" height="396" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Scalloped knob, first version.</strong> From above, from below and a cross-section. This first version had an 8 mm deep hole; the final knob uses the 5.0 mm hole depth measured from our encoder STL.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/case-c-printable.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/case-c-printable.webp" alt="Layout C as a printable case" width="1100" height="733" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Layout C as a printable case.</strong> Base and top plate with the angular corners (easier for the printer): screen window and frame, two knob holes, NAV hole, buzzer holes, screw posts and the USB opening in the end wall.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/laser-chamfer-exploded.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/laser-chamfer-exploded.webp" alt="Laser-cut finger-joint box (6 mm acrylic)" width="1100" height="733" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Laser-cut finger-joint box (6 mm acrylic).</strong> Eight wall panels with interlocking fingers, a floor with tabs, the lid, and a locator ring under the lid. The corner panels are wider than the original chamfer so a 6 mm sheet can hold fingers.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/laser-chamfer-sheet.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/laser-chamfer-sheet.webp" alt="Cutting sheet for the finger-joint box" width="1100" height="777" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Cutting sheet for the finger-joint box.</strong> All parts on one sheet, 324 x 228 mm, laid out for the laser cutter.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/stacked-original-assembled.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/stacked-original-assembled.webp" alt="Stacked layers: the original shell shape" width="1100" height="733" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Stacked layers: the original shell shape.</strong> The original shell with its chamfered corners, cut as eight 6 mm layers glued on top of each other, with the lid on top. The USB opening is cut in two of the layers.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/stacked-original-sheet.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/stacked-original-sheet.webp" alt="The different layers of the stack" width="1100" height="492" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">The different layers of the stack.</strong> One of each different layer: floor, wall rings (the number to cut is shown), the ring with the USB opening, the lid plate and the screen and buzzer frames.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/rounded-assembled.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/rounded-assembled.webp" alt="Rounded stacked case (assembled)" width="1100" height="733" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Rounded stacked case (assembled).</strong> A floor, seven wall rings and the lid in 6 mm acrylic with rounded corners. The picture shades the stack smoothly, the real edges are flat.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/rounded-exploded.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/rounded-exploded.webp" alt="Rounded stacked case (exploded)" width="1100" height="733" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Rounded stacked case (exploded).</strong> The floor and wall rings stacked, with the lid and the frame layer under it.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/rounded-sheet.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/rounded-sheet.webp" alt="Cutting sheet for the rounded case" width="1100" height="621" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Cutting sheet for the rounded case.</strong> Floor, seven wall rings (two with the USB opening), lid and the frame layer.</figcaption></figure><figure class="border border-gray-200 rounded-lg overflow-hidden bg-white"><a href="docs-images/lid-layers.webp" target="_blank" rel="noopener" class="block"><img src="docs-images/lid-layers.webp" alt="Where the lid frames go" width="900" height="620" loading="lazy" class="block w-full h-auto bg-gray-50"></a><figcaption class="p-3 text-sm text-gray-700"><strong class="text-gray-900">Where the lid frames go.</strong> The lid plate (grey) with the screen frame (blue) and buzzer ring (orange) in their true positions, so they can be glued under the lid in the right place.</figcaption></figure></div>
+<h5 id="v2-downloads" class="font-bold text-gray-800 mt-6 scroll-mt-28">Downloads: 3D models and cutting files</h5>
+<p class="text-gray-700 leading-relaxed">Everything we made for the case, so anyone can print or cut it. The whole set is also in <a href="docs-files.zip" download class="text-indigo-700 underline">docs-files.zip</a>. Files marked "not cut yet" were checked on a computer only.</p>
+<h6 class="font-semibold text-gray-800 mt-4">Knob (3D printing, STL)</h6><p class="text-sm text-gray-600 mb-2">Millimetres. The shaft hole is a 6.0 mm D-shape with a 4.5 mm flat, 5.0 mm deep, taken from our encoder STL.</p><div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">File</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">What it is</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Status</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/knob/scalloped_knob_print.stl" download class="text-indigo-700 hover:underline break-all">scalloped_knob_print.stl</a><div class="text-xs text-gray-500">117 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Scalloped knob turned upside down for printing: smooth top on the bed, no supports.</td><td class="px-3 py-2 text-gray-700 align-top">Generated and checked on a computer. Print the fit-test rings first.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/knob/scalloped_knob_as_designed.stl" download class="text-indigo-700 hover:underline break-all">scalloped_knob_as_designed.stl</a><div class="text-xs text-gray-500">117 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">The same knob the way up it is used.</td><td class="px-3 py-2 text-gray-700 align-top">Same as above.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/knob/fit_test_rings.stl" download class="text-indigo-700 hover:underline break-all">fit_test_rings.stl</a><div class="text-xs text-gray-500">148 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Small rings with different D-hole clearances to find the right fit for the shaft.</td><td class="px-3 py-2 text-gray-700 align-top">Generated. Not measured on a real shaft yet.</td></tr></tbody></table></div><h6 class="font-semibold text-gray-800 mt-4">Handheld case (3D printing, STL)</h6><p class="text-sm text-gray-600 mb-2">Layout C around the 95 x 65 mm breadboard, about 132 x 80 mm, with the 1.3" screen.</p><div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">File</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">What it is</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Status</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/case/case_C_base.stl" download class="text-indigo-700 hover:underline break-all">case_C_base.stl</a><div class="text-xs text-gray-500">25 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Base with the breadboard pocket, four screw posts and the USB opening.</td><td class="px-3 py-2 text-gray-700 align-top">Printable but long to print. Wall thickness, hole sizes and the USB side were assumed, see the case section.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/case/case_C_top_plate_oled13_print.stl" download class="text-indigo-700 hover:underline break-all">case_C_top_plate_oled13_print.stl</a><div class="text-xs text-gray-500">65 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Top plate (printed face-down) with the screen window and frame, knob holes, NAV hole and buzzer holes.</td><td class="px-3 py-2 text-gray-700 align-top">Same as above.</td></tr></tbody></table></div><h6 class="font-semibold text-gray-800 mt-4">Laser cutting (SVG, millimetres, red 0.1 mm line)</h6><p class="text-sm text-gray-600 mb-2">All 6 mm acrylic unless the name says otherwise. No kerf compensation is added.</p><div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">File</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">What it is</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Status</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/telegraph_case_rounded_T6.svg" download class="text-indigo-700 hover:underline break-all">telegraph_case_rounded_T6.svg</a><div class="text-xs text-gray-500">78 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Rounded case: floor, seven wall rings, lid and the screen / buzzer frame layer.</td><td class="px-3 py-2 text-gray-700 align-top">Checked on a computer for fit. Not cut yet.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/stacked_original_6mm_no_posts.svg" download class="text-indigo-700 hover:underline break-all">stacked_original_6mm_no_posts.svg</a><div class="text-xs text-gray-500">45 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">The original shell shape (chamfered corners) as stacked 6 mm layers, without the corner posts.</td><td class="px-3 py-2 text-gray-700 align-top">Checked on a computer. Not cut yet.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/stacked_original_6mm_with_posts.svg" download class="text-indigo-700 hover:underline break-all">stacked_original_6mm_with_posts.svg</a><div class="text-xs text-gray-500">93 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">The same, with the corner posts (loose rings).</td><td class="px-3 py-2 text-gray-700 align-top">Checked on a computer. Not cut yet.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/telegraph_box_chamfer_laser_T6.svg" download class="text-indigo-700 hover:underline break-all">telegraph_box_chamfer_laser_T6.svg</a><div class="text-xs text-gray-500">25 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Finger-joint box with chamfered corners: wall panels, floor, lid, locator ring and frame layer.</td><td class="px-3 py-2 text-gray-700 align-top">Checked on a computer. Not cut yet.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/telegraph_lid_laser.svg" download class="text-indigo-700 hover:underline break-all">telegraph_lid_laser.svg</a><div class="text-xs text-gray-500">1 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Lid only, from the first printed-shell lid (3 mm plate).</td><td class="px-3 py-2 text-gray-700 align-top">Cut from the STL slice. Not cut yet.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/telegraph_lid_se_laser.svg" download class="text-indigo-700 hover:underline break-all">telegraph_lid_se_laser.svg</a><div class="text-xs text-gray-500">1 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Lid only, second variant (screen window 35 x 18 mm, extra small holes).</td><td class="px-3 py-2 text-gray-700 align-top">Same.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/laser/telegraph_lid_sss_laser.svg" download class="text-indigo-700 hover:underline break-all">telegraph_lid_sss_laser.svg</a><div class="text-xs text-gray-500">1 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Lid only, third variant.</td><td class="px-3 py-2 text-gray-700 align-top">Same.</td></tr></tbody></table></div><h6 class="font-semibold text-gray-800 mt-4">3D viewers (open in a browser, drag to rotate)</h6><p class="text-sm text-gray-600 mb-2">Single HTML files, no install.</p><div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">File</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">What it is</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Status</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/viewers/layout_C_handheld_3d.html" download class="text-indigo-700 hover:underline break-all">layout_C_handheld_3d.html</a><div class="text-xs text-gray-500">794 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Interactive 3D view of the handheld layout C with the breadboard inside.</td><td class="px-3 py-2 text-gray-700 align-top">Concept with placeholder sizes.</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/viewers/first_assembled_concept_3d.html" download class="text-indigo-700 hover:underline break-all">first_assembled_concept_3d.html</a><div class="text-xs text-gray-500">865 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Interactive view of the first assembled concept (solid, x-ray, exploded).</td><td class="px-3 py-2 text-gray-700 align-top">Concept with placeholder sizes.</td></tr></tbody></table></div><h6 class="font-semibold text-gray-800 mt-4">Scripts (to regenerate everything)</h6><p class="text-sm text-gray-600 mb-2">Python scripts that made the files above. Change the numbers at the top and run them again. They need Python with shapely, manifold3d and trimesh, and the shell and lid STL files for the case scripts.</p><div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">File</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">What it is</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Status</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/scripts/make_scalloped_knob.py" download class="text-indigo-700 hover:underline break-all">make_scalloped_knob.py</a><div class="text-xs text-gray-500">5 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Makes the knob and the fit-test rings.</td><td class="px-3 py-2 text-gray-700 align-top"></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/scripts/make_case_C.py" download class="text-indigo-700 hover:underline break-all">make_case_C.py</a><div class="text-xs text-gray-500">6 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Makes the printable handheld case.</td><td class="px-3 py-2 text-gray-700 align-top"></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/scripts/make_laser_box2.py" download class="text-indigo-700 hover:underline break-all">make_laser_box2.py</a><div class="text-xs text-gray-500">8 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Makes the finger-joint box (reads the lid STL).</td><td class="px-3 py-2 text-gray-700 align-top"></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/scripts/make_layers6.py" download class="text-indigo-700 hover:underline break-all">make_layers6.py</a><div class="text-xs text-gray-500">7 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Slices the original shell and lid STL into 6 mm layers.</td><td class="px-3 py-2 text-gray-700 align-top"></td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 align-top"><a href="docs-files/scripts/make_laser_box3.py" download class="text-indigo-700 hover:underline break-all">make_laser_box3.py</a><div class="text-xs text-gray-500">7 KB</div></td><td class="px-3 py-2 text-gray-700 align-top">Makes the rounded stacked case (reads the lid STL).</td><td class="px-3 py-2 text-gray-700 align-top"></td></tr></tbody></table></div>
+<h4 id="v2-pin" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">10. PIN login system (on hold)</h4>
+                                <p class="text-gray-700 leading-relaxed">A PIN checked only on the device or the website would be cosmetic, because on a public broker anyone can publish as anyone. So the design moves the check to something the sender does not control.</p>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li><strong>Private broker:</strong> HiveMQ Cloud. Each device and the website logs in with the serial as user name and its PIN as password.</li><li><strong>Sender in the topic:</strong> messages go to .../dm/&lt;to&gt;/from/&lt;sender&gt; and announcements to .../announce/&lt;teacher&gt;. The broker only lets a user publish where the last part is their own serial (using the placeholder for the logged-in user name), so the sender cannot be faked. The payload is only the text.</li><li><strong>Two roles</strong> on the broker: student and teacher. Teachers may also publish announcements.</li><li><strong>PIN service:</strong> a free Cloudflare Worker. It lets a student check or change their own PIN and lets an admin add users, reset a PIN, disable or delete, with an action log. It stores only a salted hash of each PIN, locks an account for 15 minutes after 5 wrong tries, and checks admins through the Google sign-in of this site.</li><li><strong>First login:</strong> students get a random 6-digit starting PIN and must choose their own the first time. A forgotten PIN is reset by an admin to a new random one that must be changed again.</li><li><strong>Admin page:</strong> a page on this site, shown only to admin accounts, to search students and reset PINs.</li></ul>
+                                <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg"><p class="text-amber-800 leading-relaxed"><strong>Status:</strong> built and tested against fake services (the Worker with a fake database, broker and Google token; the website and firmware compiled). Not deployed. It needs the HiveMQ roles, an API token and the Cloudflare setup. The device and the Worker also still need certificate checking added before real use. Until then the public broker is used.</p></div>
+                                <h4 id="v2-lessons" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">11. Problems we hit and how we fixed them</h4>
+                                <div class="overflow-x-auto border border-gray-200 rounded-lg"><table class="w-full text-sm"><thead><tr><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Problem</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Cause</th><th class="text-left px-3 py-2 font-semibold text-gray-800 bg-gray-100 border-b">Fix</th></tr></thead><tbody><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Knob gave no counts, pins read wrong</td><td class="px-3 py-2 text-gray-700 align-top">Encoder powered from the wrong breadboard rails</td><td class="px-3 py-2 text-gray-700 align-top">Rewired 3V3 and GND to the correct rails; added a wiring test sketch</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Knob missed or doubled clicks</td><td class="px-3 py-2 text-gray-700 align-top">Our encoder rests at both 00 and 11 between clicks; contact bounce</td><td class="px-3 py-2 text-gray-700 align-top">Own 1 ms sampler with a debounce; a click counts when the knob reaches a rest state</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">OLED showed static</td><td class="px-3 py-2 text-gray-700 align-top">The 1.3" module needs the SH1106 driver</td><td class="px-3 py-2 text-gray-700 align-top">One-line driver switch in the sketch</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">OLED stopped working after rewiring</td><td class="px-3 py-2 text-gray-700 align-top">Its 3V3 and GND wires had been moved</td><td class="px-3 py-2 text-gray-700 align-top">Rebuilt the power rails; I2C scanner sketch to confirm address 0x3C</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Compile error: redefinition</td><td class="px-3 py-2 text-gray-700 align-top">Two sketch files in one folder</td><td class="px-3 py-2 text-gray-700 align-top">One sketch per folder, folder name equal to the .ino name</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Message from the web could run code</td><td class="px-3 py-2 text-gray-700 align-top">Chat log was built with innerHTML</td><td class="px-3 py-2 text-gray-700 align-top">Chat log now uses text only</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">Lists did not scroll on the device (reported)</td><td class="px-3 py-2 text-gray-700 align-top">Cause not found in the code</td><td class="px-3 py-2 text-gray-700 align-top">Lists now scroll with either knob and print a line to the serial monitor each time; waiting for a retest</td></tr><tr class="border-b last:border-0"><td class="px-3 py-2 text-gray-700 align-top">3D printing too slow (about 15 h)</td><td class="px-3 py-2 text-gray-700 align-top">Large solid shell</td><td class="px-3 py-2 text-gray-700 align-top">Moved to laser-cut 6 mm acrylic</td></tr></tbody></table></div>
+                                <h4 id="v2-open" class="text-xl font-bold text-gray-800 pt-4 scroll-mt-28">12. Open items</h4>
+                                <ul class="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed"><li>Retest scrolling in Send to, Inbox and Menu on the real device and report which knob moves them.</li><li>Deploy the private broker and PIN service (HiveMQ roles and token, Cloudflare Worker), then switch the website and sketch to the PIN version.</li><li>Add teacher names and serials to the directory.</li><li>Cut and fit the laser case; measure the encoder bushing length and the exact OLED visible area.</li><li>Add certificate checking to the device and the Worker.</li><li>Remove the Wi-Fi password echo from the serial output in the sketch.</li></ul>
                             </div>
 
                             <!-- SECTION: Circuit Design -->
@@ -3076,7 +3134,7 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
             <section class="py-20 bg-slate-50">
                 <div class="container mx-auto px-6 max-w-3xl text-center fade-in">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">Live Telegraph</h2>
-                    <p class="text-gray-600 mb-8">Send a real-time message directly to the ESP32 device.</p>
+                    <p class="text-gray-600 mb-8">Send a message to a Lumini device by its serial number, and read what comes back.</p>
                     <div class="mb-8">
                         <span id="mqtt-status" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                             <span class="w-2 h-2 mr-2 bg-yellow-500 rounded-full animate-pulse"></span>
@@ -3084,22 +3142,43 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
                         </span>
                     </div>
                     <div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-xl text-left">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="telegraph-msg" placeholder="Type (e.g. SOS)" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" onkeyup="this.value = this.value.toUpperCase();">
+
+                        <!-- Who you are: the signed-in name, plus the device serial you speak as -->
+                        <div class="mb-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                            <p class="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-1">You</p>
+                            <p id="tg-name" class="text-lg font-bold text-gray-800">Guest</p>
+                            <p id="tg-name-hint" class="text-xs text-gray-500 mb-3">Sign in to show your name in the chat.</p>
+                            <label for="tg-serial" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Your serial number</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="tg-serial" maxlength="6" placeholder="e.g. 47 or T33" autocomplete="off"
+                                       class="flex-1 p-2.5 border border-gray-300 rounded-lg uppercase focus:ring-2 focus:ring-indigo-500">
+                                <button type="button" onclick="saveTelegraphSerial()" class="px-4 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition">Save</button>
+                            </div>
+                            <p id="tg-serial-msg" class="text-xs mt-2 text-gray-500">Students use digits. Teachers start with T.</p>
                         </div>
-                        <p class="text-xs text-gray-500 mb-2 font-semibold">QUICK COMMANDS:</p>
-                        <div class="grid grid-cols-3 gap-2 mb-6">
-                            <button onclick="sendPreset('EMOJI_WINK')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">😉 Wink</button>
-                            <button onclick="sendPreset('EMOJI_HEART')" class="p-2 text-sm bg-pink-50 text-pink-700 rounded hover:bg-pink-100 border border-pink-200 transition">❤️ Heart</button>
-                            <button onclick="sendPreset('EMOJI_LAUGH')" class="p-2 text-sm bg-yellow-50 text-yellow-700 rounded hover:bg-yellow-100 border border-yellow-200 transition">😂 Laugh</button>
+
+                        <label for="tg-recipient" class="block text-sm font-medium text-gray-700 mb-2">Send to (type a name or a serial number)</label>
+                        <input type="text" id="tg-recipient" list="tg-contacts" maxlength="40" placeholder="e.g. Zdrimet or 5623" autocomplete="off"
+                               class="w-full p-3 mb-4 border border-gray-300 rounded-lg uppercase focus:ring-2 focus:ring-indigo-500">
+                        <datalist id="tg-contacts"></datalist>
+
+                        <label for="telegraph-msg" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="telegraph-msg" maxlength="100" placeholder="Type (e.g. SOS)" class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" onkeyup="this.value = this.value.toUpperCase();" onkeydown="if (event.key === 'Enter') sendTelegraph();">
+                        </div>
+                        <p class="text-xs text-gray-500 mb-2 font-semibold">QUICK PHRASES:</p>
+                        <div class="grid grid-cols-2 gap-2 mb-6">
+                            <button type="button" onclick="sendPhrase('WHAT ARE YOU DOING?')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">What are you doing?</button>
+                            <button type="button" onclick="sendPhrase('WHERE ARE YOU AT?')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">Where are you at?</button>
+                            <button type="button" onclick="sendPhrase('ON MY WAY')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">On my way</button>
+                            <button type="button" onclick="sendPhrase('BE RIGHT BACK')" class="p-2 text-sm bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 border border-indigo-200 transition">Be right back</button>
                         </div>
                         <button onclick="sendTelegraph()" class="w-full bg-indigo-600 text-white py-3.5 rounded-xl font-bold hover:bg-indigo-700 transform hover:scale-[1.02] transition-all shadow-lg flex justify-center items-center gap-2">
                             <span>TRANSMIT SIGNAL</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         </button>
                         <div class="mt-8 text-left">
-                            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Incoming Transmissions</h3>
+                            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Chat</h3>
                             <div id="comm-log" class="h-48 bg-gray-900 rounded-xl p-4 overflow-y-auto font-mono text-sm shadow-inner border border-gray-700 space-y-2">
                                 <div class="text-gray-500 italic text-xs text-center mt-10 opacity-50">Waiting for signals...</div>
                             </div>
@@ -3538,11 +3617,497 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
         let toastTimer;
         const commLog = document.getElementById('comm-log');
 
+        // ---------------------------------------------------------
+        // LIVE TELEGRAPH: talks to Lumini devices by serial number.
+        // Topics and message format must match the Arduino sketch:
+        //   a message to one device:  morse/tj-project-final/dm/<serial>
+        //   an announcement to all:   morse/tj-project-final/announce
+        //   payload:                  <senderSerial>|<senderName>|<text>
+        // ---------------------------------------------------------
+        const TG_ROOT = "morse/tj-project-final";    // same as TOPIC_ROOT in the sketch
+        const TG_REQUIRE_LOGIN = false;              // true = only signed-in users can send
+        const TG_MAX_LEN = 100;                      // same as MAX_MESSAGE_LEN in the sketch
+        const TG_SERIAL_RE = /^(\d{1,6}|T\d{1,5})$/;  // students: digits (47). teachers: T + digits (T33)
+        // Every student from batches 2018-2026. serial = badge number + 2-digit year (badge 56 in 2023 -> 5623).
+        // Teachers are not listed yet: a serial that starts with T (T33) still works, it just has no name here.
+        const TG_DIRECTORY = [
+            { serial: "118", name: "Dechen Lhendup" },
+            { serial: "218", name: "Dechen Wangmo" },
+            { serial: "318", name: "Deki Wangmo" },
+            { serial: "418", name: "Drupthob Jampa Goenpo Wangdi" },
+            { serial: "518", name: "Jigme Rinzin" },
+            { serial: "618", name: "Karma Yeshey Choden" },
+            { serial: "718", name: "Karma Gyeltshen" },
+            { serial: "818", name: "Karma Pelden" },
+            { serial: "918", name: "Kencho Wangdi" },
+            { serial: "1018", name: "Kezang Dechen" },
+            { serial: "1118", name: "Kinga Norbu" },
+            { serial: "1218", name: "Kinley Pem" },
+            { serial: "1318", name: "Kinley Wangdi" },
+            { serial: "1418", name: "Pemba Tshering" },
+            { serial: "1518", name: "Phuntsho Wangmo" },
+            { serial: "1618", name: "Riwang choki Tshering" },
+            { serial: "1718", name: "Sapna Bhujel" },
+            { serial: "1818", name: "Serthup Pelbar" },
+            { serial: "1918", name: "Sonam Choki" },
+            { serial: "2018", name: "Sonam Tshering Dumjan" },
+            { serial: "2118", name: "Sonam Norbu" },
+            { serial: "2218", name: "Sonam Tshomo Tshering" },
+            { serial: "2318", name: "Sonam Wangchuk" },
+            { serial: "2418", name: "Tandin Gyeltshen" },
+            { serial: "2518", name: "Tashi Lhundup" },
+            { serial: "2618", name: "Tempa Wangdi" },
+            { serial: "2718", name: "Thinley Norbu Jamtsho" },
+            { serial: "2818", name: "Tshendu Dorji" },
+            { serial: "2918", name: "Tshering Yangden" },
+            { serial: "3018", name: "Tshokey Dorji" },
+            { serial: "3118", name: "Yonten Chophel" },
+            { serial: "3218", name: "Yonten Chogyal" },
+            { serial: "119", name: "Choni Samdup" },
+            { serial: "219", name: "Jambay Dema" },
+            { serial: "319", name: "Jigme Dechen" },
+            { serial: "419", name: "Karma Jamtsho" },
+            { serial: "519", name: "Karma Zam" },
+            { serial: "619", name: "Kinley Yangdon" },
+            { serial: "719", name: "Kinley Zangmo" },
+            { serial: "819", name: "Kinzang Thinley" },
+            { serial: "919", name: "Kinzang Wangchuk" },
+            { serial: "1019", name: "Kunzang Choden" },
+            { serial: "1119", name: "Nima Dorji" },
+            { serial: "1219", name: "Nima Yoezer" },
+            { serial: "1319", name: "Pema Choden" },
+            { serial: "1419", name: "Pema Rinzin Deolkar" },
+            { serial: "1519", name: "Pema Yudon" },
+            { serial: "1619", name: "Sonam Zangmo" },
+            { serial: "1719", name: "Tandin Tobgay" },
+            { serial: "1819", name: "Tenzin Rabgay" },
+            { serial: "1919", name: "Tshering Lhaden" },
+            { serial: "2019", name: "Tshering Nidup" },
+            { serial: "2119", name: "Ugyen Dema" },
+            { serial: "2219", name: "Ugyen Jigme Samphel" },
+            { serial: "2319", name: "Ugyen Lhamo" },
+            { serial: "2419", name: "Ugyen Wangmo" },
+            { serial: "2519", name: "Usha Kiran Limboo" },
+            { serial: "2619", name: "Younten Thinley" },
+            { serial: "2719", name: "Zhenphen Norbu" },
+            { serial: "120", name: "Chencho Wangdi" },
+            { serial: "220", name: "Cheying Yeshi Dema" },
+            { serial: "320", name: "Chimi Zam" },
+            { serial: "420", name: "Choki Wangmo" },
+            { serial: "520", name: "Damzang Chimi Seldon" },
+            { serial: "620", name: "Deki Lhazom" },
+            { serial: "720", name: "Deki Seldon" },
+            { serial: "820", name: "Dhan Bahadur Rana Mongar" },
+            { serial: "920", name: "Dhan Bdr Rai" },
+            { serial: "1020", name: "Jigme Chogyel" },
+            { serial: "1120", name: "Jigme Seldon" },
+            { serial: "1220", name: "Karma Deki" },
+            { serial: "1320", name: "Khenrab Tenzin Dhendup" },
+            { serial: "1420", name: "Kinley Sonam" },
+            { serial: "1520", name: "Kinley Wangmo" },
+            { serial: "1620", name: "Kinley Yangchen" },
+            { serial: "1720", name: "Leki Wangmo" },
+            { serial: "1820", name: "Ngawang Pemo Dukpa" },
+            { serial: "1920", name: "Ogyen Choden" },
+            { serial: "2020", name: "Parnita Ghalley" },
+            { serial: "2120", name: "Pema Ugyen Dendup" },
+            { serial: "2220", name: "Pema Yangchen" },
+            { serial: "2320", name: "Phub Tshering" },
+            { serial: "2420", name: "Premika Rai" },
+            { serial: "2520", name: "Purna Bahadur Subedi" },
+            { serial: "2620", name: "Rashmika Chhetri" },
+            { serial: "2720", name: "Rigsel Dema" },
+            { serial: "2820", name: "Rinchen Namgay" },
+            { serial: "2920", name: "Rinchen Yoedsel Pelzom" },
+            { serial: "3020", name: "Rinzin Wangmo" },
+            { serial: "3120", name: "Sangay Dema" },
+            { serial: "3220", name: "Sangay Wangdi" },
+            { serial: "3320", name: "Sonam Choki" },
+            { serial: "3420", name: "Sonam Pelmo" },
+            { serial: "3520", name: "Sonam Tshomo" },
+            { serial: "3620", name: "Sonam Wangchuk" },
+            { serial: "3720", name: "Sonam Zangmo" },
+            { serial: "3820", name: "Sumjay" },
+            { serial: "3920", name: "Tandin Dema" },
+            { serial: "4020", name: "Tandin Tashi Wangmo" },
+            { serial: "4120", name: "Tandin Wangmo" },
+            { serial: "4220", name: "Tenzin Rabgay Zangmo" },
+            { serial: "4320", name: "Thinley Wozer Dorji" },
+            { serial: "4420", name: "Tshering Choden" },
+            { serial: "4520", name: "Tshering Choden Wangmo" },
+            { serial: "4620", name: "Tshering Wangmo" },
+            { serial: "4720", name: "Ugyen Tshering" },
+            { serial: "4820", name: "Yangdon" },
+            { serial: "4920", name: "Yeshey Dolma Tshering" },
+            { serial: "5020", name: "Yeshey Dorji" },
+            { serial: "5120", name: "Yeshey Lhamo" },
+            { serial: "121", name: "Alka Subba" },
+            { serial: "221", name: "Amir Rai" },
+            { serial: "321", name: "Anuskha Rai" },
+            { serial: "421", name: "Babita Ghalley" },
+            { serial: "521", name: "Chencho Tshering Chokgyel" },
+            { serial: "621", name: "Chimi Yoesel Phuntsho" },
+            { serial: "721", name: "Damcho Zam" },
+            { serial: "821", name: "Damchoe Yedzhin Norbu" },
+            { serial: "921", name: "Desum Tendhag" },
+            { serial: "1021", name: "Drimed Kuenden" },
+            { serial: "1121", name: "Dorji Yangzom" },
+            { serial: "1221", name: "Dorji Yangki" },
+            { serial: "1321", name: "Dorji Ngawang Choden Namgyal" },
+            { serial: "1421", name: "Jamyang Lhendup" },
+            { serial: "1521", name: "Jetsuen Lhazay Pema" },
+            { serial: "1621", name: "Jigme Thinley Namgyel" },
+            { serial: "1721", name: "Jigme Yoezer" },
+            { serial: "1821", name: "Jigme Tobgyal" },
+            { serial: "1921", name: "Jitsun Dolkar" },
+            { serial: "2021", name: "Junu Ghalley" },
+            { serial: "2121", name: "Karma Tshechi" },
+            { serial: "2221", name: "Karma Thinley Tobden" },
+            { serial: "2321", name: "Kezang Nima" },
+            { serial: "2421", name: "Kinley Dorji" },
+            { serial: "2521", name: "Kuenam Yoesel Wangmo" },
+            { serial: "2621", name: "Kuenzang Kuenphel Norbu" },
+            { serial: "2721", name: "Mon Limbu" },
+            { serial: "2821", name: "Namgay Lham" },
+            { serial: "2921", name: "Namgay Lhamo" },
+            { serial: "3021", name: "Namgay Wangmo" },
+            { serial: "3121", name: "Rigzin Choden" },
+            { serial: "3221", name: "Rigzin Kinzang Thinley" },
+            { serial: "3321", name: "Rinzin Wangchuk" },
+            { serial: "3421", name: "Sangay Wangchuk" },
+            { serial: "3521", name: "Serchey Wangmo Lhazom" },
+            { serial: "3621", name: "Shyine Kundareaka" },
+            { serial: "3721", name: "Singye Sherab" },
+            { serial: "3821", name: "Sita Mongar" },
+            { serial: "3921", name: "Sonam Tenzin" },
+            { serial: "4021", name: "Sonam Choden" },
+            { serial: "4121", name: "Sonam Jamtsho (S)" },
+            { serial: "4221", name: "Sonam Jamtsho (W)" },
+            { serial: "4321", name: "Tandin Dorji Tenzin" },
+            { serial: "4421", name: "Tashi Cheodron" },
+            { serial: "4521", name: "Tenzin Thinley Lhamo" },
+            { serial: "4621", name: "Tenzin Yoedchenma Dorjee" },
+            { serial: "4721", name: "Thinley Phuntsho" },
+            { serial: "4821", name: "Thinley Yoezer" },
+            { serial: "4921", name: "Thinley Wangdi" },
+            { serial: "5021", name: "Tshelthrim Dolkar" },
+            { serial: "5121", name: "Tsheltrim Lhamo" },
+            { serial: "5221", name: "Tshering Choki" },
+            { serial: "5321", name: "Tshering Dolkar Lhanzee" },
+            { serial: "5421", name: "Tshewang Norbu" },
+            { serial: "5521", name: "Tsheyang Palki Tshewang" },
+            { serial: "5621", name: "Wangchuk Namgyel" },
+            { serial: "5721", name: "Yeshey Tshogyal Wangda" },
+            { serial: "5821", name: "Yonten Thinley" },
+            { serial: "122", name: "Ashman Pakhring" },
+            { serial: "222", name: "Dago Penjor" },
+            { serial: "322", name: "Damcho Wangchuk" },
+            { serial: "422", name: "Dawa Nangsel Seldon" },
+            { serial: "522", name: "Deki Lhamo" },
+            { serial: "622", name: "Dema Tamang" },
+            { serial: "722", name: "Dorji Gyeltshen" },
+            { serial: "822", name: "Dorji Yangzom" },
+            { serial: "922", name: "Gephel Tsheltrim Namdhak" },
+            { serial: "1022", name: "Jalsha Powdyel" },
+            { serial: "1122", name: "Jamgyal Singye Wangchuck" },
+            { serial: "1222", name: "Jamyang Singye Wangchuck" },
+            { serial: "1322", name: "Jigme Phuntsho Wangchuk" },
+            { serial: "1422", name: "Karma Pema Dolkar" },
+            { serial: "1522", name: "Karma Zangmo" },
+            { serial: "1622", name: "Khendenma Dechen Wangchuk" },
+            { serial: "1722", name: "Kinley Tsheyang Seldon" },
+            { serial: "1822", name: "Kinzang Choden" },
+            { serial: "1922", name: "Kinzang Jigme" },
+            { serial: "2022", name: "Kuenga Eupel Wangmo" },
+            { serial: "2122", name: "Kuenzang Dolma" },
+            { serial: "2222", name: "Kusum Choden Lhendup" },
+            { serial: "2322", name: "Lawti Subba" },
+            { serial: "2422", name: "Leela Maya Jogi" },
+            { serial: "2522", name: "Lekso Dechen Wangdi" },
+            { serial: "2622", name: "Lhachey Dolma" },
+            { serial: "2722", name: "Lhaki Sonam" },
+            { serial: "2822", name: "Namkha Lham" },
+            { serial: "2922", name: "Nawang Tshesang Metho Gyeltshen" },
+            { serial: "3022", name: "Pema Jatsho" },
+            { serial: "3122", name: "Pema Yangki" },
+            { serial: "3222", name: "Pema Yoezer" },
+            { serial: "3322", name: "Sangay Lhamo Yangsel" },
+            { serial: "3422", name: "Sherab Zangmo (T)" },
+            { serial: "3522", name: "Sherab Lhamo" },
+            { serial: "3622", name: "Sherab Zangmo" },
+            { serial: "3722", name: "Somwang Tshering Palden" },
+            { serial: "3822", name: "Sonam Dema" },
+            { serial: "3922", name: "Sonam Deywa Jamtsho" },
+            { serial: "4022", name: "Sonam Jamtsho" },
+            { serial: "4122", name: "Sonam Lakhi Dema" },
+            { serial: "4222", name: "Sonam Lhaki" },
+            { serial: "4322", name: "Sonam P Choki" },
+            { serial: "4422", name: "Sonam Pema Yangchen" },
+            { serial: "4522", name: "Sonam Tshering" },
+            { serial: "4622", name: "Sonam Yangki" },
+            { serial: "4722", name: "Sonam Zangmo" },
+            { serial: "4822", name: "Tandin Wangmo" },
+            { serial: "4922", name: "Tenzin Nima Wangchuk" },
+            { serial: "5022", name: "Tshering Choden" },
+            { serial: "5122", name: "Tshering Lham" },
+            { serial: "5222", name: "Tshering Yangdon" },
+            { serial: "5322", name: "Tsheyang Lhaki Dolma" },
+            { serial: "5422", name: "Ugyen Gurung" },
+            { serial: "5522", name: "Ugyen Kuenjung Dorji Wangchuk" },
+            { serial: "5622", name: "Ugyen Pelden Dorji" },
+            { serial: "5722", name: "Ugyen Tenzin Norbu" },
+            { serial: "5822", name: "Yangchen Atisha Dorji" },
+            { serial: "5922", name: "Yeewong Yangchen Lhamo" },
+            { serial: "6022", name: "Yonten Thai" },
+            { serial: "6122", name: "Zenisha Peyzom Choki" },
+            { serial: "6222", name: "Yangtshel Wangyel" },
+            { serial: "123", name: "Aishna Chhetri" },
+            { serial: "223", name: "Anushika Rai" },
+            { serial: "323", name: "Chandan Kafley" },
+            { serial: "423", name: "Chimmi Dorji" },
+            { serial: "523", name: "Damchoe Wangmo" },
+            { serial: "623", name: "Deki Choden" },
+            { serial: "723", name: "Dorji Dradull" },
+            { serial: "823", name: "Droduel Jigme Lodey" },
+            { serial: "923", name: "Geeta Dungyel" },
+            { serial: "1023", name: "Jamyang Yuden Dorji" },
+            { serial: "1123", name: "Jangsem Dolkar" },
+            { serial: "1223", name: "Jigme Tshering" },
+            { serial: "1323", name: "Jigme Wangmo" },
+            { serial: "1423", name: "Karma Lhachoe" },
+            { serial: "1523", name: "Kezang Choden" },
+            { serial: "1623", name: "Kinley Pelden (Z)" },
+            { serial: "1723", name: "Kinley Pelden (C)" },
+            { serial: "1823", name: "Kinley Wangmo" },
+            { serial: "1923", name: "Kinzang Choden" },
+            { serial: "2023", name: "Kuenga Yul Jigme" },
+            { serial: "2123", name: "Kuenlay Tshering Dolkar" },
+            { serial: "2223", name: "Kuenzang Tobgyal Tenzin" },
+            { serial: "2323", name: "Nima Choden" },
+            { serial: "2423", name: "Nima Pelden" },
+            { serial: "2523", name: "Nima Yoezer" },
+            { serial: "2623", name: "Nima Zangmo Tamang" },
+            { serial: "2723", name: "Nisha Rizal" },
+            { serial: "2823", name: "Palden Gadhen Nima" },
+            { serial: "2923", name: "Parina Rai" },
+            { serial: "3023", name: "Pema Tshering" },
+            { serial: "3123", name: "Pema Yangdon" },
+            { serial: "3223", name: "Rada Rigsel Wangchuk" },
+            { serial: "3323", name: "Rigden Nima" },
+            { serial: "3423", name: "Sangay Choden" },
+            { serial: "3523", name: "Sangay Tharchen" },
+            { serial: "3623", name: "Sonam Rigzang Seday" },
+            { serial: "3723", name: "Sonam Wangchuk Ghaley" },
+            { serial: "3823", name: "Tandin Wangyal" },
+            { serial: "3923", name: "Tapasya Giri" },
+            { serial: "4023", name: "Tashi Rangdrup" },
+            { serial: "4123", name: "Tashi Tshering" },
+            { serial: "4223", name: "Tency Dorjee" },
+            { serial: "4323", name: "Tenzin Chodron" },
+            { serial: "4423", name: "Tenzin Tshering Drukar" },
+            { serial: "4523", name: "Tenzing Jangsel Dorjee" },
+            { serial: "4623", name: "Thinlay Paldhen Yoezer" },
+            { serial: "4723", name: "Thukten Dorji" },
+            { serial: "4823", name: "Tshering Chuki Yangzom" },
+            { serial: "4923", name: "Tshering Namgyel Dorji" },
+            { serial: "5023", name: "Tshering Yangtshok Lhazen" },
+            { serial: "5123", name: "Tsheyang Tshogyal" },
+            { serial: "5223", name: "Ugyen Rigpa Yeshey" },
+            { serial: "5323", name: "Yeewang Pinda Lhazin" },
+            { serial: "5423", name: "Yuelha Yeshey Tshogyal" },
+            { serial: "5523", name: "Yuthra Yuphel Lhamo" },
+            { serial: "5623", name: "Zdrimet Kuenga" },
+            { serial: "124", name: "Alejandro Esteves" },
+            { serial: "224", name: "Babita Ghalle" },
+            { serial: "324", name: "Bal Bahadur Subba" },
+            { serial: "424", name: "Chencho Norbu" },
+            { serial: "524", name: "Chimi Rinzin Wangmo" },
+            { serial: "624", name: "Dhanuka Homagai" },
+            { serial: "724", name: "Dorji Jatsho" },
+            { serial: "824", name: "Jampel Dorji" },
+            { serial: "924", name: "Jamyang Choedra" },
+            { serial: "1024", name: "Jamyang Dorji" },
+            { serial: "1124", name: "Jigdral Namgyal" },
+            { serial: "1224", name: "Jigme Chogyel" },
+            { serial: "1324", name: "Jigme Rigsel Dorji Tenzing" },
+            { serial: "1424", name: "Karma Jangchuk Yeshi" },
+            { serial: "1524", name: "Karma Tendel Dorji" },
+            { serial: "1624", name: "Karma Tshewang Lhamo" },
+            { serial: "1724", name: "Kezang Nima" },
+            { serial: "1824", name: "Khandro Karmo" },
+            { serial: "1924", name: "Kinzang Dema" },
+            { serial: "2024", name: "Kuenga Yangdon" },
+            { serial: "2124", name: "Muskan Karki" },
+            { serial: "2224", name: "Ngawang Sonam Dolkar" },
+            { serial: "2324", name: "Ngawang Tshogyal Phuentshok" },
+            { serial: "2424", name: "Nyizer Khandu" },
+            { serial: "2524", name: "Pelden Wangmo Dorji" },
+            { serial: "2624", name: "Pema Lhaki" },
+            { serial: "2724", name: "Pema Samdrup" },
+            { serial: "2824", name: "Pema Thinley" },
+            { serial: "2924", name: "Pema Yoeser Thinley" },
+            { serial: "3024", name: "Pema Zangmo" },
+            { serial: "3124", name: "Phuntsho Tenzin Wangmo" },
+            { serial: "3224", name: "Phuntshok Namgyel Dhendrup" },
+            { serial: "3324", name: "Rada Om" },
+            { serial: "3424", name: "Riggzin Jigme Jatsho" },
+            { serial: "3524", name: "Ritisha Thara" },
+            { serial: "3624", name: "Rohan Adhikari" },
+            { serial: "3724", name: "Rudra Mini Rai" },
+            { serial: "3824", name: "Sangay Lhazeen Dolma" },
+            { serial: "3924", name: "Sangay Yuden" },
+            { serial: "4024", name: "Sangsung Mongar" },
+            { serial: "4124", name: "Singye Lekzin Dolma" },
+            { serial: "4224", name: "Singye Wangmo" },
+            { serial: "4324", name: "Sonam Lhaden" },
+            { serial: "4424", name: "Sonam Lhazen Tobgay" },
+            { serial: "4524", name: "Sonam Pelkeath Lhazin" },
+            { serial: "4624", name: "Sonam Pelyang Zomkey" },
+            { serial: "4724", name: "Sonam Penjo Dorji" },
+            { serial: "4824", name: "Sonam Rigsel" },
+            { serial: "4924", name: "Sonam Yangden Wangmo" },
+            { serial: "5024", name: "Sonam Zangmo (SJ)" },
+            { serial: "5124", name: "Sonam Zangmo (W)" },
+            { serial: "5224", name: "Tandin Karma Lhazen" },
+            { serial: "5324", name: "Tenzin Tendel Yangzom" },
+            { serial: "5424", name: "Tenzin Yesel Choden" },
+            { serial: "5524", name: "Tenzin Yoesel Dorji" },
+            { serial: "5624", name: "Tshering Rigden Lhamo" },
+            { serial: "5724", name: "Tshering Yangdon" },
+            { serial: "5824", name: "Tsheten Dema" },
+            { serial: "5924", name: "Tshoki Lhamo" },
+            { serial: "6024", name: "Tshoki Tshomo" },
+            { serial: "6124", name: "Ugyen Om" },
+            { serial: "6224", name: "Yeshey Lhamo" },
+            { serial: "6324", name: "Yoesul Yangdon" },
+            { serial: "125", name: "Ahawash Ghalley" },
+            { serial: "225", name: "Arabella Esteves" },
+            { serial: "325", name: "Ashizsh Rai" },
+            { serial: "425", name: "Dawa Tshering" },
+            { serial: "525", name: "Dradrul Zoepa" },
+            { serial: "625", name: "Drishti Samal" },
+            { serial: "725", name: "Jangsem Tshangyang Lhamo" },
+            { serial: "825", name: "Jebika Adhikari" },
+            { serial: "925", name: "Jigme Choden" },
+            { serial: "1025", name: "Jigme Kinga Gyeltshen" },
+            { serial: "1125", name: "Jigme Namgyel Thinley" },
+            { serial: "1225", name: "Jigme Palden Singye" },
+            { serial: "1325", name: "Jigme Phuntsho Wangdue" },
+            { serial: "1425", name: "Jigmme Yeshey Choden" },
+            { serial: "1525", name: "Jigsel Palmo Dakini" },
+            { serial: "1625", name: "Jigten Gyembo" },
+            { serial: "1725", name: "Jurmey Rigsel" },
+            { serial: "1825", name: "Karma Cheden" },
+            { serial: "1925", name: "Karma Dechen Gyelmo" },
+            { serial: "2025", name: "Khushboo" },
+            { serial: "2125", name: "Kinley Dorji" },
+            { serial: "2225", name: "Kinzang Choden" },
+            { serial: "2325", name: "Kuenlek Druksum Tenzin" },
+            { serial: "2425", name: "Kuenzang Lhamo" },
+            { serial: "2525", name: "Lhekden Kuenchap" },
+            { serial: "2625", name: "Lhendup Thaye Tashi" },
+            { serial: "2725", name: "Longsel Yeshey" },
+            { serial: "2825", name: "Namdren Nidup Tsheyang" },
+            { serial: "2925", name: "Namgay Wangmo Tamang" },
+            { serial: "3025", name: "Ngawang Lhaden" },
+            { serial: "3125", name: "Nim Deki Sherpa" },
+            { serial: "3225", name: "Ngawang Zoepa Lhamo" },
+            { serial: "3325", name: "Pelden Jigme Dorji" },
+            { serial: "3425", name: "Pema Dorje Gyatso" },
+            { serial: "3525", name: "Pema Yoesel" },
+            { serial: "3625", name: "Prashna Darjee" },
+            { serial: "3725", name: "Rabgay Norbu Tshering" },
+            { serial: "3825", name: "Rachina Chettri" },
+            { serial: "3925", name: "Rig Yang Selsum" },
+            { serial: "4025", name: "Rigsel Lhaki Lhazin" },
+            { serial: "4125", name: "Rigsel Rigden Wangmo" },
+            { serial: "4225", name: "Rigzang Wangmo" },
+            { serial: "4325", name: "Sherab Wangchuk" },
+            { serial: "4425", name: "Sonam Chimi" },
+            { serial: "4525", name: "Sonam Kunzang Tshomo" },
+            { serial: "4625", name: "Sonam Lhamo" },
+            { serial: "4725", name: "Sonam Rinchen" },
+            { serial: "4825", name: "Sudipa Chhetri" },
+            { serial: "4925", name: "Tandin Namgyal Dorji" },
+            { serial: "5025", name: "Tandin Zam" },
+            { serial: "5125", name: "Tashi Dema" },
+            { serial: "5225", name: "Tenzin Dasel" },
+            { serial: "5325", name: "Tenzin Selden" },
+            { serial: "5425", name: "Tshering Aeingchok Choden" },
+            { serial: "5525", name: "Tshering Dekar" },
+            { serial: "5625", name: "Tshering Tashi Yangzom" },
+            { serial: "5725", name: "Tshewang Gyeltshen" },
+            { serial: "5825", name: "Tujje Kinley Pelden" },
+            { serial: "5925", name: "Ugyen Jamyang" },
+            { serial: "6025", name: "Yonten Choki Gyeltshen" },
+            { serial: "126", name: "Ashika Thapa" },
+            { serial: "226", name: "Aungeeta Rai" },
+            { serial: "326", name: "Chencho Zhomke Lham" },
+            { serial: "426", name: "Chetish Rai" },
+            { serial: "526", name: "Dechen Tshering Yangchen" },
+            { serial: "626", name: "Dechen Tshogyel Yangzom" },
+            { serial: "726", name: "Deki Tshomo Yangzom" },
+            { serial: "826", name: "Dendup Jingpa Wangchu" },
+            { serial: "926", name: "Drukten Lodae Wangda" },
+            { serial: "1026", name: "Jampel Ngawang" },
+            { serial: "1126", name: "Jamyang Dorji" },
+            { serial: "1226", name: "Jamyang Lhamo" },
+            { serial: "1326", name: "Jangchub Lhamo" },
+            { serial: "1426", name: "Jigme Chozen Wangmo" },
+            { serial: "1526", name: "Jigme Tenzin Choden" },
+            { serial: "1626", name: "Jigmed Yoser Dorje" },
+            { serial: "1726", name: "Jigmi Wangchen Namgyal" },
+            { serial: "1826", name: "Jigyel Dorji" },
+            { serial: "1926", name: "Karma Tenzin" },
+            { serial: "2026", name: "Kintsho Dolkar Thinley" },
+            { serial: "2126", name: "Kuenga Penjor" },
+            { serial: "2226", name: "Kuenzang Youden" },
+            { serial: "2326", name: "Lungtok Gyaltsho Wangdi" },
+            { serial: "2426", name: "Mindrup Sherab Gyaldon" },
+            { serial: "2526", name: "Mingma Tshering Sherpa" },
+            { serial: "2626", name: "Namkha Sonam Dolma" },
+            { serial: "2726", name: "Norbu Lhaden" },
+            { serial: "2826", name: "Pema Yangki" },
+            { serial: "2926", name: "Pema Yewong" },
+            { serial: "3026", name: "Pema Zuk Yangsyel" },
+            { serial: "3126", name: "Penjor Nima" },
+            { serial: "3226", name: "Phuensum Lhazin Tamang" },
+            { serial: "3326", name: "Phuntsho choden" },
+            { serial: "3426", name: "Priyasha Gurung" },
+            { serial: "3526", name: "Reena Rana" },
+            { serial: "3626", name: "Riggyal Yoezer Rai" },
+            { serial: "3726", name: "Rigyal Pema Jamtsho" },
+            { serial: "3826", name: "Rigzin Chonni" },
+            { serial: "3926", name: "Sangay Yuden Dorji" },
+            { serial: "4026", name: "Sangay Zangmo" },
+            { serial: "4126", name: "Sonam Choki (L)" },
+            { serial: "4226", name: "Sonam Choki (P)" },
+            { serial: "4326", name: "Sonam Choki (T)" },
+            { serial: "4426", name: "Sonam Namsel Lhamo" },
+            { serial: "4526", name: "Sonam Utshog Lhamo" },
+            { serial: "4626", name: "Sonam Yangchen" },
+            { serial: "4726", name: "Sonam Yangkey" },
+            { serial: "4826", name: "Sonam Yeshi" },
+            { serial: "4926", name: "Subham Bhandari" },
+            { serial: "5026", name: "Tandin Om" },
+            { serial: "5126", name: "Tashi Karsel Lhamo" },
+            { serial: "5226", name: "Tashi Tenzin" },
+            { serial: "5326", name: "Thinley Wangmo" },
+            { serial: "5426", name: "Tshering Choden Dorji" },
+            { serial: "5526", name: "Tshering Tshomo" },
+            { serial: "5626", name: "Tshering Yangchen" },
+            { serial: "5726", name: "Tshewang Tashi Tshering" },
+            { serial: "5826", name: "Ugyen Jamyang Choden" },
+            { serial: "5926", name: "Yeedzhin Keldhen" },
+            { serial: "6026", name: "Zoya Rai" }
+        ];
+        const TG_BY_SERIAL = {};
+        TG_DIRECTORY.forEach(c => { TG_BY_SERIAL[c.serial] = c.name; });
+
         const mqttConfig = {
             host: "broker.hivemq.com",
             port: 8884,
             path: "/mqtt",
-            topic: "morse/tj-project-final/999",
             clientId: "Web_User_" + Math.floor(Math.random() * 10000)
         };
 
@@ -3550,66 +4115,221 @@ const char* MQTT_TOPIC = "morse/tj-project-final/999";
         client.onConnectionLost = onConnectionLost;
         client.onMessageArrived = onMessageArrived;
 
+        let tgSerial = "";      // the serial this visitor speaks as (remembered in this browser)
+        let tgTopics = [];      // topics we are currently subscribed to
+
         function connectMQTT() {
             updateStatus("connecting");
             client.connect({ useSSL: true, onSuccess: onConnect, onFailure: onFailure });
         }
-        function onConnect() { updateStatus("online"); client.subscribe(mqttConfig.topic); }
+        function onConnect() { updateStatus("online"); tgSubscribe(); }
         function onFailure(e) { console.log("Failed:", e); updateStatus("offline"); }
         function onConnectionLost(responseObject) {
             if (responseObject.errorCode !== 0) { updateStatus("offline"); }
         }
+
+        // ---------- who is this? ----------
+        function tgUser() {
+            try { return firebase.auth().currentUser; } catch (e) { return null; }
+        }
+        // "tenzing.jangseld2023@academy.bt"  ->  "Tenzing Jangseld"
+        function tgPrettyName(user) {
+            if (!user) return "";
+            if (user.displayName && user.displayName.trim()) return user.displayName.trim();
+            const local = (user.email || "").split("@")[0].replace(/\d+$/, "");
+            return local.split(/[._-]+/).filter(Boolean)
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        }
+        function tgLongName() {
+            const user = tgUser();
+            if (user) return tgPrettyName(user) || user.email;
+            return tgNameFor(tgSerial) || "Guest";                  // not signed in, but the serial tells who it is
+        }
+        // The short name the device shows next to the serial (it keeps 8 characters)
+        function tgDeviceName() {
+            const listed = tgNameFor(tgSerial);
+            if (listed) return listed.replace(/\|/g, "").split(" ")[0].toUpperCase().slice(0, 8);
+            const user = tgUser();
+            if (!user) return "WEB";
+            const first = (tgPrettyName(user) || "").split(" ")[0] || "WEB";
+            return first.replace(/\|/g, "").toUpperCase().slice(0, 8);
+        }
+        function tgNameFor(serial) { return TG_BY_SERIAL[serial] || ""; }
+        // "5623 Zdrimet Kuenga": the directory name is used when the serial is listed, otherwise the name the sender included
+        function tgLabel(serial, name) {
+            const n = tgNameFor(serial) || name;
+            return n ? serial + " " + n : serial;
+        }
+
+        // ---------- subscriptions ----------
+        function tgSubscribe() {
+            if (!client.isConnected()) return;
+            tgTopics.forEach(t => { try { client.unsubscribe(t); } catch (e) {} });
+            tgTopics = [TG_ROOT + "/announce"];                       // everyone hears announcements
+            if (TG_SERIAL_RE.test(tgSerial)) tgTopics.push(TG_ROOT + "/dm/" + tgSerial);
+            tgTopics.forEach(t => client.subscribe(t));
+        }
+
+        // ---------- receiving ----------
         function onMessageArrived(message) {
-            const payload = message.payloadString;
-            let sender = "Unknown", content = payload;
-            if (payload.includes(":")) {
-                const parts = payload.split(":");
-                sender = parts[0];
-                content = parts.slice(1).join(":");
+            const parts = String(message.payloadString || "").split("|");
+            if (parts.length < 3) return;                              // not a Lumini message
+            const serial = parts[0].trim();
+            const name = parts[1].trim();
+            const text = parts.slice(2).join("|");
+            if (!TG_SERIAL_RE.test(serial)) return;
+            const isAnnouncement = message.destinationName === TG_ROOT + "/announce";
+            if (isAnnouncement && serial.charAt(0) !== "T") return;    // only teachers can announce
+            if (serial === tgSerial) return;                           // our own announcement coming back
+            addToLog({
+                who: tgLabel(serial, name),
+                text: text,
+                kind: isAnnouncement ? "announce" : "dm",
+                mine: false
+            });
+        }
+
+        // ---------- sending ----------
+        function tgSend(text) {
+            const user = tgUser();
+            if (TG_REQUIRE_LOGIN && !user) {
+                showToast("Sign in first", "Please sign in to send messages", "error");
+                return false;
             }
-            addToLog(sender, content);
+            if (!TG_SERIAL_RE.test(tgSerial)) {
+                showToast("Set your serial", "Enter your serial number above and press Save", "error");
+                return false;
+            }
+            const to = (document.getElementById("tg-recipient").value || "").trim().toUpperCase().split(/\s+/)[0];   // "5623 ZDRIMET KUENGA" -> "5623"
+            const toAll = (to === "ALL");
+            if (toAll && tgSerial.charAt(0) !== "T") {
+                showToast("Not allowed", "Only teachers can send announcements", "error");
+                return false;
+            }
+            if (!toAll && !TG_SERIAL_RE.test(to)) {
+                showToast("Who to?", "Enter the serial number to send to", "error");
+                return false;
+            }
+            text = String(text || "").replace(/\|/g, " ").trim().slice(0, TG_MAX_LEN);
+            if (!text) {
+                showToast("Input Error", "Please type a message first", "error");
+                return false;
+            }
+            if (!client.isConnected()) {
+                showToast("Transmission Failed", "Not connected to the network", "error");
+                connectMQTT();
+                return false;
+            }
+
+            const topic = toAll ? TG_ROOT + "/announce" : TG_ROOT + "/dm/" + to;
+            const message = new Paho.MQTT.Message(tgSerial + "|" + tgDeviceName() + "|" + text);
+            message.destinationName = topic;
+            client.send(message);
+
+            addToLog({
+                who: tgLongName() + " (" + tgSerial + ")",
+                to: toAll ? "Everyone" : tgLabel(to, ""),
+                text: text,
+                kind: toAll ? "announce" : "dm",
+                mine: true
+            });
+            showToast("Signal Sent", toAll ? "Announcement sent" : "Sent to " + tgLabel(to, ""), "success");
+            return true;
         }
         function sendTelegraph() {
             const input = document.getElementById("telegraph-msg");
-            const text = input.value.trim();
-            if (text === "") { showToast("Input Error", "Please type a message first", "error"); return; }
-            publish(text);
-            input.value = "";
+            if (tgSend(input.value)) input.value = "";
         }
-        function sendPreset(command) { publish(command); }
-        function publish(payload) {
-            if (client.isConnected()) {
-                const formattedMessage = mqttConfig.clientId + ":" + payload;
-                let message = new Paho.MQTT.Message(formattedMessage);
-                message.destinationName = mqttConfig.topic;
-                client.send(message);
-                let displayMsg = payload;
-                if (payload === 'EMOJI_WINK') displayMsg = "Winking Face 😉";
-                if (payload === 'EMOJI_HEART') displayMsg = "Heart ❤️";
-                showToast("Signal Sent", displayMsg, "success");
-            } else {
-                showToast("Transmission Failed", "Device is offline", "error");
-                connectMQTT();
-            }
-        }
-        function addToLog(sender, message) {
+        function sendPhrase(text) { tgSend(text); }
+
+        // ---------- the chat log (text only, so nothing typed can run as HTML) ----------
+        function addToLog(entry) {
             if (!commLog) return;
             if (commLog.innerText.includes("Waiting for signals...")) commLog.innerHTML = "";
-            const entry = document.createElement('div');
-            entry.className = "p-2 rounded bg-white/5 border-l-2 border-indigo-500";
-            const isMe = sender === mqttConfig.clientId;
-            const senderColor = isMe ? "text-indigo-400" : "text-green-400";
-            const senderName = isMe ? "YOU" : sender;
-            entry.innerHTML = `
-                <div class="flex justify-between text-xs ${senderColor} font-bold mb-1">
-                    <span>${senderName}</span>
-                    <span class="text-gray-600 font-normal">${new Date().toLocaleTimeString()}</span>
-                </div>
-                <div class="text-gray-300 break-words">${message}</div>
-            `;
-            commLog.appendChild(entry);
+            const row = document.createElement("div");
+            row.className = "p-2 rounded bg-white/5 border-l-2 " +
+                (entry.kind === "announce" ? "border-amber-400" : "border-indigo-500");
+
+            const head = document.createElement("div");
+            head.className = "flex justify-between gap-2 text-xs font-bold mb-1 " +
+                (entry.mine ? "text-indigo-400" : "text-green-400");
+            const who = document.createElement("span");
+            who.textContent = entry.who + (entry.to ? "  \u2192  " + entry.to : "");
+            const time = document.createElement("span");
+            time.className = "text-gray-600 font-normal whitespace-nowrap";
+            time.textContent = new Date().toLocaleTimeString();
+            head.appendChild(who);
+            head.appendChild(time);
+
+            const body = document.createElement("div");
+            body.className = "text-gray-300 break-words";
+            body.textContent = (entry.kind === "announce" ? "\ud83d\udce2 " : "") + entry.text;
+
+            row.appendChild(head);
+            row.appendChild(body);
+            commLog.appendChild(row);
             commLog.scrollTop = commLog.scrollHeight;
         }
+
+        // ---------- the identity box ----------
+        function saveTelegraphSerial() {
+            const input = document.getElementById("tg-serial");
+            const msg = document.getElementById("tg-serial-msg");
+            const v = (input.value || "").trim().toUpperCase();
+            if (!TG_SERIAL_RE.test(v)) {
+                msg.textContent = "Not a valid serial. Use digits (47) or T and digits (T33).";
+                msg.className = "text-xs mt-2 text-red-600";
+                return;
+            }
+            tgSerial = v;
+            try { localStorage.setItem("lumini-serial", v); } catch (e) {}
+            tgSubscribe();
+            tgRefreshIdentity();
+            showToast("Serial saved", "You are now " + v, "success");
+        }
+        function tgRefreshIdentity() {
+            const user = tgUser();
+            const nameEl = document.getElementById("tg-name");
+            const hintEl = document.getElementById("tg-name-hint");
+            if (nameEl) nameEl.textContent = tgLongName();
+            if (hintEl) hintEl.textContent = user ? "Signed in as " + user.email : "Sign in to show your name in the chat.";
+
+            const input = document.getElementById("tg-serial");
+            if (input && document.activeElement !== input) input.value = tgSerial;
+
+            const msg = document.getElementById("tg-serial-msg");
+            if (msg) {
+                msg.className = "text-xs mt-2 text-gray-500";
+                msg.textContent = !tgSerial ? "Students use digits. Teachers start with T."
+                    : tgSerial.charAt(0) === "T" ? "Teacher " + tgSerial + ": you can also send to ALL."
+                    : tgNameFor(tgSerial) ? "Serial " + tgSerial + ": " + tgNameFor(tgSerial)
+                    : "Serial " + tgSerial + " saved (not in the list, it still works).";
+            }
+
+            const list = document.getElementById("tg-contacts");
+            if (list) {
+                list.innerHTML = "";
+                if (tgSerial.charAt(0) === "T") {
+                    const all = document.createElement("option");
+                    all.value = "ALL";
+                    all.label = "Everyone (announcement)";
+                    list.appendChild(all);
+                }
+                TG_DIRECTORY.forEach(c => {
+                    if (c.serial === tgSerial) return;
+                    const o = document.createElement("option");
+                    o.value = c.serial + " " + c.name;                      // typing a name or a serial finds it
+                    o.label = String(2000 + Number(c.serial.slice(-2)));     // the batch year
+                    list.appendChild(o);
+                });
+            }
+        }
+        window.addEventListener("load", function () {
+            try { tgSerial = localStorage.getItem("lumini-serial") || ""; } catch (e) { tgSerial = ""; }
+            if (!TG_SERIAL_RE.test(tgSerial)) tgSerial = "";
+            tgRefreshIdentity();
+            try { firebase.auth().onAuthStateChanged(tgRefreshIdentity); } catch (e) {}
+        });
         function updateStatus(state) {
             const status = document.getElementById("mqtt-status");
             if (!status) return;
